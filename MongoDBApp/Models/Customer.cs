@@ -25,5 +25,6 @@ namespace MongoDBApp.Models
 
         [BsonElement("email")]
         public string Email { get; set; }
+
     }
 }
