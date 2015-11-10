@@ -10,7 +10,7 @@ using System.Windows.Data;
 // <author>Brian Varley</author>
 // <summary>BoolToNonVisibilityConverter</summary>
 
-namespace MyoTestv4.Home
+namespace MongoDBApp.Converters
 {
     /// <summary>
     /// BoolToNonVisibilityConverter

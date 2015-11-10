@@ -1,9 +1,14 @@
 ﻿<Window x:Class="MongoDBApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:validator="clr-namespace:MongoDBApp.Validators"
         Title="MainWindow"
         Width="800"
         Height="500">
+
+    <Window.Resources>
+        <validator:RegexValidationRule x:Key="RegexValidationRule" />
+    </Window.Resources>
 
     <Grid>
         <TabControl>
@@ -22,7 +27,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width=".75*" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
                     <DataGrid Name="infogrid"
@@ -35,10 +40,12 @@
                               AutoGenerateColumns="True" />
 
                     <Label Grid.Row="4"
+                           Grid.Column="0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Content="First Name:" />
-                    <TextBox Grid.Row="4"
+                    <TextBox x:Name="fNameTbx"
+                             Grid.Row="4"
                              Grid.Column="1"
                              Grid.ColumnSpan="2"
                              Width="120"
@@ -52,13 +59,12 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Content="Last Name:" />
-                    <TextBox Grid.Row="5"
+                    <TextBox x:Name="lNameTbx"
+                             Grid.Row="5"
                              Grid.Column="1"
-                             Grid.ColumnSpan="2"
                              Width="120"
-                             Height="23"
+                             Margin="0,0,0,44"
                              HorizontalAlignment="Left"
-                             VerticalAlignment="Top"
                              Text=""
                              TextWrapping="Wrap" />
 
@@ -66,15 +72,23 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Content="Email:" />
-                    <TextBox Grid.Row="6"
+
+                    <TextBox x:Name="emailTbx"
+                             Grid.Row="6"
                              Grid.Column="1"
                              Grid.ColumnSpan="2"
                              Width="120"
                              Height="23"
                              HorizontalAlignment="Left"
-                             VerticalAlignment="Top"
-                             Text=""
-                             TextWrapping="Wrap" />
+                             VerticalAlignment="Top">
+                        <TextBox.Text>
+                            <Binding Path="BoundProperty1" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validator:RegexValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <Button x:Name="saveBtn"
                             Grid.Row="7"

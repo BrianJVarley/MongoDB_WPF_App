@@ -15,9 +15,8 @@ namespace MongoDBApp.Models
         /// </summary>
         [BsonId]
         public ObjectId Id { get; set; }
-
       
-        [BsonElement("fisrtName")]
+        [BsonElement("firstName")]
         public string firstName { get; set; }
 
         [BsonElement("lastName")]

@@ -6,7 +6,7 @@ using System.Windows.Input;
 //example: http://rachel53461.wordpress.com/2011/12/18/navigation-with-mvvm-2/ </summary>
 
 
-namespace MyoTestv4
+namespace MongoDBApp.Common
 {
     /// <summary>
     /// A command whose sole purpose is to 
