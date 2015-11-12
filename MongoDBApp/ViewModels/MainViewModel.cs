@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.ViewModels
 {
+
     class MainViewModel : ObservableObject, INotifyPropertyChanged
     {
+
+        
+
+
+
     }
 }

@@ -25,28 +25,28 @@
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*" />
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width=".5*" />
                     </Grid.ColumnDefinitions>
 
                     <DataGrid Name="infogrid"
                               Grid.Row="0"
                               Grid.RowSpan="3"
                               Grid.Column="1"
-                              Grid.ColumnSpan="2"
-                              Width="356"
-                              HorizontalAlignment="Left"
+                              Grid.ColumnSpan="3"
                               AutoGenerateColumns="True" />
 
                     <Label Grid.Row="4"
-                           Grid.Column="0"
-                           HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           HorizontalAlignment="Center"
                            VerticalAlignment="Top"
                            Content="First Name:" />
                     <TextBox x:Name="fNameTbx"
                              Grid.Row="4"
-                             Grid.Column="1"
+                             Grid.Column="2"
                              Grid.ColumnSpan="2"
                              Width="120"
                              Height="23"
@@ -55,13 +55,30 @@
                              Text=""
                              TextWrapping="Wrap" />
 
-                    <Label Grid.Row="5"
+                    <TextBox x:Name="iDTbx"
+                             Grid.Row="4"
+                             Grid.Column="2"
+                             Grid.ColumnSpan="2"
+                             Width="120"
+                             Height="23"
+                             HorizontalAlignment="Right"
+                             VerticalAlignment="Top"
+                             Text=""
+                             TextWrapping="Wrap" />
+
+                    <Label Grid.Row="4"
+                           Grid.Column="3"
                            HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Customer ID:" />
+                    <Label Grid.Row="5"
+                           Grid.Column="1"
+                           HorizontalAlignment="Center"
                            VerticalAlignment="Top"
                            Content="Last Name:" />
                     <TextBox x:Name="lNameTbx"
                              Grid.Row="5"
-                             Grid.Column="1"
+                             Grid.Column="2"
                              Width="120"
                              Margin="0,0,0,44"
                              HorizontalAlignment="Left"
@@ -69,13 +86,14 @@
                              TextWrapping="Wrap" />
 
                     <Label Grid.Row="6"
-                           HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           HorizontalAlignment="Center"
                            VerticalAlignment="Top"
                            Content="Email:" />
 
                     <TextBox x:Name="emailTbx"
                              Grid.Row="6"
-                             Grid.Column="1"
+                             Grid.Column="2"
                              Grid.ColumnSpan="2"
                              Width="120"
                              Height="23"
@@ -92,6 +110,7 @@
 
                     <Button x:Name="saveBtn"
                             Grid.Row="7"
+                            Grid.Column="1"
                             Width="75"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -99,7 +118,7 @@
 
                     <Button x:Name="updateBtn"
                             Grid.Row="7"
-                            Grid.Column="1"
+                            Grid.Column="2"
                             Width="75"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
@@ -107,7 +126,7 @@
 
                     <Button x:Name="deleteBtn"
                             Grid.Row="7"
-                            Grid.Column="2"
+                            Grid.Column="3"
                             Width="75"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"

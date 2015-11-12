@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading.Tasks;
+using MongoDBApp.ViewModels;
 
 
 namespace MongoDBApp
@@ -22,10 +23,13 @@ namespace MongoDBApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel ViewModel { get; set; }
         
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel = new MainViewModel();
+            this.DataContext = ViewModel;
 
         }
     }

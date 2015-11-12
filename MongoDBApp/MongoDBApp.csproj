@@ -75,7 +75,8 @@
     <Compile Include="Converters\BoolToNonVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Services\DatabaseRepository.cs" />
+    <Compile Include="Services\CustomerRepository.cs" />
+    <Compile Include="Services\ICustomerRepository.cs" />
     <Compile Include="Validators\RegexValidationRule.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
