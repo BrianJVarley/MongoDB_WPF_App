@@ -1,8 +1,8 @@
-﻿<Window x:Class="MongoDBApp.MainWindow"
+﻿<Window x:Class="MongoDBApp.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:validator="clr-namespace:MongoDBApp.Validators"
-        Title="MainWindow"
+        Title="Orders GUI"
         Width="800"
         Height="500">
 

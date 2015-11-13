@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Threading.Tasks;
 using MongoDBApp.ViewModels;
+using MongoDBApp.Services;
 
 
 namespace MongoDBApp
@@ -21,14 +21,14 @@ namespace MongoDBApp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
         private MainViewModel ViewModel { get; set; }
         
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
-            ViewModel = new MainViewModel();
+            ViewModel = new MainViewModel(new CustomerRepository());
             this.DataContext = ViewModel;
 
         }

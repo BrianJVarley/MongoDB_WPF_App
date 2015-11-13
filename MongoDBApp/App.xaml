@@ -1,6 +1,6 @@
 ﻿<Application x:Class="MongoDBApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="pack://application:,,,/Views/MainWindow.xaml">
+             StartupUri="pack://application:,,,/Views/MainView.xaml">
     <Application.Resources />
 </Application>
