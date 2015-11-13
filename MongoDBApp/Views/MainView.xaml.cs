@@ -28,9 +28,15 @@ namespace MongoDBApp
         public MainView()
         {
             InitializeComponent();
-            ViewModel = new MainViewModel(new CustomerRepository());
+            ViewModel = new MainViewModel(CustomerRepository.Instance);
             this.DataContext = ViewModel;
 
         }
+
+
+
+       
+
+
     }
 }

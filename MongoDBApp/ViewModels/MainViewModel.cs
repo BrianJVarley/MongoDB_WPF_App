@@ -1,4 +1,5 @@
 ﻿using MongoDBApp.Common;
+using MongoDBApp.Models;
 using MongoDBApp.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace MongoDBApp.ViewModels
         public MainViewModel(CustomerRepository customer)
         {
             _customerObj = customer;
-                
+            this.QueryDataFromPersistence();
         }
 
 
@@ -33,6 +34,10 @@ namespace MongoDBApp.ViewModels
         }
 
 
+        public void QueryDataFromPersistence()
+        {
+            CustomerRepository.Instance.LoadCustomers();
+        }
 
     }
 }

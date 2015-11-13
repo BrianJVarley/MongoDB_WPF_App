@@ -18,7 +18,7 @@ namespace MongoDBApp.Services
         //Database connection string
         private const string connectionString = "mongodb://<brianVarley>:<Starlight123;>@ds048878.mongolab.com:48878/orders";
         private static readonly CustomerRepository instance = new CustomerRepository();
-        private static List<Customer> customers;
+        private static List<Customer> customers = new List<Customer>();
 
 
         static CustomerRepository()
@@ -45,29 +45,27 @@ namespace MongoDBApp.Services
             //Get a handle on the customers collection:
             var collection = database.GetCollection<Customer>("customers");
             var docs = collection.Find(new BsonDocument()).ToListAsync().GetAwaiter().GetResult();
-            return docs;
+            customers = docs;
+
+            return customers;
         } 
 
 
         public void DeleteCustomer(Customer customer)
         {
             customers.Remove(customer);
-
         }
 
         public Customer GetCustomerByEmail(string email)
         {
-
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
 
         public void UpdateCustomer(Customer customer)
         {
-
             Customer customerToUpdate = customers.Where(c => c.Id == customer.Id).FirstOrDefault();
             customerToUpdate = customer;
-
         }
 
         /*
