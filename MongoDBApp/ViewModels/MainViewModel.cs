@@ -1,4 +1,5 @@
-﻿using MongoDBApp.Common;
+﻿using Microsoft.Practices.Prism.Commands;
+using MongoDBApp.Common;
 using MongoDBApp.Models;
 using MongoDBApp.Services;
 using System;
@@ -15,11 +16,12 @@ namespace MongoDBApp.ViewModels
     {
 
         private static CustomerRepository _customerObj;
+        private DelegateCommand objCommand;
 
         public MainViewModel(CustomerRepository customer)
         {
             _customerObj = customer;
-            this.QueryDataFromPersistence();
+            //this.QueryDataFromPersistence();
         }
 
 
@@ -38,6 +40,9 @@ namespace MongoDBApp.ViewModels
         {
             CustomerRepository.Instance.LoadCustomers();
         }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
     }
 }
