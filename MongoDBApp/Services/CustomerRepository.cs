@@ -18,10 +18,9 @@ namespace MongoDBApp.Services
     {
 
         //Database connection string
-        private const string connectionString = "mongodb://<brianVarley>:<Starlight123;>@ds048878.mongolab.com:48878/orders/?connectTimeoutMS=600000";
+        private const string connectionString = "mongodb://brianVarley:Starlight123;@ds054118.mongolab.com:54118/orders";
         private static readonly CustomerRepository instance = new CustomerRepository();
-        private static List<Customer> customers = new List<Customer>();
-
+        private static List<CustomerModel> customers = new List<CustomerModel>();
 
         static CustomerRepository()
         {
@@ -40,12 +39,12 @@ namespace MongoDBApp.Services
             }
         }
 
-        public List<Customer> LoadCustomers()
+        public List<CustomerModel> LoadCustomers()
         {
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("orders");
             //Get a handle on the customers collection:
-            var collection = database.GetCollection<Customer>("customers");
+            var collection = database.GetCollection<CustomerModel>("customers");
             
             try
             {
@@ -56,27 +55,27 @@ namespace MongoDBApp.Services
             catch(MongoException ex)
             {
                 //Log exception here:
-                MessageBox.Show("A handled exception just occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);          
+                MessageBox.Show("A connection error occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);          
             }
             
             return customers;
         } 
 
 
-        public void DeleteCustomer(Customer customer)
+        public void DeleteCustomer(CustomerModel customer)
         {
             customers.Remove(customer);
         }
 
-        public Customer GetCustomerByEmail(string email)
+        public CustomerModel GetCustomerByEmail(string email)
         {
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
 
-        public void UpdateCustomer(Customer customer)
+        public void UpdateCustomer(CustomerModel customer)
         {
-            Customer customerToUpdate = customers.Where(c => c.Id == customer.Id).FirstOrDefault();
+            CustomerModel customerToUpdate = customers.Where(c => c.Id == customer.Id).FirstOrDefault();
             customerToUpdate = customer;
         }
 

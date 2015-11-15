@@ -4,8 +4,10 @@ using MongoDBApp.Models;
 using MongoDBApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,34 +17,97 @@ namespace MongoDBApp.ViewModels
     class MainViewModel : ObservableObject, INotifyPropertyChanged
     {
 
-        private static CustomerRepository _customerObj;
         private DelegateCommand objCommand;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        public MainViewModel(CustomerRepository customer)
+      
+
+        public MainViewModel(CustomerRepository customerRepository, CustomerModel customerObj)
         {
-            _customerObj = customer;
-            //this.QueryDataFromPersistence();
+            _customerObj = customerObj;
+            _customerRepository = customerRepository;
+            this.QueryDataFromPersistence();
         }
 
 
-        public static CustomerRepository CustomerObject
+        private static CustomerRepository _customerRepository;
+        public static CustomerRepository CustomerRepository
         {
-            get { return _customerObj; }
+            get { return _customerRepository; }
             set
             {
-                if (value == _customerObj) return;
-                _customerObj = value;
+                if (_customerRepository != value)
+                {
+                    _customerRepository = value;
+                   
+                }
             }
         }
 
 
-        public void QueryDataFromPersistence()
+        private static CustomerModel _customerObj;
+        public static CustomerModel CustomerObj
         {
-            CustomerRepository.Instance.LoadCustomers();
+            get { return _customerObj; }
+            set
+            {
+                if (_customerObj != value)
+                {
+                    _customerObj = value;
+
+                }
+            }
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        
+        public string Id
+        {
+            get { return Convert.ToString(_customerObj.Id); }
+            set { _customerObj.Id = MongoDB.Bson.ObjectId.Parse(value); }
+        }
+         
+
+
+        public string FirstName
+        {
+            get { return _customerObj.FirstName; }
+            set { _customerObj.FirstName = value; }
+        }
+
+
+        public string LastName
+        {
+            get { return _customerObj.LastName; }
+            set { _customerObj.LastName = value; }
+        }
+
+
+
+        public string Email
+        {
+            get { return _customerObj.Email; }
+            set { _customerObj.Email = value; }
+        }    
+
+
+
+
+
+
+        public void QueryDataFromPersistence()
+        {
+            _customerRepository.LoadCustomers();
+        }
+
+
+        public void OnPropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
 
     }
 }

@@ -9,10 +9,10 @@ namespace MongoDBApp.Services
 {
     public interface ICustomerRepository
     {
-        void DeleteCustomer(Customer customer);
-        Customer GetCustomerByEmail(string email);
-        List<Customer> LoadCustomers();
-        void UpdateCustomer(Customer customer);
+        void DeleteCustomer(CustomerModel customer);
+        CustomerModel GetCustomerByEmail(string email);
+        List<CustomerModel> LoadCustomers();
+        void UpdateCustomer(CustomerModel customer);
 
     }
 }

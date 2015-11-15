@@ -83,7 +83,7 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Converters\BoolToNonVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Services\CustomerRepository.cs" />
     <Compile Include="Services\ICustomerRepository.cs" />
     <Compile Include="Validators\RegexValidationRule.cs" />

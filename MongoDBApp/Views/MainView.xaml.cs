@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MongoDBApp.ViewModels;
 using MongoDBApp.Services;
+using MongoDBApp.Models;
 
 
 namespace MongoDBApp
@@ -28,15 +29,10 @@ namespace MongoDBApp
         public MainView()
         {
             InitializeComponent();
-            ViewModel = new MainViewModel(CustomerRepository.Instance);
+            ViewModel = new MainViewModel(CustomerRepository.Instance, new CustomerModel());
             this.DataContext = ViewModel;
 
         }
-
-
-
-       
-
 
     }
 }
