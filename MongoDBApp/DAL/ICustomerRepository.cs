@@ -13,6 +13,7 @@ namespace MongoDBApp.Services
         CustomerModel GetCustomerByEmail(string email);
         List<CustomerModel> LoadCustomers();
         void UpdateCustomer(CustomerModel customer);
+        List<CustomerModel> GetCustomers();
 
     }
 }

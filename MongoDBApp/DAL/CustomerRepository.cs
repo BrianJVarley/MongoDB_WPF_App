@@ -22,6 +22,7 @@ namespace MongoDBApp.Services
         private static readonly CustomerRepository instance = new CustomerRepository();
         private static List<CustomerModel> customers = new List<CustomerModel>();
 
+
         static CustomerRepository()
         {
         }
@@ -39,8 +40,9 @@ namespace MongoDBApp.Services
             }
         }
 
-        public List<CustomerModel> LoadCustomers()
+        private void LoadCustomers()
         {
+
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("orders");
             //Get a handle on the customers collection:
@@ -49,7 +51,6 @@ namespace MongoDBApp.Services
             try
             {
                 customers = collection.Find(new BsonDocument()).ToListAsync().GetAwaiter().GetResult();
-               //var docs = BsonClassMap.RegisterClassMap<Customer>();
 
             }
             catch(MongoException ex)
@@ -58,8 +59,15 @@ namespace MongoDBApp.Services
                 MessageBox.Show("A connection error occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);          
             }
             
+        }
+
+
+        public List<CustomerModel> GetCustomers()
+        {
+            if (customers == null)
+                LoadCustomers();
             return customers;
-        } 
+        }
 
 
         public void DeleteCustomer(CustomerModel customer)
@@ -69,6 +77,8 @@ namespace MongoDBApp.Services
 
         public CustomerModel GetCustomerByEmail(string email)
         {
+            if (customers == null)
+                LoadCustomers();
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
@@ -79,17 +89,6 @@ namespace MongoDBApp.Services
             customerToUpdate = customer;
         }
 
-        /*
-        public async static Task<List<Customer>> FindCustomers(IMongoCollection<BsonDocument> collection)
-        {
-            var documents =  await collection.Find(new BsonDocument()).ToListAsync();
-            List<Customer> customerList = documents.ToList();
-
-            return documents.ToList();
-        }
-         */
-
-  
 
     }
 

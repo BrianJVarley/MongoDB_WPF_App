@@ -10,8 +10,14 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Models
 {
-    public class CustomerModel
+    public class CustomerModel : INotifyPropertyChanged
     {
+
+        private ObjectId id;
+        private string firstName;
+        private string lastName;
+        private string email;
+
         
         [BsonElement]
         ObservableCollection<CustomerModel> customers { get; set; }
@@ -23,13 +29,55 @@ namespace MongoDBApp.Models
         public ObjectId Id { get; set; }
       
         [BsonElement("firstName")]
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get
+            {
+                return firstName;
+            }
+            set
+            {
+                firstName = value;
+                RaisePropertyChanged("FirstName");
+            }
+        }
 
         [BsonElement("lastName")]
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+            set
+            {
+                lastName = value;
+                RaisePropertyChanged("LastName");
+            }
+        }
 
         [BsonElement("email")]
-        public string Email { get; set; }
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                email = value;
+                RaisePropertyChanged("Email");
+            }
+        }
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

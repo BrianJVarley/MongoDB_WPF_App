@@ -26,7 +26,8 @@ namespace MongoDBApp.ViewModels
         {
             _customerObj = customerObj;
             _customerRepository = customerRepository;
-            this.QueryDataFromPersistence();
+
+            QueryDataFromPersistence();
         }
 
 
@@ -56,6 +57,22 @@ namespace MongoDBApp.ViewModels
                     _customerObj = value;
 
                 }
+            }
+        }
+
+
+
+        private ObservableCollection<CustomerModel> customers;
+        public ObservableCollection<CustomerModel> Customers
+        {
+            get
+            {
+                return customers;
+            }
+            set
+            {
+                customers = value;
+                RaisePropertyChanged("Customers");
             }
         }
 
@@ -93,12 +110,10 @@ namespace MongoDBApp.ViewModels
 
 
 
-
-
-
-        public void QueryDataFromPersistence()
+        private void QueryDataFromPersistence()
         {
-            _customerRepository.LoadCustomers();
+            Customers = customerRepository.LoadCustomers().ToObservableCollection();
+
         }
 
 
