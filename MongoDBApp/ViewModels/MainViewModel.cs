@@ -61,6 +61,22 @@ namespace MongoDBApp.ViewModels
         }
 
 
+        private CustomerModel selectedCustomer;
+
+        public CustomerModel SelectedCustomer
+        {
+            get
+            {
+                return selectedCustomer;
+            }
+            set
+            {
+                selectedCustomer = value;
+                RaisePropertyChanged("SelectedCustomer");
+            }
+        }
+
+
 
         private ObservableCollection<CustomerModel> customers;
         public ObservableCollection<CustomerModel> Customers

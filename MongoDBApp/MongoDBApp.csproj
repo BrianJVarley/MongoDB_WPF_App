@@ -86,6 +86,8 @@
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="DAL\ICustomerRepository.cs" />
+    <Compile Include="Services\CustomerDataService.cs" />
+    <Compile Include="Services\ICustomerDataService.cs" />
     <Compile Include="Validators\RegexValidationRule.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
