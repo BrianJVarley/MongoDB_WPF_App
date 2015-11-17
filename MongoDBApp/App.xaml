@@ -4,7 +4,5 @@
              xmlns:converters="clr-namespace:MongoDBApp.Converters"
              xmlns:validators="clr-namespace:MongoDBApp.Validator"
              StartupUri="pack://application:,,,/Views/MainView.xaml">
-    <Application.Resources>
-        
-    </Application.Resources>
+    <Application.Resources />
 </Application>

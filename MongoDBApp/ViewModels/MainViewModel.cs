@@ -14,55 +14,26 @@ using System.Threading.Tasks;
 namespace MongoDBApp.ViewModels
 {
 
-    class MainViewModel : ObservableObject, INotifyPropertyChanged
+    class MainViewModel : INotifyPropertyChanged
     {
 
         private DelegateCommand objCommand;
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        private ICustomerDataService _customerDataService;
+
 
       
 
-        public MainViewModel(CustomerRepository customerRepository, CustomerModel customerObj)
+        public MainViewModel(ICustomerDataService customerDataService)
         {
-            _customerObj = customerObj;
-            _customerRepository = customerRepository;
-
+            this._customerDataService = customerDataService;
             QueryDataFromPersistence();
         }
 
 
-        private static CustomerRepository _customerRepository;
-        public static CustomerRepository CustomerRepository
-        {
-            get { return _customerRepository; }
-            set
-            {
-                if (_customerRepository != value)
-                {
-                    _customerRepository = value;
-                   
-                }
-            }
-        }
-
-
-        private static CustomerModel _customerObj;
-        public static CustomerModel CustomerObj
-        {
-            get { return _customerObj; }
-            set
-            {
-                if (_customerObj != value)
-                {
-                    _customerObj = value;
-
-                }
-            }
-        }
-
-
+      
+       
         private CustomerModel selectedCustomer;
-
         public CustomerModel SelectedCustomer
         {
             get
@@ -94,11 +65,11 @@ namespace MongoDBApp.ViewModels
 
 
 
-        
+        /*
         public string Id
         {
             get { return Convert.ToString(_customerObj.Id); }
-            set { _customerObj.Id = MongoDB.Bson.ObjectId.Parse(value); }
+            set { _customerDataService.Id = MongoDB.Bson.ObjectId.Parse(value); }
         }
          
 
@@ -122,13 +93,14 @@ namespace MongoDBApp.ViewModels
         {
             get { return _customerObj.Email; }
             set { _customerObj.Email = value; }
-        }    
+        }   
+         */
 
 
 
         private void QueryDataFromPersistence()
         {
-            //Customers = _customerRepository.LoadCustomers().ToObservableCollection();
+            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
 
         }
 

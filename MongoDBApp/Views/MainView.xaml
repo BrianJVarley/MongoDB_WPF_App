@@ -112,7 +112,7 @@
                         <TextBox.Text>
                             <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <email_validator:RegexValidationRule/>
+                                    <email_validator:RegexValidationRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
