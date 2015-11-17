@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Services
 {
-    public interface ICustomerRepository
+    interface ICustomerDataService
     {
         void DeleteCustomer(CustomerModel customer);
-        CustomerModel GetACustomer();
         CustomerModel GetCustomerByEmail(string email);
-        CustomerModel GetCustomerById(ObjectId id);
-        List<CustomerModel> GetCustomers();
+        List<CustomerModel> GetAllCustomers();
+        CustomerModel GetCustomerDetail(ObjectId id);
         void UpdateCustomer(CustomerModel customer);
+        
     }
 }

@@ -1,15 +1,9 @@
 ﻿<Window x:Class="MongoDBApp.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:validator="clr-namespace:MongoDBApp.Validators"
         Title="Orders Dashbord"
         Width="800"
         Height="500">
-
-
-    <Window.Resources>
-        <validator:RegexValidationRule x:Key="RegexValidationRule" />
-    </Window.Resources>
 
     <Grid>
         <TabControl>
@@ -39,7 +33,8 @@
                               Grid.Column="1"
                               Grid.ColumnSpan="3"
                               AutoGenerateColumns="True"
-                              ItemsSource="{Binding Path=CustomerObj}">
+                              ItemsSource="{Binding Path=CustomerObj}"
+                              SelectedItem="{Binding SelectedCustomer}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
                             <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />

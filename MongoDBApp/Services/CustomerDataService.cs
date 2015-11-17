@@ -1,4 +1,5 @@
-﻿using MongoDBApp.Models;
+﻿using MongoDB.Bson;
+using MongoDBApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,22 @@ namespace MongoDBApp.Services
             this.repository = repository;  
         }
 
+        
+        public CustomerModel GetCustomerDetail(ObjectId id)
+        {
+            return repository.GetCustomerById(id);
+        }
+
+        public List<CustomerModel> GetAllCustomers()
+        {
+            return repository.GetCustomers();
+        }
+
+        public void UpdateCustomer(CustomerModel customer)
+        {
+            repository.UpdateCustomer(customer);
+        }
+
         public void DeleteCustomer(CustomerModel customer)
         {
             repository.DeleteCustomer(customer);
@@ -27,19 +44,7 @@ namespace MongoDBApp.Services
             return repository.GetCustomerByEmail(email);
         }
 
-        public List<CustomerModel> LoadCustomers()
-        {
-            return repository.LoadCustomers();
-        }
 
-        public void UpdateCustomer(CustomerModel customer)
-        {
-            repository.UpdateCustomer(customer);
-        }
-
-        public List<CustomerModel> GetCustomers()
-        {
-            return repository.LoadCustomers();
-        }
+       
     }
 }

@@ -40,27 +40,13 @@ namespace MongoDBApp.Services
             }
         }
 
-        private void LoadCustomers()
+
+        public CustomerModel GetACustomer()
         {
-
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase("orders");
-            //Get a handle on the customers collection:
-            var collection = database.GetCollection<CustomerModel>("customers");
-            
-            try
-            {
-                customers = collection.Find(new BsonDocument()).ToListAsync().GetAwaiter().GetResult();
-
-            }
-            catch(MongoException ex)
-            {
-                //Log exception here:
-                MessageBox.Show("A connection error occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);          
-            }
-            
+            if (customers == null)
+                LoadCustomers();
+            return customers.FirstOrDefault();
         }
-
 
         public List<CustomerModel> GetCustomers()
         {
@@ -70,16 +56,24 @@ namespace MongoDBApp.Services
         }
 
 
-        public void DeleteCustomer(CustomerModel customer)
+        public CustomerModel GetCustomerById(ObjectId id)
         {
-            customers.Remove(customer);
+            if (customers == null)
+                LoadCustomers();
+            return customers.Where(c => c.Id == id).FirstOrDefault();
         }
+
 
         public CustomerModel GetCustomerByEmail(string email)
         {
             if (customers == null)
                 LoadCustomers();
             return customers.Where(c => c.Email == email).FirstOrDefault();
+        }
+
+        public void DeleteCustomer(CustomerModel customer)
+        {
+            customers.Remove(customer);
         }
 
 
@@ -90,6 +84,27 @@ namespace MongoDBApp.Services
         }
 
 
+        private void LoadCustomers()
+        {
+
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("orders");
+            //Get a handle on the customers collection:
+            var collection = database.GetCollection<CustomerModel>("customers");
+
+            try
+            {
+                customers = collection.Find(new BsonDocument()).ToListAsync().GetAwaiter().GetResult();
+
+            }
+            catch (MongoException ex)
+            {
+                //Log exception here:
+                MessageBox.Show("A connection error occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+      
     }
 
 }

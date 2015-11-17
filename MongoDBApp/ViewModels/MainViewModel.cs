@@ -128,14 +128,18 @@ namespace MongoDBApp.ViewModels
 
         private void QueryDataFromPersistence()
         {
-            Customers = customerRepository.LoadCustomers().ToObservableCollection();
+            Customers = _customerRepository.LoadCustomers().ToObservableCollection();
 
         }
 
 
-        public void OnPropertyChanged([CallerMemberName]string propertyName = "")
+     
+        private void RaisePropertyChanged(string propertyName)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
 
