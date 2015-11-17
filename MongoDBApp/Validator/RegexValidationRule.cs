@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace MongoDBApp.Validators
+namespace MongoDBApp.Validator
 {
     public class RegexValidationRule : ValidationRule
     {

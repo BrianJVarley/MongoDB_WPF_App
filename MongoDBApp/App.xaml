@@ -2,13 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:MongoDBApp.Converters"
-             xmlns:validators="clr-namespace:MongoDBApp.Validators"
+             xmlns:validators="clr-namespace:MongoDBApp.Validator"
              StartupUri="pack://application:,,,/Views/MainView.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <converters:BoolToNonVisibilityConverter x:Key="BoolToNonVisibilityConverter" />
-            <converters:BoolToVisibilityConverter x:Key="localBoolToVisibilityConverter" />
-            <validators:RegexValidationRule x:Key="localRegexValidationRule" />
-        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

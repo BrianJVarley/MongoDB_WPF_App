@@ -128,7 +128,7 @@ namespace MongoDBApp.ViewModels
 
         private void QueryDataFromPersistence()
         {
-            Customers = _customerRepository.LoadCustomers().ToObservableCollection();
+            //Customers = _customerRepository.LoadCustomers().ToObservableCollection();
 
         }
 
