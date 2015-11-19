@@ -30,13 +30,13 @@
                         <ColumnDefinition Width=".5*" />
                     </Grid.ColumnDefinitions>
 
-                    <DataGrid Name="infogrid"
+                    <DataGrid Name="customersgrid"
                               Grid.Row="0"
                               Grid.RowSpan="3"
                               Grid.Column="1"
                               Grid.ColumnSpan="3"
-                              AutoGenerateColumns="True"
-                              ItemsSource="{Binding Path=CustomerObj}"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Customers}"
                               SelectedItem="{Binding SelectedCustomer}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
@@ -59,7 +59,8 @@
                              Height="23"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
-                             Text="{Binding FirstName}"
+                             Text="{Binding SelectedItem.FirstName,
+                                            ElementName=customersgrid}"
                              TextWrapping="Wrap" />
 
                     <TextBox x:Name="iDTbx"
@@ -72,7 +73,8 @@
                              VerticalAlignment="Top"
                              BorderBrush="AliceBlue"
                              IsReadOnly="True"
-                             Text=""
+                             Text="{Binding SelectedItem.ID,
+                                            ElementName=customersgrid}"
                              TextWrapping="Wrap" />
 
                     <Label Grid.Row="4"
@@ -92,7 +94,8 @@
                              Height="23"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
-                             Text="{Binding LastName}"
+                             Text="{Binding SelectedItem.LastName,
+                                            ElementName=customersgrid}"
                              TextWrapping="Wrap" />
 
                     <Label Grid.Row="6"
@@ -110,7 +113,9 @@
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top">
                         <TextBox.Text>
-                            <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                            <Binding ElementName="customergrid"
+                                     Path="SlectedItem.Email"
+                                     UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <email_validator:RegexValidationRule />
                                 </Binding.ValidationRules>

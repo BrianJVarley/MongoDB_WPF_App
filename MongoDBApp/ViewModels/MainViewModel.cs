@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDBApp.Extensions;
+using MongoDB.Bson;
 
 namespace MongoDBApp.ViewModels
 {
@@ -23,11 +24,11 @@ namespace MongoDBApp.ViewModels
         private ICustomerDataService _customerDataService;
 
 
-      
 
-        public MainViewModel(ICustomerDataService customerDataService)
+
+        public MainViewModel() //ICustomerDataService customerDataService
         {
-            this._customerDataService = customerDataService;
+            //this._customerDataService = customerDataService;
             QueryDataFromPersistence();
         }
 
@@ -65,43 +66,77 @@ namespace MongoDBApp.ViewModels
         }
 
 
-
         /*
-        public string Id
+        private ObjectId _id;
+        public ObjectId ID
         {
-            get { return Convert.ToString(_customerObj.Id); }
-            set { _customerDataService.Id = MongoDB.Bson.ObjectId.Parse(value); }
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                RaisePropertyChanged("ID");
+            }
         }
-         
 
 
+
+        private string _firstName;
         public string FirstName
         {
-            get { return _customerObj.FirstName; }
-            set { _customerObj.FirstName = value; }
+            get
+            {
+                return _firstName;
+            }
+            set
+            {
+                _firstName = value;
+                RaisePropertyChanged("FirstName");
+            }
         }
 
 
+        private string _lastName;
         public string LastName
         {
-            get { return _customerObj.LastName; }
-            set { _customerObj.LastName = value; }
+            get
+            {
+                return _lastName;
+            }
+            set
+            {
+                _lastName = value;
+                RaisePropertyChanged("LastName");
+            }
         }
 
 
 
+        private string _email;
         public string Email
         {
-            get { return _customerObj.Email; }
-            set { _customerObj.Email = value; }
-        }   
+            get
+            {
+                return  this._email;
+               
+            }
+            set
+            {
+                this._email = value;
+                RaisePropertyChanged("Email");
+            }
+        }
          */
-
+      
+     
 
 
         private void QueryDataFromPersistence()
         {
-            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
+            Customers = new ObservableCollection<CustomerModel> { new CustomerModel() {FirstName = "myname", LastName = "myfamily"}, new CustomerModel() {FirstName = "yourname", LastName = "yourfamily"} };
+                //_customerDataService.GetAllCustomers().ToObservableCollection();
 
         }
 

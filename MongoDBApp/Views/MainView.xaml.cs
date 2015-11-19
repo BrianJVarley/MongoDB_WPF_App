@@ -29,7 +29,7 @@ namespace MongoDBApp.Views
         public MainView()
         {
             InitializeComponent();
-            ViewModel = new MainViewModel(customerDataService);
+            ViewModel = new MainViewModel(); //customerDataService
             this.DataContext = ViewModel;
 
         }
