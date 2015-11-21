@@ -26,9 +26,9 @@ namespace MongoDBApp.ViewModels
 
 
 
-        public MainViewModel() //ICustomerDataService customerDataService
+        public MainViewModel(ICustomerDataService customerDataService) 
         {
-            //this._customerDataService = customerDataService;
+            this._customerDataService = customerDataService;
             QueryDataFromPersistence();
         }
 
@@ -64,80 +64,12 @@ namespace MongoDBApp.ViewModels
                 RaisePropertyChanged("Customers");
             }
         }
-
-
-        /*
-        private ObjectId _id;
-        public ObjectId ID
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                RaisePropertyChanged("ID");
-            }
-        }
-
-
-
-        private string _firstName;
-        public string FirstName
-        {
-            get
-            {
-                return _firstName;
-            }
-            set
-            {
-                _firstName = value;
-                RaisePropertyChanged("FirstName");
-            }
-        }
-
-
-        private string _lastName;
-        public string LastName
-        {
-            get
-            {
-                return _lastName;
-            }
-            set
-            {
-                _lastName = value;
-                RaisePropertyChanged("LastName");
-            }
-        }
-
-
-
-        private string _email;
-        public string Email
-        {
-            get
-            {
-                return  this._email;
-               
-            }
-            set
-            {
-                this._email = value;
-                RaisePropertyChanged("Email");
-            }
-        }
-         */
-      
      
 
 
         private void QueryDataFromPersistence()
         {
-            Customers = new ObservableCollection<CustomerModel> { new CustomerModel() {FirstName = "myname", LastName = "myfamily"}, new CustomerModel() {FirstName = "yourname", LastName = "yourfamily"} };
-                //_customerDataService.GetAllCustomers().ToObservableCollection();
-
+            Customers =  _customerDataService.GetAllCustomers().ToObservableCollection();
         }
 
 

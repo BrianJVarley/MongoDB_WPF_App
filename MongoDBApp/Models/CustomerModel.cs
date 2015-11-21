@@ -21,12 +21,24 @@ namespace MongoDBApp.Models
         
         [BsonElement]
         ObservableCollection<CustomerModel> customers { get; set; }
+        
 
         /// <summary>
         /// This attribute is used to map the Id property to the ObjectId in the collection
         /// </summary>
         [BsonId]
-        public ObjectId Id { get; set; }
+        public ObjectId Id 
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+
+                id = value;
+            }
+        }
       
         [BsonElement("firstName")]
         public string FirstName

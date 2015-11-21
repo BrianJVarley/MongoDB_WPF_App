@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MongoDBApp.Services
+namespace MongoDBApp.DAL
 {
     public interface ICustomerRepository
     {

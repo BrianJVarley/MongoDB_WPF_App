@@ -1,4 +1,5 @@
-﻿using MongoDBApp.Models;
+﻿using MongoDBApp.DAL;
+using MongoDBApp.Models;
 using MongoDBApp.Services;
 using MongoDBApp.ViewModels;
 using System;
@@ -29,7 +30,7 @@ namespace MongoDBApp.Views
         public MainView()
         {
             InitializeComponent();
-            ViewModel = new MainViewModel(); //customerDataService
+            ViewModel = new MainViewModel(customerDataService); //
             this.DataContext = ViewModel;
 
         }

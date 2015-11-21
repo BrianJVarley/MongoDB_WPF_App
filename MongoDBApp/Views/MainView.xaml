@@ -73,7 +73,7 @@
                              VerticalAlignment="Top"
                              BorderBrush="AliceBlue"
                              IsReadOnly="True"
-                             Text="{Binding SelectedItem.ID,
+                             Text="{Binding SelectedItem.Id,
                                             ElementName=customersgrid}"
                              TextWrapping="Wrap" />
 
@@ -113,8 +113,8 @@
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top">
                         <TextBox.Text>
-                            <Binding ElementName="customergrid"
-                                     Path="SlectedItem.Email"
+                            <Binding ElementName="customersgrid"
+                                     Path="SelectedItem.Email"
                                      UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <email_validator:RegexValidationRule />

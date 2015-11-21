@@ -10,7 +10,7 @@ using MongoDBApp.Models;
 using MongoDB.Bson.Serialization;
 using System.Windows;
 
-namespace MongoDBApp.Services
+namespace MongoDBApp.DAL
 {
 
 
@@ -50,7 +50,7 @@ namespace MongoDBApp.Services
 
         public List<CustomerModel> GetCustomers()
         {
-            if (customers == null)
+            if (customers.Count == 0)
                 LoadCustomers();
             return customers;
         }
