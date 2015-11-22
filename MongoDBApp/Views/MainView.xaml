@@ -7,6 +7,10 @@
         Height="500">
 
 
+    <Window.Resources>
+        
+    </Window.Resources>
+
 
     <Grid>
         <TabControl>
@@ -63,19 +67,17 @@
                                             ElementName=customersgrid}"
                              TextWrapping="Wrap" />
 
-                    <TextBox x:Name="iDTbx"
-                             Grid.Row="4"
-                             Grid.Column="2"
-                             Grid.ColumnSpan="2"
-                             Width="120"
-                             Height="23"
-                             HorizontalAlignment="Right"
-                             VerticalAlignment="Top"
-                             BorderBrush="AliceBlue"
-                             IsReadOnly="True"
-                             Text="{Binding SelectedItem.Id,
-                                            ElementName=customersgrid}"
-                             TextWrapping="Wrap" />
+                    <TextBlock x:Name="iDTbx"
+                               Grid.Row="4"
+                               Grid.Column="2"
+                               Grid.ColumnSpan="2"
+                               Width="180"
+                               Height="23"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               Text="{Binding SelectedItem.Id,
+                                              ElementName=customersgrid}"
+                               TextWrapping="Wrap" />
 
                     <Label Grid.Row="4"
                            Grid.Column="3"
@@ -117,7 +119,7 @@
                                      Path="SelectedItem.Email"
                                      UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <email_validator:RegexValidationRule />
+                                    <email_validator:RegexValidationRule ValidationStep="RawProposedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -152,6 +154,10 @@
             <TabItem Header="Order" />
 
             <TabItem Header="OrderStatus" />
+            <TextBlock Width="100"
+                       Height="100"
+                       Text="TextBlock"
+                       TextWrapping="Wrap" />
 
         </TabControl>
     </Grid>

@@ -12,8 +12,8 @@ namespace MongoDBApp.Validator
     public class RegexValidationRule : ValidationRule
     {
       
-        private string Message = "Incorrect email format, please enter a valid email!";
-        Regex Regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase);
+       private string Message = "Incorrect email format, please enter a valid email!";
+       Regex Regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase);
 
       public override ValidationResult Validate(object value, CultureInfo cultureInfo)
       {
