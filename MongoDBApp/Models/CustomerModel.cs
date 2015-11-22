@@ -18,11 +18,7 @@ namespace MongoDBApp.Models
         private string lastName;
         private string email;
 
-        
-        [BsonElement]
-        ObservableCollection<CustomerModel> customers { get; set; }
-        
-
+   
         /// <summary>
         /// This attribute is used to map the Id property to the ObjectId in the collection
         /// </summary>
