@@ -77,34 +77,39 @@ namespace MongoDBApp.DAL
         }
 
 
-        public void UpdateCustomer(CustomerModel customer)
-        {
-            CustomerModel customerToUpdate = customers.Where(c => c.Id == customer.Id).FirstOrDefault();
-            customerToUpdate = customer;
+        public async Task UpdateCustomer(CustomerModel customer)
+        {          
+            var collection = StartConnection();
+            var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
+         
+            await collection.ReplaceOneAsync(filter, customer);
         }
 
 
         private void LoadCustomers()
         {
-
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase("orders");
-            //Get a handle on the customers collection:
-            var collection = database.GetCollection<CustomerModel>("customers");
+            var collection = StartConnection();
 
             try
             {
                 customers = collection.Find(new BsonDocument()).ToListAsync().GetAwaiter().GetResult();
-
             }
             catch (MongoException ex)
             {
                 //Log exception here:
                 MessageBox.Show("A connection error occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
         }
-      
+
+        private static IMongoCollection<CustomerModel> StartConnection()
+        {
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("orders");
+            //Get a handle on the customers collection:
+            var collection = database.GetCollection<CustomerModel>("customers");
+            return collection;
+        }
+        
     }
 
 }

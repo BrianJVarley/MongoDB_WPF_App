@@ -15,6 +15,6 @@ namespace MongoDBApp.DAL
         CustomerModel GetCustomerByEmail(string email);
         CustomerModel GetCustomerById(ObjectId id);
         List<CustomerModel> GetCustomers();
-        void UpdateCustomer(CustomerModel customer);
+        Task UpdateCustomer(CustomerModel customer);
     }
 }

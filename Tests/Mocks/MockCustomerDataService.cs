@@ -37,7 +37,10 @@ namespace Tests.Mocks
             throw new NotImplementedException();
         }
 
-        public void UpdateCustomer(CustomerModel customer)
+
+
+
+        public Task UpdateCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }
