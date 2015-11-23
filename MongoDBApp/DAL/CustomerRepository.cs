@@ -81,8 +81,8 @@ namespace MongoDBApp.DAL
         {          
             var collection = StartConnection();
             var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
-         
-            await collection.ReplaceOneAsync(filter, customer);
+
+            var result = await collection.ReplaceOneAsync(filter, customer, new UpdateOptions { IsUpsert = true });
         }
 
 
