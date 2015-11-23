@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDBApp.Extensions;
 using MongoDB.Bson;
+using System.Windows.Input;
 
 namespace MongoDBApp.ViewModels
 {
@@ -19,9 +20,19 @@ namespace MongoDBApp.ViewModels
     class MainViewModel : INotifyPropertyChanged
     {
 
-        private DelegateCommand objCommand;
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public ICommand UpdateCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         private ICustomerDataService _customerDataService;
+
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
 
 
@@ -30,6 +41,10 @@ namespace MongoDBApp.ViewModels
         {
             this._customerDataService = customerDataService;
             QueryDataFromPersistence();
+
+            UpdateCommand = new CustomCommand(UpdateCustomer, CanUpdateCustomer);
+
+
         }
 
 
@@ -73,15 +88,18 @@ namespace MongoDBApp.ViewModels
         }
 
 
-     
-        private void RaisePropertyChanged(string propertyName)
+        private bool CanUpdateCustomer(object obj)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            return true;
         }
 
+
+        private void UpdateCustomer(object customer)
+        {
+            _customerDataService.UpdateCustomer(selectedCustomer);
+
+        }
+        
 
 
     }

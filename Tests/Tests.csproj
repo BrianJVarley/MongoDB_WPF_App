@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\MongoDB.Bson.2.1.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -51,10 +54,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CustomerDataServiceTest.cs" />
+    <Compile Include="Mocks\MockCustomerDataService.cs" />
+    <Compile Include="Mocks\MockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Mocks\" />
+    <ProjectReference Include="..\MongoDBApp\MongoDBApp.csproj">
+      <Project>{89c91fd9-40e7-4894-b368-72e41a2318da}</Project>
+      <Name>MongoDBApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

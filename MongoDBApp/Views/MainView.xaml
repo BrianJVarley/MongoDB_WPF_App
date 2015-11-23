@@ -6,12 +6,6 @@
         Width="800"
         Height="500">
 
-
-    <Window.Resources>
-        
-    </Window.Resources>
-
-
     <Grid>
         <TabControl>
             <TabItem Header="Customer">
@@ -139,7 +133,16 @@
                             Width="75"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Content="Update" />
+                            Command="{Binding Path=UpdateCommand}"
+                            Content="Update">
+                        <Button.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock>Updates the modified customer record.</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </Button.ToolTip>
+                    </Button>
 
                     <Button x:Name="deleteBtn"
                             Grid.Row="7"

@@ -10,13 +10,31 @@
                 <Setter.Value>
                     <ControlTemplate>
                         <DockPanel>
-                            <Grid DockPanel.Dock="Right" Width="16" Height="16" VerticalAlignment="Center" Margin="3 0 0 0">
-                                <Ellipse Width="16" Height="16" Fill="Red"/>
-                                <Ellipse Width="3" Height="8" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 2 0 0" Fill="White"/>
-                                <Ellipse Width="2" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 2" Fill="White"/>
+                            <Grid Width="16"
+                                  Height="16"
+                                  Margin="3 0 0 0"
+                                  VerticalAlignment="Center"
+                                  DockPanel.Dock="Right">
+                                <Ellipse Width="16"
+                                         Height="16"
+                                         Fill="Red" />
+                                <Ellipse Width="3"
+                                         Height="8"
+                                         Margin="0 2 0 0"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top"
+                                         Fill="White" />
+                                <Ellipse Width="2"
+                                         Height="2"
+                                         Margin="0 0 0 2"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Bottom"
+                                         Fill="White" />
                             </Grid>
-                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="2">
-                                <AdornedElementPlaceholder/>
+                            <Border BorderBrush="Red"
+                                    BorderThickness="2"
+                                    CornerRadius="2">
+                                <AdornedElementPlaceholder />
                             </Border>
                         </DockPanel>
                     </ControlTemplate>
@@ -24,7 +42,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
