@@ -42,9 +42,7 @@ namespace MongoDBApp.ViewModels
             this._customerDataService = customerDataService;
             QueryDataFromPersistence();
 
-            UpdateCommand = new CustomCommand(UpdateCustomer, CanUpdateCustomer);
-
-
+            UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanUpdateCustomer);
         }
 
 
@@ -79,6 +77,18 @@ namespace MongoDBApp.ViewModels
                 RaisePropertyChanged("Customers");
             }
         }
+
+
+        private Boolean button_enabled;
+        public Boolean ButtonEnabled 
+        {
+            get { return button_enabled; }
+            set
+            {
+                button_enabled = value;
+                RaisePropertyChanged("ButtonEnabled"); // 
+            }
+        }
      
 
 
@@ -94,10 +104,11 @@ namespace MongoDBApp.ViewModels
         }
 
 
-        private void UpdateCustomer(object customer)
-        {
-            _customerDataService.UpdateCustomer(selectedCustomer);
-
+        private async Task UpdateCustomerAsync(object customer) { 
+            
+            ButtonEnabled = true;
+            await Task.Run(() => _customerDataService.UpdateCustomer(selectedCustomer));
+            ButtonEnabled = false; 
         }
         
 

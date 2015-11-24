@@ -2,113 +2,115 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:email_validator="clr-namespace:MongoDBApp.Validator"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="Orders Dashbord"
         Width="800"
         Height="500">
 
-    <Grid>
-        <TabControl>
-            <TabItem Header="Customer">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="70" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height=".50*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width=".5*" />
-                    </Grid.ColumnDefinitions>
+    <xctk:BusyIndicator IsBusy="{Binding ButtonEnabled}">
 
-                    <DataGrid Name="customersgrid"
-                              Grid.Row="0"
-                              Grid.RowSpan="3"
-                              Grid.Column="1"
-                              Grid.ColumnSpan="3"
-                              AutoGenerateColumns="False"
-                              ItemsSource="{Binding Customers}"
-                              SelectedItem="{Binding SelectedCustomer}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
-                            <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
-                            <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
-                            <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+        <Grid>
+            <TabControl>
+                <TabItem Header="Customer">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height=".50*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width=".5*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="4"
-                           Grid.Column="1"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Content="First Name:" />
-                    <TextBox x:Name="fNameTbx"
-                             Grid.Row="4"
-                             Grid.Column="2"
-                             Grid.ColumnSpan="2"
-                             Width="120"
-                             Height="23"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top"
-                             Text="{Binding SelectedItem.FirstName,
-                                            ElementName=customersgrid}"
-                             TextWrapping="Wrap" />
+                        <DataGrid x:Name="customersgrid"
+                                  Grid.Row="0"
+                                  Grid.RowSpan="3"
+                                  Grid.Column="1"
+                                  Grid.ColumnSpan="3"
+                                  AutoGenerateColumns="False"
+                                  ItemsSource="{Binding Customers}"
+                                  SelectedItem="{Binding SelectedCustomer}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
+                                <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
+                                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
+                                <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                    <TextBlock x:Name="iDTbx"
-                               Grid.Row="4"
-                               Grid.Column="2"
-                               Grid.ColumnSpan="2"
-                               Width="180"
-                               Height="23"
-                               HorizontalAlignment="Right"
+                        <Label Grid.Row="4"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Top"
-                               Text="{Binding SelectedItem.Id,
-                                              ElementName=customersgrid}"
-                               TextWrapping="Wrap" />
+                               Content="First Name:" />
+                        <TextBox x:Name="fNameTbx"
+                                 Grid.Row="4"
+                                 Grid.Column="2"
+                                 Grid.ColumnSpan="2"
+                                 Width="120"
+                                 Height="23"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Text="{Binding SelectedItem.FirstName,
+                                                ElementName=customersgrid}"
+                                 TextWrapping="Wrap" />
 
-                    <Label Grid.Row="4"
-                           Grid.Column="3"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Content="Customer ID:" />
-                    <Label Grid.Row="5"
-                           Grid.Column="1"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Content="Last Name:" />
-                    <TextBox x:Name="lNameTbx"
-                             Grid.Row="5"
-                             Grid.Column="2"
-                             Width="120"
-                             Height="23"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top"
-                             Text="{Binding SelectedItem.LastName,
-                                            ElementName=customersgrid}"
-                             TextWrapping="Wrap" />
+                        <TextBlock x:Name="iDTbx"
+                                   Grid.Row="4"
+                                   Grid.Column="2"
+                                   Grid.ColumnSpan="2"
+                                   Width="180"
+                                   Height="23"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Text="{Binding SelectedItem.Id,
+                                                  ElementName=customersgrid}"
+                                   TextWrapping="Wrap" />
 
-                    <Label Grid.Row="6"
-                           Grid.Column="1"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Content="Email:" />
+                        <Label Grid.Row="4"
+                               Grid.Column="3"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Content="Customer ID:" />
+                        <Label Grid.Row="5"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               Content="Last Name:" />
+                        <TextBox x:Name="lNameTbx"
+                                 Grid.Row="5"
+                                 Grid.Column="2"
+                                 Width="120"
+                                 Height="23"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Text="{Binding SelectedItem.LastName,
+                                                ElementName=customersgrid}"
+                                 TextWrapping="Wrap" />
 
-                    <TextBox x:Name="emailTbx"
-                             Grid.Row="6"
-                             Grid.Column="2"
-                             Grid.ColumnSpan="2"
-                             Width="120"
-                             Height="23"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                        <TextBox.Text>
+                        <Label Grid.Row="6"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               Content="Email:" />
+
+                        <TextBox x:Name="emailTbx"
+                                 Grid.Row="6"
+                                 Grid.Column="2"
+                                 Grid.ColumnSpan="2"
+                                 Width="120"
+                                 Height="23"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top">
                             <Binding ElementName="customersgrid"
                                      Path="SelectedItem.Email"
                                      UpdateSourceTrigger="PropertyChanged">
@@ -116,54 +118,58 @@
                                     <email_validator:RegexValidationRule ValidationStep="RawProposedValue" />
                                 </Binding.ValidationRules>
                             </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                        </TextBox>
 
-                    <Button x:Name="saveBtn"
-                            Grid.Row="7"
-                            Grid.Column="1"
-                            Width="75"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Content="Save" />
+                        <Button x:Name="saveBtn"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Width="75"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Save" />
 
-                    <Button x:Name="updateBtn"
-                            Grid.Row="7"
-                            Grid.Column="2"
-                            Width="75"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Command="{Binding Path=UpdateCommand}"
-                            Content="Update">
-                        <Button.ToolTip>
-                            <ToolTip>
-                                <StackPanel>
-                                    <TextBlock>Updates customer record</TextBlock>
-                                </StackPanel>
-                            </ToolTip>
-                        </Button.ToolTip>
-                    </Button>
+                        <Button x:Name="updateBtn"
+                                Grid.Row="7"
+                                Grid.Column="2"
+                                Width="75"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Command="{Binding UpdateCommand}"
+                                Content="Update">
+                                
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock><Run Text="Updates customer record" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
 
-                    <Button x:Name="deleteBtn"
-                            Grid.Row="7"
-                            Grid.Column="3"
-                            Width="75"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Content="Delete" />
-                </Grid>
-            </TabItem>
+                        <Button x:Name="deleteBtn"
+                                Grid.Row="7"
+                                Grid.Column="3"
+                                Width="75"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Delete" />
+                    </Grid>
+                </TabItem>
 
-            <TabItem Header="Order" />
+                <TabItem Header="Order" />
 
-            <TabItem Header="OrderStatus" />
-            <TextBlock Width="100"
-                       Height="100"
-                       Text="TextBlock"
-                       TextWrapping="Wrap" />
+                <TabItem Header="OrderStatus" />
+                <TextBlock Width="100"
+                           Height="100"
+                           Text="TextBlock"
+                           TextWrapping="Wrap" />
 
-        </TabControl>
-    </Grid>
+
+            </TabControl>
+        </Grid>
+
+    </xctk:BusyIndicator>
 
 </Window>
 
