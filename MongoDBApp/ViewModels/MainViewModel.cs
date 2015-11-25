@@ -21,7 +21,7 @@ namespace MongoDBApp.ViewModels
     {
 
         public ICommand UpdateCommand { get; set; }
-        public ICommand SaveCommand { get; set; }
+        public ICommand CreateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,7 +42,10 @@ namespace MongoDBApp.ViewModels
             this._customerDataService = customerDataService;
             QueryDataFromPersistence();
 
-            UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanUpdateCustomer);
+            UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            CreateCommand = new CustomCommand((c) => CreateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+
         }
 
 
@@ -86,23 +89,21 @@ namespace MongoDBApp.ViewModels
             set
             {
                 button_enabled = value;
-                RaisePropertyChanged("ButtonEnabled"); // 
+                RaisePropertyChanged("ButtonEnabled");  
             }
         }
-     
 
+        private bool CanModifyCustomer(object obj)
+        {
+            return true;
+        }
+
+        #region persistence methods
 
         private void QueryDataFromPersistence()
         {
             Customers =  _customerDataService.GetAllCustomers().ToObservableCollection();
         }
-
-
-        private bool CanUpdateCustomer(object obj)
-        {
-            return true;
-        }
-
 
         private async Task UpdateCustomerAsync(object customer) { 
             
@@ -110,7 +111,23 @@ namespace MongoDBApp.ViewModels
             await Task.Run(() => _customerDataService.UpdateCustomer(selectedCustomer));
             ButtonEnabled = false; 
         }
-        
+
+
+        private async Task DeleteCustomerAsync(object customer)
+        {
+            ButtonEnabled = true;
+            await Task.Run(() => _customerDataService.DeleteCustomer(selectedCustomer));
+            ButtonEnabled = false;
+        }
+
+        private async Task CreateCustomerAsync(object customer)
+        {
+            ButtonEnabled = true;
+            await Task.Run(() => _customerDataService.CreateCustomer(new CustomerModel()));
+            ButtonEnabled = false;
+        }
+
+        #endregion
 
 
     }

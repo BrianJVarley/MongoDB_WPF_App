@@ -10,11 +10,13 @@ namespace MongoDBApp.DAL
 {
     public interface ICustomerRepository
     {
-        void DeleteCustomer(CustomerModel customer);
+        Task DeleteCustomer(CustomerModel customer);
         CustomerModel GetACustomer();
         CustomerModel GetCustomerByEmail(string email);
         CustomerModel GetCustomerById(ObjectId id);
         List<CustomerModel> GetCustomers();
         Task UpdateCustomer(CustomerModel customer);
+        Task CreateCustomer(CustomerModel customer);
+
     }
 }

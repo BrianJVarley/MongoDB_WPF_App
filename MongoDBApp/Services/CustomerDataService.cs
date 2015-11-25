@@ -40,12 +40,16 @@ namespace MongoDBApp.Services
             repository.DeleteCustomer(customer);
         }
 
+
+        public void CreateCustomer(CustomerModel customer)
+        {
+            repository.CreateCustomer(customer);
+        }
+
         public CustomerModel GetCustomerByEmail(string email)
         {
             return repository.GetCustomerByEmail(email);
         }
 
-
-       
     }
 }

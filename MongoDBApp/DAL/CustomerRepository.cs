@@ -71,9 +71,22 @@ namespace MongoDBApp.DAL
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
-        public void DeleteCustomer(CustomerModel customer)
+        public async Task DeleteCustomer(CustomerModel customer)
         {
-            customers.Remove(customer);
+            var collection = StartConnection();
+            var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
+
+            var result = await collection.DeleteOneAsync(filter);
+            //refresh data set
+            LoadCustomers();
+        }
+
+        public async Task CreateCustomer(CustomerModel customer)
+        {
+            var collection = StartConnection();
+            await collection.InsertOneAsync(customer);
+            //refresh data set
+            LoadCustomers();
         }
 
 
@@ -82,7 +95,10 @@ namespace MongoDBApp.DAL
             var collection = StartConnection();
             var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
 
+            collection.Find(filter).ToString();
             var result = await collection.ReplaceOneAsync(filter, customer, new UpdateOptions { IsUpsert = true });
+            //refresh data set
+            LoadCustomers();
         }
 
 
@@ -109,7 +125,10 @@ namespace MongoDBApp.DAL
             var collection = database.GetCollection<CustomerModel>("customers");
             return collection;
         }
-        
+
+
+
+       
     }
 
 }
