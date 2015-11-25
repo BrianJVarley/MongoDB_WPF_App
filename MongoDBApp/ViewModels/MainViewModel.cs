@@ -44,7 +44,7 @@ namespace MongoDBApp.ViewModels
 
             UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
-            CreateCommand = new CustomCommand((c) => CreateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            CreateCommand = new CustomCommand((c) => AddCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
 
         }
 
@@ -120,7 +120,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = false;
         }
 
-        private async Task CreateCustomerAsync(object customer)
+        private async Task AddCustomerAsync(object customer)
         {
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.CreateCustomer(new CustomerModel()));

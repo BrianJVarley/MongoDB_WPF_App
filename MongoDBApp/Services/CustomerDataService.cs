@@ -41,7 +41,7 @@ namespace MongoDBApp.Services
         }
 
 
-        public void CreateCustomer(CustomerModel customer)
+        public void AddCustomer(CustomerModel customer)
         {
             repository.CreateCustomer(customer);
         }

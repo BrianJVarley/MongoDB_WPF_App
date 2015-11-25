@@ -120,14 +120,14 @@
                             </Binding>
                         </TextBox>
 
-                        <Button x:Name="createBtn"
+                        <Button x:Name="addBtn"
                                 Grid.Row="7"
                                 Grid.Column="1"
                                 Width="75"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 Command="{Binding CreateCommand}"
-                                Content="Create" />
+                                Content="Add" />
 
                         <Button x:Name="updateBtn"
                                 Grid.Row="7"

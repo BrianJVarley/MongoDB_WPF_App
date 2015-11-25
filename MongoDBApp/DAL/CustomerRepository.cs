@@ -81,7 +81,7 @@ namespace MongoDBApp.DAL
             LoadCustomers();
         }
 
-        public async Task CreateCustomer(CustomerModel customer)
+        public async Task AddCustomer(CustomerModel customer)
         {
             var collection = StartConnection();
             await collection.InsertOneAsync(customer);

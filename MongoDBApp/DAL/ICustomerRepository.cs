@@ -16,7 +16,7 @@ namespace MongoDBApp.DAL
         CustomerModel GetCustomerById(ObjectId id);
         List<CustomerModel> GetCustomers();
         Task UpdateCustomer(CustomerModel customer);
-        Task CreateCustomer(CustomerModel customer);
+        Task AddCustomer(CustomerModel customer);
 
     }
 }

@@ -15,7 +15,7 @@ namespace MongoDBApp.Services
         List<CustomerModel> GetAllCustomers();
         CustomerModel GetCustomerDetail(ObjectId id);
         void UpdateCustomer(CustomerModel customer);
-        void CreateCustomer(CustomerModel customer);
+        void AddCustomer(CustomerModel customer);
 
         
     }
