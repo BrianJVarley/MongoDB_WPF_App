@@ -49,7 +49,7 @@ namespace MongoDBApp.ViewModels
         }
 
 
-      
+      #region Properties
        
         private CustomerModel selectedCustomer;
         public CustomerModel SelectedCustomer
@@ -93,6 +93,57 @@ namespace MongoDBApp.ViewModels
             }
         }
 
+        
+        
+        /* 
+        private string firstName;
+        public string FirstName
+        {
+            get
+            {
+                return firstName;
+            }
+            set
+            {
+                firstName = value;
+                RaisePropertyChanged("FirstName");
+            }
+        }
+
+        private string lastName;
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+            set
+            {
+                lastName = value;
+                RaisePropertyChanged("LastName");
+            }
+        }
+
+
+
+        private string email;
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                email = value;
+                RaisePropertyChanged("Email");
+            }
+        }
+         */
+
+      #endregion
+
+
         private bool CanModifyCustomer(object obj)
         {
             return true;
@@ -123,7 +174,7 @@ namespace MongoDBApp.ViewModels
         private async Task AddCustomerAsync(object customer)
         {
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.CreateCustomer(new CustomerModel()));
+            await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
             ButtonEnabled = false;
         }
 

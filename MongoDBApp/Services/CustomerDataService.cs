@@ -43,7 +43,7 @@ namespace MongoDBApp.Services
 
         public void AddCustomer(CustomerModel customer)
         {
-            repository.CreateCustomer(customer);
+            repository.AddCustomer(customer);
         }
 
         public CustomerModel GetCustomerByEmail(string email)
