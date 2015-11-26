@@ -46,11 +46,33 @@ namespace MongoDBApp.ViewModels
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             CreateCommand = new CustomCommand((c) => AddCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
 
+      
+            foreach (var customerModel in Customers)
+                MainViewModels.Add(new MainViewModel(_customerDataService));
+           
+
         }
 
 
       #region Properties
        
+        private MainViewModel selectedModel;
+        public MainViewModel SelectedModel
+        {
+            get
+            {
+                return selectedModel;
+            }
+            set
+            {
+                selectedModel = value;
+                RaisePropertyChanged("SelectedModel");
+            }
+        }
+
+
+
+
         private CustomerModel selectedCustomer;
         public CustomerModel SelectedCustomer
         {
@@ -65,6 +87,19 @@ namespace MongoDBApp.ViewModels
             }
         }
 
+        private ObservableCollection<MainViewModel> mainViewModels;
+        public ObservableCollection<MainViewModel> MainViewModels
+        {
+            get
+            {
+                return mainViewModels;
+            }
+            set
+            {
+                mainViewModels = value;
+                RaisePropertyChanged("MainViewModels");
+            }
+        }
 
 
         private ObservableCollection<CustomerModel> customers;
@@ -93,19 +128,33 @@ namespace MongoDBApp.ViewModels
             }
         }
 
+
+
+        private ObjectId _id;
+        public ObjectId ID
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+                RaisePropertyChanged("ID");
+            }
+        }
         
         
-        /* 
         private string firstName;
         public string FirstName
         {
             get
             {
-                return firstName;
+                return this.firstName;
             }
             set
             {
-                firstName = value;
+                this.firstName = value;
                 RaisePropertyChanged("FirstName");
             }
         }
@@ -115,11 +164,11 @@ namespace MongoDBApp.ViewModels
         {
             get
             {
-                return lastName;
+                return this.lastName;
             }
             set
             {
-                lastName = value;
+                this.lastName = value;
                 RaisePropertyChanged("LastName");
             }
         }
@@ -131,15 +180,15 @@ namespace MongoDBApp.ViewModels
         {
             get
             {
-                return email;
+                return this.email;
             }
             set
             {
-                email = value;
+                this.email = value;
                 RaisePropertyChanged("Email");
             }
         }
-         */
+        
 
       #endregion
 
@@ -174,7 +223,7 @@ namespace MongoDBApp.ViewModels
         private async Task AddCustomerAsync(object customer)
         {
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
+            await Task.Run(() => _customerDataService.AddCustomer(new CustomerModel()));
             ButtonEnabled = false;
         }
 
