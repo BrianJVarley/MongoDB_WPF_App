@@ -47,8 +47,8 @@ namespace MongoDBApp.ViewModels
             CreateCommand = new CustomCommand((c) => AddCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
 
       
-            foreach (var customerModel in Customers)
-                MainViewModels.Add(new MainViewModel(_customerDataService));
+            //foreach (var customerModel in Customers)
+              //  MainViewModels.Add(new MainViewModel(_customerDataService));
            
 
         }
