@@ -21,8 +21,10 @@ namespace MongoDBApp.ViewModels
     {
 
         public ICommand UpdateCommand { get; set; }
-        public ICommand CreateCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand AddCommand { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private ICustomerDataService _customerDataService;
@@ -44,12 +46,9 @@ namespace MongoDBApp.ViewModels
 
             UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
-            CreateCommand = new CustomCommand((c) => AddCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            AddCommand = new RelayCommand(AddCustomer);
 
-      
-            //foreach (var customerModel in Customers)
-              //  MainViewModels.Add(new MainViewModel(_customerDataService));
-           
 
         }
 
@@ -87,21 +86,7 @@ namespace MongoDBApp.ViewModels
             }
         }
 
-        private ObservableCollection<MainViewModel> mainViewModels;
-        public ObservableCollection<MainViewModel> MainViewModels
-        {
-            get
-            {
-                return mainViewModels;
-            }
-            set
-            {
-                mainViewModels = value;
-                RaisePropertyChanged("MainViewModels");
-            }
-        }
-
-
+       
         private ObservableCollection<CustomerModel> customers;
         public ObservableCollection<CustomerModel> Customers
         {
@@ -220,10 +205,21 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = false;
         }
 
-        private async Task AddCustomerAsync(object customer)
+        private async Task SaveCustomerAsync(object customer)
         {
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.AddCustomer(new CustomerModel()));
+            await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
+            ButtonEnabled = false;
+        }
+
+
+        private void AddCustomer(object customer)
+        {
+            ButtonEnabled = true;
+            //create new customer and add, set as selected customer
+            CustomerModel newCustomer = new CustomerModel();
+            Customers.Add(newCustomer);
+            SelectedCustomer = newCustomer;
             ButtonEnabled = false;
         }
 

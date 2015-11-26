@@ -22,6 +22,7 @@
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="1*" />
+                            <RowDefinition Height=".2*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".1*" />
@@ -121,9 +122,17 @@
                                 Width="75"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Command="{Binding CreateCommand}"
+                                Command="{Binding AddCommand}"
                                 Content="Add" />
 
+                        <Button x:Name="saveBtn"
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Width="75"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding SaveCommand}"
+                                Content="Save" />
                         <Button x:Name="updateBtn"
                                 Grid.Row="7"
                                 Grid.Column="2"
@@ -151,6 +160,7 @@
                                 VerticalAlignment="Top"
                                 Command="{Binding DeleteCommand}"
                                 Content="Delete" />
+
                     </Grid>
                 </TabItem>
 
