@@ -9,6 +9,7 @@
 
     <xctk:BusyIndicator IsBusy="{Binding ButtonEnabled}">
 
+
         <Grid>
             <TabControl>
                 <TabItem Header="Customer">
@@ -31,6 +32,38 @@
                             <ColumnDefinition Width="2*" />
                             <ColumnDefinition Width=".5*" />
                         </Grid.ColumnDefinitions>
+
+                        <DockPanel>
+                            <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
+                                <ToolBar>
+                                    <Button Command="{Binding Add}" ToolTip="Add new record.">
+                                        <Image Width="30"
+                                               Height="30"
+                                               Source="/MongoDBApp;component/Images/add.png" />
+                                    </Button>
+                                    <Button Command="{Binding Save}" ToolTip="Save the updated record.">
+                                        <Image Width="30"
+                                               Height="30"
+                                               Source="/MongoDBApp;component/Images/save.png" />
+                                    </Button>
+                                    <Button Command="{Binding Modify}" ToolTip="Modify the current record.">
+                                        <Image Width="30"
+                                               Height="30"
+                                               Source="/MongoDBApp;component/Images/update.png" />
+                                    </Button>
+                                    <Button Command="{Binding Delete}" ToolTip="Delete the current record.">
+                                        <Image Width="30"
+                                               Height="30"
+                                               Source="/MongoDBApp;component/Images/delete.png" />
+                                    </Button>
+                                    <Button Command="{Binding Refresh}" ToolTip="Refreshes the customer records.">
+                                        <Image Width="30"
+                                               Height="30"
+                                               Source="/MongoDBApp;component/Images/refresh.png" />
+                                    </Button>
+                                </ToolBar>
+                            </ToolBarTray>
+                        </DockPanel>
 
                         <DataGrid x:Name="customersgrid"
                                   Grid.Row="0"
@@ -176,6 +209,8 @@
         </Grid>
 
     </xctk:BusyIndicator>
+
+
 
 </Window>
 

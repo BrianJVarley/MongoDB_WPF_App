@@ -44,5 +44,15 @@ namespace Tests.Mocks
         {
             throw new NotImplementedException();
         }
+
+        Task ICustomerRepository.DeleteCustomer(CustomerModel customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddCustomer(CustomerModel customer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

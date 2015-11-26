@@ -55,23 +55,7 @@ namespace MongoDBApp.ViewModels
 
       #region Properties
        
-        private MainViewModel selectedModel;
-        public MainViewModel SelectedModel
-        {
-            get
-            {
-                return selectedModel;
-            }
-            set
-            {
-                selectedModel = value;
-                RaisePropertyChanged("SelectedModel");
-            }
-        }
-
-
-
-
+        
         private CustomerModel selectedCustomer;
         public CustomerModel SelectedCustomer
         {
@@ -113,66 +97,8 @@ namespace MongoDBApp.ViewModels
             }
         }
 
-
-
-        private ObjectId _id;
-        public ObjectId ID
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-                RaisePropertyChanged("ID");
-            }
-        }
+      
         
-        
-        private string firstName;
-        public string FirstName
-        {
-            get
-            {
-                return this.firstName;
-            }
-            set
-            {
-                this.firstName = value;
-                RaisePropertyChanged("FirstName");
-            }
-        }
-
-        private string lastName;
-        public string LastName
-        {
-            get
-            {
-                return this.lastName;
-            }
-            set
-            {
-                this.lastName = value;
-                RaisePropertyChanged("LastName");
-            }
-        }
-
-
-
-        private string email;
-        public string Email
-        {
-            get
-            {
-                return this.email;
-            }
-            set
-            {
-                this.email = value;
-                RaisePropertyChanged("Email");
-            }
-        }
         
 
       #endregion
@@ -194,7 +120,8 @@ namespace MongoDBApp.ViewModels
             
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.UpdateCustomer(selectedCustomer));
-            ButtonEnabled = false; 
+            ButtonEnabled = false;
+            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
         }
 
 
@@ -203,6 +130,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.DeleteCustomer(selectedCustomer));
             ButtonEnabled = false;
+            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
         }
 
         private async Task SaveCustomerAsync(object customer)
@@ -210,6 +138,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
             ButtonEnabled = false;
+            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
         }
 
 
