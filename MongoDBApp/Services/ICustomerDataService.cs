@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Services
 {
-    interface ICustomerDataService
+    public interface ICustomerDataService
     {
         void DeleteCustomer(CustomerModel customer);
         CustomerModel GetCustomerByEmail(string email);

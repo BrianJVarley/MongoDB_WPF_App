@@ -10,11 +10,14 @@ using MongoDB.Bson;
 
 namespace Tests.Mocks
 {
-    class MockCustomerDataService : ICustomerRepository
+    class MockCustomerDataService : ICustomerDataService
     {
+
+        private MockRepository repository = new MockRepository();
+
         public void DeleteCustomer(CustomerModel customer)
         {
-            throw new NotImplementedException();
+            repository.DeleteCustomer(customer);
         }
 
         public CustomerModel GetACustomer()
@@ -24,7 +27,8 @@ namespace Tests.Mocks
 
         public CustomerModel GetCustomerByEmail(string email)
         {
-            throw new NotImplementedException();
+            CustomerModel customer = repository.GetCustomerByEmail(email);
+            return customer;
         }
 
         public CustomerModel GetCustomerById(ObjectId id)
@@ -34,23 +38,32 @@ namespace Tests.Mocks
 
         public List<CustomerModel> GetCustomers()
         {
-            throw new NotImplementedException();
+            return repository.GetCustomers();
         }
 
-
-
-
-        public Task UpdateCustomer(CustomerModel customer)
+ 
+        public Task DeleteCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }
 
-        Task ICustomerRepository.DeleteCustomer(CustomerModel customer)
+    
+        public List<CustomerModel> GetAllCustomers()
         {
             throw new NotImplementedException();
         }
 
-        public Task AddCustomer(CustomerModel customer)
+        public CustomerModel GetCustomerDetail(ObjectId id)
+        {
+            throw new NotImplementedException();
+        }
+
+        void UpdateCustomer(CustomerModel customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        void AddCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }

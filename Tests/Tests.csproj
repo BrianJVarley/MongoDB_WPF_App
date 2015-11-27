@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CustomerDataServiceTest.cs" />
+    <Compile Include="MainViewModelTests.cs" />
     <Compile Include="Mocks\MockCustomerDataService.cs" />
     <Compile Include="Mocks\MockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

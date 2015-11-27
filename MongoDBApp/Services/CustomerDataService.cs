@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Services
 {
-    class CustomerDataService : ICustomerDataService
+    public class CustomerDataService : ICustomerDataService
     {
 
         ICustomerRepository repository;

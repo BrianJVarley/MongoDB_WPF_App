@@ -1,4 +1,5 @@
-﻿using MongoDBApp.DAL;
+﻿using MongoDB.Bson;
+using MongoDBApp.DAL;
 using MongoDBApp.Models;
 using System;
 using System.Collections.Generic;
@@ -23,33 +24,28 @@ namespace Tests.Mocks
             return new List<CustomerModel>()
 			{
 				new CustomerModel ()
-				{ 
+				{
 					FirstName = "Brian",
 					LastName = "Varley",
 					Email = "brian@gmail.com",                 
 				},
 				new CustomerModel ()
 				{ 
-					FirstName = "Brian",
-					LastName = "Varley",
-					Email = "brian@gmail.com",              
+					FirstName = "Patrick",
+					LastName = "Darley",
+					Email = "patd@gmail.com",              
 				},
 				new CustomerModel ()
 				{ 
-					FirstName = "Brian",
-					LastName = "Varley",
-					Email = "brian@gmail.com",              
+					FirstName = "John",
+					LastName = "Carley",
+					Email = "jc@gmail.com",              
 				},
 			};
 
         }
 
 
-
-        public void DeleteCustomer(CustomerModel customer)
-        {
-            throw new NotImplementedException();
-        }
 
         public CustomerModel GetACustomer()
         {
@@ -58,28 +54,27 @@ namespace Tests.Mocks
 
         public CustomerModel GetCustomerByEmail(string email)
         {
-            throw new NotImplementedException();
+            if (customers == null)
+                LoadMockCustomers();
+            return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
-        public CustomerModel GetCustomerById(MongoDB.Bson.ObjectId id)
+        public CustomerModel GetCustomerById(ObjectId id)
         {
             throw new NotImplementedException();
         }
 
         public List<CustomerModel> GetCustomers()
         {
-            throw new NotImplementedException();
+            return customers;
         }
-
-
-
 
         public Task UpdateCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }
 
-        Task ICustomerRepository.DeleteCustomer(CustomerModel customer)
+        public Task DeleteCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }

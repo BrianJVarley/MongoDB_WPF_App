@@ -17,7 +17,7 @@ using System.Windows.Input;
 namespace MongoDBApp.ViewModels
 {
 
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
 
         public ICommand UpdateCommand { get; set; }
@@ -48,7 +48,6 @@ namespace MongoDBApp.ViewModels
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             AddCommand = new RelayCommand(AddCustomer);
-
 
         }
 
