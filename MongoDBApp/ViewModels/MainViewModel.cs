@@ -106,7 +106,13 @@ namespace MongoDBApp.ViewModels
 
         private bool CanModifyCustomer(object obj)
         {
-            return true;
+            
+            if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.LastName != null && SelectedCustomer.Email != null)            
+            {
+                return true;
+            }
+
+            return false;            
         }
 
         #region persistence methods
@@ -135,21 +141,32 @@ namespace MongoDBApp.ViewModels
 
         private async Task SaveCustomerAsync(object customer)
         {
-            ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
-            ButtonEnabled = false;
-            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
+
+     
+           if(!Customers.Any(str => String.Compare(str.Email, SelectedCustomer.Email, true) == -1))
+           {
+                ButtonEnabled = true;
+                await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
+                ButtonEnabled = false;
+                Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
+                
+            }
+          
+                return;
+             
         }
 
 
         private void AddCustomer(object customer)
         {
-            ButtonEnabled = true;
-            //create new customer and add, set as selected customer
-            CustomerModel newCustomer = new CustomerModel();
-            Customers.Add(newCustomer);
-            SelectedCustomer = newCustomer;
-            ButtonEnabled = false;
+            
+                ButtonEnabled = true;
+                //create new customer and add, set as selected customer
+                CustomerModel newCustomer = new CustomerModel();
+                Customers.Add(newCustomer);
+                SelectedCustomer = newCustomer;
+                ButtonEnabled = false;
+            
         }
 
         #endregion
