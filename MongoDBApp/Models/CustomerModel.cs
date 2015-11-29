@@ -17,6 +17,8 @@ namespace MongoDBApp.Models
         private string firstName;
         private string lastName;
         private string email;
+        private string address;
+
 
    
         /// <summary>
@@ -75,6 +77,21 @@ namespace MongoDBApp.Models
             {
                 email = value;
                 RaisePropertyChanged("Email");
+            }
+        }
+
+
+        [BsonElement("address")]
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                address = value;
+                RaisePropertyChanged("Address");
             }
         }
 

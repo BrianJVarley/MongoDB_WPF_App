@@ -36,27 +36,7 @@
                         <DockPanel>
                             <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
                                 <ToolBar>
-                                    <Button Command="{Binding Add}" ToolTip="Add new record.">
-                                        <Image Width="30"
-                                               Height="30"
-                                               Source="/MongoDBApp;component/Images/add.png" />
-                                    </Button>
-                                    <Button Command="{Binding Save}" ToolTip="Save the updated record.">
-                                        <Image Width="30"
-                                               Height="30"
-                                               Source="/MongoDBApp;component/Images/save.png" />
-                                    </Button>
-                                    <Button Command="{Binding Modify}" ToolTip="Modify the current record.">
-                                        <Image Width="30"
-                                               Height="30"
-                                               Source="/MongoDBApp;component/Images/update.png" />
-                                    </Button>
-                                    <Button Command="{Binding Delete}" ToolTip="Delete the current record.">
-                                        <Image Width="30"
-                                               Height="30"
-                                               Source="/MongoDBApp;component/Images/delete.png" />
-                                    </Button>
-                                    <Button Command="{Binding Refresh}" ToolTip="Refreshes the customer records.">
+                                    <Button Command="{Binding RefreshCommand}" ToolTip="Refreshes the customer records.">
                                         <Image Width="30"
                                                Height="30"
                                                Source="/MongoDBApp;component/Images/refresh.png" />
@@ -78,6 +58,7 @@
                                 <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
                                 <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
                                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
+                                <DataGridTextColumn Binding="{Binding Address}" Header="Address" />
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -126,6 +107,21 @@
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Top"
                                  Text="{Binding SelectedCustomer.LastName}"
+                                 TextWrapping="Wrap" />
+
+                        <Label Grid.Row="5"
+                               Grid.Column="3"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Content="Address:" />
+                        <TextBox x:Name="addressTbx"
+                                 Grid.Row="5"
+                                 Grid.Column="3"
+                                 Width="180"
+                                 Height="100"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Top"
+                                 Text="{Binding SelectedCustomer.Address}"
                                  TextWrapping="Wrap" />
 
                         <Label Grid.Row="6"

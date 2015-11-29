@@ -24,6 +24,8 @@ namespace MongoDBApp.ViewModels
         public ICommand SaveCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -48,6 +50,7 @@ namespace MongoDBApp.ViewModels
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             AddCommand = new RelayCommand(AddCustomer);
+            //RefreshCommand = new RelayCommand(QueryDataFromPersistence());
 
         }
 
@@ -126,7 +129,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.UpdateCustomer(selectedCustomer));
             ButtonEnabled = false;
-            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
+            QueryDataFromPersistence();
         }
 
 
@@ -135,9 +138,10 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.DeleteCustomer(selectedCustomer));
             ButtonEnabled = false;
-            Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
+            QueryDataFromPersistence();
         }
 
+       
         private async Task SaveCustomerAsync(object customer)
         {
 
@@ -147,12 +151,11 @@ namespace MongoDBApp.ViewModels
                 ButtonEnabled = true;
                 await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
                 ButtonEnabled = false;
-                Customers = _customerDataService.GetAllCustomers().ToObservableCollection();
+                QueryDataFromPersistence();
                 
             }
           
-                return;
-             
+                return;            
         }
 
 

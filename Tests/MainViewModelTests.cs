@@ -31,7 +31,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void LoadAllCoffees()
+        public void LoadAllCustomers()
         {
             //Arrange
             ObservableCollection<CustomerModel> customers = null;

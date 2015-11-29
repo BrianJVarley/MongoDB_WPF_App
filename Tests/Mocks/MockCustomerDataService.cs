@@ -42,15 +42,9 @@ namespace Tests.Mocks
         }
 
  
-        public Task DeleteCustomer(CustomerModel customer)
-        {
-            throw new NotImplementedException();
-        }
-
-    
         public List<CustomerModel> GetAllCustomers()
         {
-            throw new NotImplementedException();
+            return repository.GetCustomers();
         }
 
         public CustomerModel GetCustomerDetail(ObjectId id)
@@ -58,12 +52,12 @@ namespace Tests.Mocks
             throw new NotImplementedException();
         }
 
-        void UpdateCustomer(CustomerModel customer)
+        void ICustomerDataService.UpdateCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }
 
-        void AddCustomer(CustomerModel customer)
+        void ICustomerDataService.AddCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }
