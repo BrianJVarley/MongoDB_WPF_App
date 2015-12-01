@@ -18,9 +18,9 @@ namespace Tests
     {
         private ICustomerDataService customerDataService;
 
-        private MainViewModel GetViewModel()
+        private CustomerDetailsViewModel GetViewModel()
         {
-            return new MainViewModel(this.customerDataService);
+            return new CustomerDetailsViewModel(this.customerDataService);
         }
        
 

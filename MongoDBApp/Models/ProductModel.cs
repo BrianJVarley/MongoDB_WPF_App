@@ -16,8 +16,6 @@ namespace MongoDBApp.Models
         private string description;
 
 
-        
-
 
         [BsonElement("productId")]
         public string ProductId

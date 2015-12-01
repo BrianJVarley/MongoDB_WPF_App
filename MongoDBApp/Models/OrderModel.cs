@@ -15,6 +15,7 @@ namespace MongoDBApp.Models
 
         private ObjectId _id;
         private string email;
+        private BsonDateTime date;
         private ProductModel[] products;
 
 
@@ -47,6 +48,22 @@ namespace MongoDBApp.Models
             {
                 email = value;
                 RaisePropertyChanged("Email");
+            }
+        }
+
+
+
+        [BsonElement("date")]
+        public BsonDateTime Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+                RaisePropertyChanged("Date");
             }
         }
 

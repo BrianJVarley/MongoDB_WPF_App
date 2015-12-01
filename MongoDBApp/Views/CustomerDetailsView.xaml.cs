@@ -21,16 +21,16 @@ namespace MongoDBApp.Views
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class CustomerDetailsView : UserControl
     {
-        private MainViewModel ViewModel { get; set; }
+        private CustomerDetailsViewModel ViewModel { get; set; }
         private static ICustomerDataService customerDataService = new CustomerDataService(CustomerRepository.Instance);
 
 
-        public MainView()
+        public CustomerDetailsView()
         {
             InitializeComponent();
-            ViewModel = new MainViewModel(customerDataService); 
+            ViewModel = new CustomerDetailsViewModel(customerDataService); 
             this.DataContext = ViewModel;
 
         }

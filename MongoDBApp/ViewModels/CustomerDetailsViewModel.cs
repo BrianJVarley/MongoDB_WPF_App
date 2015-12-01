@@ -17,7 +17,7 @@ using System.Windows.Input;
 namespace MongoDBApp.ViewModels
 {
 
-    public class MainViewModel : INotifyPropertyChanged
+    public class CustomerDetailsViewModel : INotifyPropertyChanged, IPageViewModel
     {
 
         public ICommand UpdateCommand { get; set; }
@@ -41,7 +41,7 @@ namespace MongoDBApp.ViewModels
 
 
 
-        public MainViewModel(ICustomerDataService customerDataService) 
+        public CustomerDetailsViewModel(ICustomerDataService customerDataService) 
         {
             this._customerDataService = customerDataService;
             QueryDataFromPersistence();
@@ -124,6 +124,8 @@ namespace MongoDBApp.ViewModels
             Customers =  _customerDataService.GetAllCustomers().ToObservableCollection();
         }
 
+       
+
         private async Task UpdateCustomerAsync(object customer) { 
             
             ButtonEnabled = true;
@@ -172,6 +174,15 @@ namespace MongoDBApp.ViewModels
         }
 
         #endregion
+
+
+        public string Name
+        {
+            get
+            {
+                return "Customer Details";
+            }
+        }
 
 
     }
