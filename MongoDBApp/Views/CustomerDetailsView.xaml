@@ -154,15 +154,6 @@
                         Command="{Binding AddCommand}"
                         Content="Add" />
 
-                <Button x:Name="saveBtn"
-                        Grid.Row="7"
-                        Grid.Column="1"
-                        Width="75"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
-                        Command="{Binding SaveCommand}"
-                        Content="Save" />
-
                 <Button x:Name="updateBtn"
                         Grid.Row="7"
                         Grid.Column="3"
@@ -181,6 +172,15 @@
                         </ToolTip>
                     </Button.ToolTip>
                 </Button>
+
+                <Button x:Name="saveBtn"
+                        Grid.Row="7"
+                        Grid.Column="4"
+                        Width="75"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Command="{Binding SaveCommand}"
+                        Content="Save" />
 
                 <Button x:Name="deleteBtn"
                         Grid.Row="7"

@@ -16,6 +16,7 @@ namespace MongoDBApp.Models
         private ObjectId _id;
         private string email;
         private BsonDateTime date;
+        private BsonBoolean status;
         private ProductModel[] products;
 
 
@@ -64,6 +65,21 @@ namespace MongoDBApp.Models
             {
                 date = value;
                 RaisePropertyChanged("Date");
+            }
+        }
+
+
+        [BsonElement("status")]
+        public BsonBoolean Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+                RaisePropertyChanged("Status");
             }
         }
 

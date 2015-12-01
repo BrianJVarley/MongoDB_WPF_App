@@ -109,7 +109,8 @@ namespace MongoDBApp.ViewModels
         private bool CanModifyCustomer(object obj)
         {
             
-            if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.LastName != null && SelectedCustomer.Email != null)            
+            if (SelectedCustomer != null && SelectedCustomer.FirstName != null && 
+                SelectedCustomer.LastName != null && SelectedCustomer.Email != null && SelectedCustomer.Address != null)            
             {
                 return true;
             }

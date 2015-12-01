@@ -21,16 +21,13 @@
     </Window.DataContext>
 
 
-    <TabControl ItemsSource="{Binding PageViewModels}" TabStripPlacement="Top">
+    <TabControl ItemsSource="{Binding PageViewModels}"
+                SelectedItem="{Binding CurrentPageViewModel}"
+                TabStripPlacement="Top">
         <TabControl.ItemTemplate>
             <DataTemplate>
                 <TextBlock Text="{Binding Name}" />
             </DataTemplate>
         </TabControl.ItemTemplate>
-        <TabControl.ContentTemplate>
-            <DataTemplate>
-                <ContentPresenter Content="{Binding CurrentPageViewModel}" />
-            </DataTemplate>
-        </TabControl.ContentTemplate>
     </TabControl>
 </Window>
