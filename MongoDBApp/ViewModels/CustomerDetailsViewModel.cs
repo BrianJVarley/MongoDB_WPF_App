@@ -108,7 +108,7 @@ namespace MongoDBApp.ViewModels
         }
 
 
-        private Boolean is_enabled;
+        private Boolean is_enabled = true;
         public bool IsEnabled
         {
             get { return is_enabled; }
