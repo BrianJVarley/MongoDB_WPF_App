@@ -75,13 +75,15 @@ namespace MongoDBApp.DAL
         {
             var collection = StartConnection();
             var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
-            var result = await collection.DeleteOneAsync(filter);            
+            var result = await collection.DeleteOneAsync(filter);
+            customers.Remove(customer);
         }
 
         public async Task AddCustomer(CustomerModel customer)
         {
             var collection = StartConnection();
-            await collection.InsertOneAsync(customer);           
+            await collection.InsertOneAsync(customer);
+            customers.Add(customer);
         }
 
 
@@ -91,7 +93,10 @@ namespace MongoDBApp.DAL
             var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
 
             collection.Find(filter).ToString();
-            var result = await collection.ReplaceOneAsync(filter, customer, new UpdateOptions { IsUpsert = true });        
+            var result = await collection.ReplaceOneAsync(filter, customer, new UpdateOptions { IsUpsert = true });
+
+            var index = customers.FindIndex(a => a.Id == customer.Id);
+            customers[index] = customer;
         }
 
 
