@@ -57,6 +57,7 @@
                         <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
                         <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
                         <DataGridTextColumn Binding="{Binding Address}" Header="Address" />
+                        <DataGridTextColumn Binding="{Binding Country}" Header="Country" />
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -117,7 +118,7 @@
                          Grid.RowSpan="2"
                          Grid.Column="4"
                          Width="180"
-                         Height="100"
+                         Height="40"
                          Margin="81,0"
                          HorizontalAlignment="Center"
                          VerticalAlignment="Top"
@@ -144,6 +145,27 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
+
+
+                <Label Grid.Row="6"
+                       Grid.Column="4"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Content="Country:" />
+
+                <ComboBox Grid.Row="6"
+                          Grid.RowSpan="2"
+                          Grid.Column="4"
+                          Width="180"
+                          Height="30"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Top"
+                          DisplayMemberPath="Country"
+                          ItemsSource="{Binding Customers}"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          SelectedItem="{Binding SelectedCustomer.Country}" />
+
+
 
                 <Button x:Name="addBtn"
                         Grid.Row="7"
@@ -182,6 +204,16 @@
                         Command="{Binding SaveCommand}"
                         Content="Save" />
 
+                <Button x:Name="statsBtn"
+                        Grid.Row="7"
+                        Grid.Column="4"
+                        Width="75"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Command="{Binding StatsCommand}"
+                        Content="View Stats" />
+
+
                 <Button x:Name="deleteBtn"
                         Grid.Row="7"
                         Grid.Column="4"
@@ -190,6 +222,7 @@
                         VerticalAlignment="Top"
                         Command="{Binding DeleteCommand}"
                         Content="Delete" />
+
             </Grid>
         </Grid>
     </xctk:BusyIndicator>

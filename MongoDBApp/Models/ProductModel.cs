@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,65 +9,21 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Models
 {
-    public class ProductModel : INotifyPropertyChanged
+    
+    [ImplementPropertyChanged]
+    public class ProductModel 
     {
-
-        private string productId;
-        private float price;
-        private string description;
-
 
 
         [BsonElement("productId")]
-        public string ProductId
-        {
-            get
-            {
-                return productId;
-            }
-            set
-            {
-                productId = value;
-                RaisePropertyChanged("ProductId");
-            }
-        }
-
+        public string ProductId { get; set; }
+        
         [BsonElement("price")]
-        public float Price
-        {
-            get
-            {
-                return price;
-            }
-            set
-            {
-                price = value;
-                RaisePropertyChanged("Price");
-            }
-        }
+        public float Price { get; set; }
+      
 
         [BsonElement("description")]
-        public string Description
-        {
-            get
-            {
-                return description;
-            }
-            set
-            {
-                description = value;
-                RaisePropertyChanged("Description");
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        public string Description { get; set; }
+     
     }
 }

@@ -7,108 +7,38 @@ using MongoDBApp.Models;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using MongoDB.Bson.Serialization.Attributes;
+using PropertyChanged;
 
 namespace MongoDBApp.Models
 {
-    public class OrderModel : INotifyPropertyChanged
+    [ImplementPropertyChanged]
+    public class OrderModel 
     {
 
-        private ObjectId _id;
-        private string email;
-        private BsonDateTime date;
-        private Boolean status;
-        private ProductModel[] products;
-
-
+        
         [BsonId]
-        public ObjectId Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-
-                _id = value;
-            }
-        }
-
-
-
-
+        public ObjectId Id { get; set; }
+        
 
         [BsonElement("email")]
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email = value;
-                RaisePropertyChanged("Email");
-            }
-        }
-
-
+        public string Email { get; set; }
+        
 
         [BsonElement("date")]
-        public BsonDateTime Date
-        {
-            get
-            {
-                return date;
-            }
-            set
-            {
-                date = value;
-                RaisePropertyChanged("Date");
-            }
-        }
+        public BsonDateTime Date { get; set; }
+       
 
 
         [BsonElement("status")]
-        public Boolean Status
-        {
-            get
-            {
-                return status;
-            }
-            set
-            {
-                status = value;
-                RaisePropertyChanged("Status");
-            }
-        }
-
+        public Boolean Status { get; set; }
+        
 
         [BsonElement("products")]
-        public ProductModel[] Products
-        {
-            get
-            {
-                return products;
-            }
-            set
-            {
-                products = value;
-                RaisePropertyChanged("Products");
-            }
-        }       
-        
-        
+        public ProductModel[] Products { get; set; }
+      
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+       
     }
 
 }

@@ -64,6 +64,8 @@ namespace MongoDBApp.ViewModels
         public bool IsEnabled { get; set; }
         
         public ObservableCollection<CustomerModel> Customers { get; set; }
+
+        public Dictionary<string, string> CountryDictionary { get; set; }
        
         public Boolean ButtonEnabled { get; set; }
         
@@ -82,7 +84,7 @@ namespace MongoDBApp.ViewModels
         private bool CanModifyCustomer(object obj)
         {
             
-            if (SelectedCustomer != null && SelectedCustomer.FirstName != null && 
+            if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.Country != null &&
                 SelectedCustomer.LastName != null && SelectedCustomer.Email != null && SelectedCustomer.Address != null)            
             {
                 return true;

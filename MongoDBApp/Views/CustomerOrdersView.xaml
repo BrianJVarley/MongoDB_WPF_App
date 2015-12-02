@@ -46,8 +46,8 @@
                       Grid.Column="1"
                       Grid.ColumnSpan="4"
                       AutoGenerateColumns="False"
-                      ItemsSource="{Binding Customers}"
-                      SelectedItem="{Binding SelectedCustomer}">
+                      ItemsSource="{Binding Orders}"
+                      SelectedItem="{Binding SelectedOrder}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding OrderId}" Header="Id" />
                     <DataGridTextColumn Binding="{Binding Email}" Header="Email" />

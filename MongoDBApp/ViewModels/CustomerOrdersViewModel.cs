@@ -1,5 +1,6 @@
 ﻿using MongoDBApp.Models;
 using MongoDBApp.Utility;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,24 +10,16 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.ViewModels
 {
-    public class CustomerOrdersViewModel : INotifyPropertyChanged, IPageViewModel
+    [ImplementPropertyChanged]
+    public class CustomerOrdersViewModel : IPageViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+       
 
 
         public CustomerOrdersViewModel()
         {
 
-
             Messenger.Default.Register<CustomerModel>(this, OnCustomerReceived);
-
-
         }
 
 
@@ -37,22 +30,9 @@ namespace MongoDBApp.ViewModels
         }
 
 
-        private CustomerModel selectedCustomer;
-        public CustomerModel SelectedCustomer
-        {
-            get
-            {
-                return selectedCustomer;
-            }
-            set
-            {
-                selectedCustomer = value;
-                RaisePropertyChanged("SelectedCustomer");
-            }
-        }
 
-
-
+        public CustomerModel SelectedCustomer { get; set; }
+        
 
         public string Name
         {
@@ -62,16 +42,7 @@ namespace MongoDBApp.ViewModels
             }
         }
 
-
-        private Boolean is_enabled;
-        public bool IsEnabled
-        {
-            get { return is_enabled; }
-            set
-            {
-                is_enabled = value;
-                RaisePropertyChanged("IsEnabled");
-            }
-        }
+        public bool IsEnabled { get; set; }
+       
     }
 }

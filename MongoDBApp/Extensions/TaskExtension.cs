@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MongoDBApp.Extensions
 {
@@ -16,7 +17,8 @@ namespace MongoDBApp.Extensions
             }
             catch (Exception e)
             {
-                // log errors
+                MessageBox.Show("A task error occurred: " + e.Message, "DB - Task Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
+
             }
         }
     }
