@@ -14,11 +14,13 @@ using MongoDBApp.Extensions;
 using MongoDB.Bson;
 using System.Windows.Input;
 using MongoDBApp.Utility;
+using PropertyChanged;
 
 namespace MongoDBApp.ViewModels
 {
 
-    public class CustomerDetailsViewModel : INotifyPropertyChanged, IPageViewModel
+    [ImplementPropertyChanged]
+    public class CustomerDetailsViewModel : IPageViewModel
     {
 
         public ICommand UpdateCommand { get; set; }
@@ -28,19 +30,10 @@ namespace MongoDBApp.ViewModels
         public ICommand RefreshCommand { get; set; }
 
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
         private ICustomerDataService _customerDataService;
 
 
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
-
+    
 
         public CustomerDetailsViewModel(ICustomerDataService customerDataService) 
         {
@@ -49,6 +42,7 @@ namespace MongoDBApp.ViewModels
 
             LoadCommands();
 
+            IsEnabled = true;
         }
 
 
@@ -58,68 +52,21 @@ namespace MongoDBApp.ViewModels
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             AddCommand = new RelayCommand(AddCustomer);
-            //RefreshCommand = new RelayCommand(QueryDataFromPersistence());   
+            //RefreshCommand = new RelayCommand(QueryDataFromPersistence());   //debugging...
         }
 
 
       #region Properties
        
         
-        private CustomerModel selectedCustomer;
-        public CustomerModel SelectedCustomer
-        {
-            get
-            {
-                return selectedCustomer;
-            }
-            set
-            {
-                selectedCustomer = value;
-                Messenger.Default.Send<CustomerModel>(selectedCustomer);
-                RaisePropertyChanged("SelectedCustomer");
-            }
-        }
+        public CustomerModel SelectedCustomer  { get; set; }
 
+        public bool IsEnabled { get; set; }
+        
+        public ObservableCollection<CustomerModel> Customers { get; set; }
        
-        private ObservableCollection<CustomerModel> customers;
-        public ObservableCollection<CustomerModel> Customers
-        {
-            get
-            {
-                return customers;
-            }
-            set
-            {
-                customers = value;
-                RaisePropertyChanged("Customers");
-            }
-        }
-
-
-        private Boolean button_enabled;
-        public Boolean ButtonEnabled
-        {
-            get { return button_enabled; }
-            set
-            {
-                button_enabled = value;
-                RaisePropertyChanged("ButtonEnabled");
-            }
-        }
-
-
-        private Boolean is_enabled = true;
-        public bool IsEnabled
-        {
-            get { return is_enabled; }
-            set
-            {
-                is_enabled = value;
-                RaisePropertyChanged("IsEnabled");
-            }
-        }
-
-
+        public Boolean ButtonEnabled { get; set; }
+        
         public string Name
         {
             get
@@ -128,8 +75,6 @@ namespace MongoDBApp.ViewModels
             }
         }
       
-        
-        
 
       #endregion
 
@@ -146,6 +91,12 @@ namespace MongoDBApp.ViewModels
             return false;            
         }
 
+
+        public void OnSelectedCustomerChanged()
+        { 
+            Messenger.Default.Send<CustomerModel>(SelectedCustomer); 
+        }
+
         #region persistence methods
 
         private void QueryDataFromPersistence()
@@ -158,7 +109,7 @@ namespace MongoDBApp.ViewModels
         private async Task UpdateCustomerAsync(object customer) { 
             
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.UpdateCustomer(selectedCustomer));
+            await Task.Run(() => _customerDataService.UpdateCustomer(SelectedCustomer));
             ButtonEnabled = false;
             QueryDataFromPersistence();
         }
@@ -167,7 +118,7 @@ namespace MongoDBApp.ViewModels
         private async Task DeleteCustomerAsync(object customer)
         {
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.DeleteCustomer(selectedCustomer));
+            await Task.Run(() => _customerDataService.DeleteCustomer(SelectedCustomer));
             ButtonEnabled = false;
             QueryDataFromPersistence();
         }
@@ -180,7 +131,7 @@ namespace MongoDBApp.ViewModels
            if(!Customers.Any(str => String.Compare(str.Email, SelectedCustomer.Email, true) == -1))
            {
                ButtonEnabled = true;
-                await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
+                await Task.Run(() => _customerDataService.AddCustomer(SelectedCustomer));
                 ButtonEnabled = false;
                 QueryDataFromPersistence();
                 
@@ -203,13 +154,6 @@ namespace MongoDBApp.ViewModels
         }
 
         #endregion
-
-
-      
-
-
-
-
-       
+  
     }
 }
