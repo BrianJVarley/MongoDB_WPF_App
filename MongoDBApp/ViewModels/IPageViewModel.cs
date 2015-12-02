@@ -10,6 +10,7 @@ namespace MongoDBApp.ViewModels
     {
 
         string Name { get; }
+        Boolean IsEnabled { get; set; }
 
     }
 }

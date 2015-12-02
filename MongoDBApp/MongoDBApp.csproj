@@ -120,6 +120,7 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Services\CustomerDataService.cs" />
     <Compile Include="Services\ICustomerDataService.cs" />
+    <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Validator\RegexValidationRule.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrdersViewModel.cs" />

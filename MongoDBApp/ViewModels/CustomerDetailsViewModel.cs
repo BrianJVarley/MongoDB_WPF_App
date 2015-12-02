@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using MongoDBApp.Extensions;
 using MongoDB.Bson;
 using System.Windows.Input;
+using MongoDBApp.Utility;
 
 namespace MongoDBApp.ViewModels
 {
@@ -46,12 +47,18 @@ namespace MongoDBApp.ViewModels
             this._customerDataService = customerDataService;
             QueryDataFromPersistence();
 
+            LoadCommands();
+
+        }
+
+
+        private void LoadCommands()
+        {
             UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             AddCommand = new RelayCommand(AddCustomer);
-            //RefreshCommand = new RelayCommand(QueryDataFromPersistence());
-
+            //RefreshCommand = new RelayCommand(QueryDataFromPersistence());   
         }
 
 
@@ -68,6 +75,7 @@ namespace MongoDBApp.ViewModels
             set
             {
                 selectedCustomer = value;
+                Messenger.Default.Send<CustomerModel>(selectedCustomer);
                 RaisePropertyChanged("SelectedCustomer");
             }
         }
@@ -89,16 +97,36 @@ namespace MongoDBApp.ViewModels
 
 
         private Boolean button_enabled;
-        public Boolean ButtonEnabled 
+        public Boolean ButtonEnabled
         {
             get { return button_enabled; }
             set
             {
                 button_enabled = value;
-                RaisePropertyChanged("ButtonEnabled");  
+                RaisePropertyChanged("ButtonEnabled");
             }
         }
 
+
+        private Boolean is_enabled;
+        public bool IsEnabled
+        {
+            get { return is_enabled; }
+            set
+            {
+                is_enabled = value;
+                RaisePropertyChanged("IsEnabled");
+            }
+        }
+
+
+        public string Name
+        {
+            get
+            {
+                return "Customer Details";
+            }
+        }
       
         
         
@@ -151,7 +179,7 @@ namespace MongoDBApp.ViewModels
      
            if(!Customers.Any(str => String.Compare(str.Email, SelectedCustomer.Email, true) == -1))
            {
-                ButtonEnabled = true;
+               ButtonEnabled = true;
                 await Task.Run(() => _customerDataService.AddCustomer(selectedCustomer));
                 ButtonEnabled = false;
                 QueryDataFromPersistence();
@@ -164,7 +192,7 @@ namespace MongoDBApp.ViewModels
 
         private void AddCustomer(object customer)
         {
-            
+
                 ButtonEnabled = true;
                 //create new customer and add, set as selected customer
                 CustomerModel newCustomer = new CustomerModel();
@@ -177,14 +205,11 @@ namespace MongoDBApp.ViewModels
         #endregion
 
 
-        public string Name
-        {
-            get
-            {
-                return "Customer Details";
-            }
-        }
+      
 
 
+
+
+       
     }
 }

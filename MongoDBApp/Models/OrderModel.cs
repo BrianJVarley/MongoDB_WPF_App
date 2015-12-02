@@ -16,7 +16,7 @@ namespace MongoDBApp.Models
         private ObjectId _id;
         private string email;
         private BsonDateTime date;
-        private BsonBoolean status;
+        private Boolean status;
         private ProductModel[] products;
 
 
@@ -70,7 +70,7 @@ namespace MongoDBApp.Models
 
 
         [BsonElement("status")]
-        public BsonBoolean Status
+        public Boolean Status
         {
             get
             {

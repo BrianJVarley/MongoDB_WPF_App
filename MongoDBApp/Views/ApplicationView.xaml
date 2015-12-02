@@ -29,5 +29,10 @@
                 <TextBlock Text="{Binding Name}" />
             </DataTemplate>
         </TabControl.ItemTemplate>
+        <TabControl.ItemContainerStyle>
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+            </Style>
+        </TabControl.ItemContainerStyle>
     </TabControl>
 </Window>
