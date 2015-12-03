@@ -31,13 +31,15 @@ namespace MongoDBApp.ViewModels
 
 
         private IDataService<CustomerModel> _customerDataService;
+        private IDataService<CountryModel> _countryDataService;
 
 
-    
 
-        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService) 
+
+        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService, IDataService<CountryModel> countryDataService) 
         {
             this._customerDataService = customerDataService;
+            this._countryDataService = countryDataService;
             QueryDataFromPersistence();
 
             LoadCommands();
@@ -65,8 +67,8 @@ namespace MongoDBApp.ViewModels
         
         public ObservableCollection<CustomerModel> Customers { get; set; }
 
-        public Dictionary<string, string> CountryDictionary { get; set; }
-       
+        public ObservableCollection<CountryModel> Countries { get; set; }   
+    
         public Boolean ButtonEnabled { get; set; }
         
         public string Name
@@ -104,6 +106,7 @@ namespace MongoDBApp.ViewModels
         private void QueryDataFromPersistence()
         {
             Customers =  _customerDataService.GetAll().ToObservableCollection();
+            Countries = _countryDataService.GetAll().ToObservableCollection();
         }
 
        

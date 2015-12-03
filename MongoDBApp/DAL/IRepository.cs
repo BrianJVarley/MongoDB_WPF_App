@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDBApp.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace MongoDBApp.DAL
         Task Add(T t);
         Task Delete(T t);
         void LoadDb();
+        IMongoCollection<T> StartConnection();
 
     }
 }

@@ -16,11 +16,12 @@ namespace Tests
     [TestClass]
     public class MainViewModelTests
     {
-        private ICustomerDataService customerDataService;
+        private IDataService<CustomerModel> customerDataService;
+        private IDataService<CountryModel> countryDataService;
 
         private CustomerDetailsViewModel GetViewModel()
         {
-            return new CustomerDetailsViewModel(this.customerDataService);
+            return new CustomerDetailsViewModel(this.customerDataService, this.countryDataService);
         }
        
 
@@ -35,7 +36,7 @@ namespace Tests
         {
             //Arrange
             ObservableCollection<CustomerModel> customers = null;
-            var expectedCustomers = customerDataService.GetAllCustomers();
+            var expectedCustomers = customerDataService.GetAll();
 
             //act
             var viewModel = GetViewModel();

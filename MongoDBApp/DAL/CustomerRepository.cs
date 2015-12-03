@@ -18,7 +18,7 @@ namespace MongoDBApp.DAL
     {
 
         //Database connection string
-        private const string connectionString = "mongodb://brianVarley:Starlight123;@ds054118.mongolab.com:54118/orders";
+        private static string connectionString = Properties.Settings.Default.ordersConnectionString;
         private static readonly CustomerRepository instance = new CustomerRepository();
         private static List<CustomerModel> customers = new List<CustomerModel>();
 
@@ -40,16 +40,6 @@ namespace MongoDBApp.DAL
             }
         }
 
-
-
-        private static IMongoCollection<CustomerModel> StartConnection()
-        {
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase("orders");
-            //Get a handle on the customers collection:
-            var collection = database.GetCollection<CustomerModel>("customers");
-            return collection;
-        }
 
 
 
@@ -117,6 +107,16 @@ namespace MongoDBApp.DAL
         }
 
 
+
+        public IMongoCollection<CustomerModel> StartConnection()
+        {
+              
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("orders");
+            //Get a handle on the customers collection:
+            var collection = database.GetCollection<CustomerModel>("customers");
+            return collection;
+        }
     }
 
 }

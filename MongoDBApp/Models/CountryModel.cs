@@ -27,7 +27,7 @@ namespace MongoDBApp.Models
     public class Country
     {
         [BsonElement("name")]
-        public float Name { get; set; }
+        public string Name { get; set; }
 
         [BsonElement("code")]
         public string Code { get; set; }

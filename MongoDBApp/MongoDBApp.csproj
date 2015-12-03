@@ -115,6 +115,7 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Converters\BoolToNonVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="DAL\CountryRepository.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\TaskExtension.cs" />
     <Compile Include="Models\CountryModel.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Services\CountryDataService.cs" />
     <Compile Include="Services\CustomerDataService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Utility\Messenger.cs" />

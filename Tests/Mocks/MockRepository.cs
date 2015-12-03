@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDBApp.DAL;
 using MongoDBApp.Models;
 using System;
@@ -46,34 +47,45 @@ namespace Tests.Mocks
         }
 
 
-        public CustomerModel GetCustomerByEmail(string email)
+        public CustomerModel GetByEmail(string email)
         {
             if (customers == null)
                 LoadMockCustomers();
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
-        public CustomerModel GetCustomerById(ObjectId id)
+        public CustomerModel GetById(ObjectId id)
         {
             throw new NotImplementedException();
         }
 
-        public List<CustomerModel> GetCustomers()
+        public List<CustomerModel> GetAll()
         {
             return customers;
         }
 
-        public Task UpdateCustomer(CustomerModel customer)
+        public Task Update(CustomerModel customer)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteCustomer(CustomerModel customer)
+        public Task Delete(CustomerModel customer)
         {
             throw new NotImplementedException();
         }
 
-        public Task AddCustomer(CustomerModel customer)
+        public Task Add(CustomerModel customer)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void LoadDb()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IMongoCollection<CustomerModel> StartConnection()
         {
             throw new NotImplementedException();
         }

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDBApp.DAL;
 using MongoDBApp.Services;
 using Tests.Mocks;
+using MongoDBApp.Models;
 
 namespace Tests
 {
@@ -10,7 +11,7 @@ namespace Tests
     public class CustomerDataServiceTest
     {
 
-        private IRepository repository;
+        private IRepository<CustomerModel> repository;
 
         [TestInitialize]
         public void Init()
@@ -27,7 +28,7 @@ namespace Tests
             var service = new CustomerDataService(repository);
 
             //act
-            var customer = service.GetCustomerByEmail("brian@gmail.com");
+            var customer = service.GetByEmail("brian@gmail.com");
 
             //assert
             Assert.IsNotNull(customer);

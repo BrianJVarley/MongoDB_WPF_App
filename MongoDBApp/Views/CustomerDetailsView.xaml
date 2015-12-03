@@ -161,9 +161,9 @@
                           HorizontalAlignment="Center"
                           VerticalAlignment="Top"
                           DisplayMemberPath="Country"
-                          ItemsSource="{Binding Customers}"
+                          ItemsSource="{Binding Countries}"
                           ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          SelectedItem="{Binding SelectedCustomer.Country}" />
+                          SelectedItem="{Binding Countries.Name}" />
 
 
 
