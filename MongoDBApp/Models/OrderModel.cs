@@ -34,11 +34,27 @@ namespace MongoDBApp.Models
         
 
         [BsonElement("products")]
-        public ProductModel[] Products { get; set; }
+        public List<ProductModel> Products { get; set; }
       
-
-
        
+    }
+
+
+    [ImplementPropertyChanged]
+    public class ProductModel
+    {
+
+
+        [BsonElement("productId")]
+        public string ProductId { get; set; }
+
+        [BsonElement("price")]
+        public float Price { get; set; }
+
+
+        [BsonElement("description")]
+        public string Description { get; set; }
+
     }
 
 }

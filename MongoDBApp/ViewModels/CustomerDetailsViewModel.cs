@@ -30,12 +30,12 @@ namespace MongoDBApp.ViewModels
         public ICommand RefreshCommand { get; set; }
 
 
-        private ICustomerDataService _customerDataService;
+        private IDataService<CustomerModel> _customerDataService;
 
 
     
 
-        public CustomerDetailsViewModel(ICustomerDataService customerDataService) 
+        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService) 
         {
             this._customerDataService = customerDataService;
             QueryDataFromPersistence();
@@ -103,7 +103,7 @@ namespace MongoDBApp.ViewModels
 
         private void QueryDataFromPersistence()
         {
-            Customers =  _customerDataService.GetAllCustomers().ToObservableCollection();
+            Customers =  _customerDataService.GetAll().ToObservableCollection();
         }
 
        
@@ -111,7 +111,7 @@ namespace MongoDBApp.ViewModels
         private async Task UpdateCustomerAsync(object customer) { 
             
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.UpdateCustomer(SelectedCustomer));
+            await Task.Run(() => _customerDataService.Update(SelectedCustomer));
             ButtonEnabled = false;
             QueryDataFromPersistence();
         }
@@ -120,7 +120,7 @@ namespace MongoDBApp.ViewModels
         private async Task DeleteCustomerAsync(object customer)
         {
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.DeleteCustomer(SelectedCustomer));
+            await Task.Run(() => _customerDataService.Delete(SelectedCustomer));
             ButtonEnabled = false;
             QueryDataFromPersistence();
         }
@@ -133,7 +133,7 @@ namespace MongoDBApp.ViewModels
            if(!Customers.Any(str => String.Compare(str.Email, SelectedCustomer.Email, true) == -1))
            {
                ButtonEnabled = true;
-                await Task.Run(() => _customerDataService.AddCustomer(SelectedCustomer));
+                await Task.Run(() => _customerDataService.Add(SelectedCustomer));
                 ButtonEnabled = false;
                 QueryDataFromPersistence();
                 

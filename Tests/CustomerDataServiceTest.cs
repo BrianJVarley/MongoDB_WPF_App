@@ -10,7 +10,7 @@ namespace Tests
     public class CustomerDataServiceTest
     {
 
-        private ICustomerRepository repository;
+        private IRepository repository;
 
         [TestInitialize]
         public void Init()

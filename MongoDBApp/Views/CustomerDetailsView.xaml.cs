@@ -23,16 +23,11 @@ namespace MongoDBApp.Views
     /// </summary>
     public partial class CustomerDetailsView : UserControl
     {
-        private CustomerDetailsViewModel ViewModel { get; set; }
-        private static ICustomerDataService customerDataService = new CustomerDataService(CustomerRepository.Instance);
-
 
         public CustomerDetailsView()
         {
             InitializeComponent();
-            ViewModel = new CustomerDetailsViewModel(customerDataService); 
-            this.DataContext = ViewModel;
-
+           
         }
 
     }

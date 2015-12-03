@@ -14,7 +14,7 @@ namespace MongoDBApp.DAL
 {
 
 
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : IRepository<CustomerModel>
     {
 
         //Database connection string
@@ -41,66 +41,67 @@ namespace MongoDBApp.DAL
         }
 
 
-        public CustomerModel GetACustomer()
-        {
-            if (customers == null)
-                LoadCustomers();
-            return customers.FirstOrDefault();
-        }
 
-        public List<CustomerModel> GetCustomers()
+        private static IMongoCollection<CustomerModel> StartConnection()
         {
-            if (customers.Count == 0)
-                LoadCustomers();
-            return customers;
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("orders");
+            //Get a handle on the customers collection:
+            var collection = database.GetCollection<CustomerModel>("customers");
+            return collection;
         }
 
 
-        public CustomerModel GetCustomerById(ObjectId id)
+
+        public CustomerModel GetByEmail(string email)
         {
             if (customers == null)
-                LoadCustomers();
-            return customers.Where(c => c.Id == id).FirstOrDefault();
-        }
-
-
-        public CustomerModel GetCustomerByEmail(string email)
-        {
-            if (customers == null)
-                LoadCustomers();
+                LoadDb();
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
-        public async Task DeleteCustomer(CustomerModel customer)
+        public CustomerModel GetById(ObjectId id)
         {
-            var collection = StartConnection();
-            var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
-            var result = await collection.DeleteOneAsync(filter);
-            customers.Remove(customer);
+            if (customers == null)
+                LoadDb();
+            return customers.Where(c => c.Id == id).FirstOrDefault();
         }
 
-        public async Task AddCustomer(CustomerModel customer)
+        public List<CustomerModel> GetAll()
         {
-            var collection = StartConnection();
-            await collection.InsertOneAsync(customer);
-            customers.Add(customer);
+            if (customers.Count == 0)
+                LoadDb();
+            return customers;
         }
 
-
-        public async Task UpdateCustomer(CustomerModel customer)
-        {          
+        public async Task Update(CustomerModel t)
+        {
             var collection = StartConnection();
-            var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == customer.Id);
+            var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == t.Id);
 
             collection.Find(filter).ToString();
-            var result = await collection.ReplaceOneAsync(filter, customer, new UpdateOptions { IsUpsert = true });
+            var result = await collection.ReplaceOneAsync(filter, t, new UpdateOptions { IsUpsert = true });
 
-            var index = customers.FindIndex(a => a.Id == customer.Id);
-            customers[index] = customer;
+            var index = customers.FindIndex(a => a.Id == t.Id);
+            customers[index] = t;
         }
 
+        public async Task Add(CustomerModel t)
+        {
+            var collection = StartConnection();
+            await collection.InsertOneAsync(t);
+            customers.Add(t);
+        }
 
-        private void LoadCustomers()
+        public async Task Delete(CustomerModel t)
+        {
+            var collection = StartConnection();
+            var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == t.Id);
+            var result = await collection.DeleteOneAsync(filter);
+            customers.Remove(t);
+        }
+
+        public void LoadDb()
         {
             var collection = StartConnection();
 
@@ -115,18 +116,7 @@ namespace MongoDBApp.DAL
             }
         }
 
-        private static IMongoCollection<CustomerModel> StartConnection()
-        {
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase("orders");
-            //Get a handle on the customers collection:
-            var collection = database.GetCollection<CustomerModel>("customers");
-            return collection;
-        }
 
-
-
-       
     }
 
 }

@@ -9,49 +9,46 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Services
 {
-    public class CustomerDataService : ICustomerDataService
+    public class CustomerDataService : IDataService<CustomerModel>
     {
 
-        ICustomerRepository repository;
+        IRepository<CustomerModel> repository;
 
-        public CustomerDataService(ICustomerRepository repository)
+        public CustomerDataService(IRepository<CustomerModel> repository)
         {
             this.repository = repository;  
         }
 
         
-        public CustomerModel GetCustomerDetail(ObjectId id)
+        public List<CustomerModel> GetAll()
         {
-            return repository.GetCustomerById(id);
+            return repository.GetAll();
         }
 
-        public List<CustomerModel> GetAllCustomers()
+        public CustomerModel GetById(ObjectId id)
         {
-            return repository.GetCustomers();
+            return repository.GetById(id);
         }
 
-        public void UpdateCustomer(CustomerModel customer)
+        public CustomerModel GetByEmail(string email)
         {
-            repository.UpdateCustomer(customer);
-        }
-
-
-
-        public void DeleteCustomer(CustomerModel customer)
-        {
-            repository.DeleteCustomer(customer);
+            return repository.GetByEmail(email);
         }
 
 
-        public void AddCustomer(CustomerModel customer)
+        async Task IDataService<CustomerModel>.Update(CustomerModel t)
         {
-            repository.AddCustomer(customer);
+            await repository.Update(t);
         }
 
-        public CustomerModel GetCustomerByEmail(string email)
+        async Task IDataService<CustomerModel>.Add(CustomerModel t)
         {
-            return repository.GetCustomerByEmail(email);
+            await repository.Add(t);
         }
 
+        async Task IDataService<CustomerModel>.Delete(CustomerModel t)
+        {
+            await repository.Delete(t);
+        }
     }
 }

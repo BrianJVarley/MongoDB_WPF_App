@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Tests.Mocks
 {
-    class MockRepository : ICustomerRepository
+    class MockRepository : IRepository<CustomerModel>
     {
         private List<CustomerModel> customers;
 
@@ -45,12 +45,6 @@ namespace Tests.Mocks
 
         }
 
-
-
-        public CustomerModel GetACustomer()
-        {
-            throw new NotImplementedException();
-        }
 
         public CustomerModel GetCustomerByEmail(string email)
         {
