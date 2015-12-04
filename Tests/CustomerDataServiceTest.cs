@@ -28,7 +28,7 @@ namespace Tests
             var service = new CustomerDataService(repository);
 
             //act
-            var customer = service.GetByEmail("brian@gmail.com");
+            var customer = service.GetByEmailAsync("brian@gmail.com");
 
             //assert
             Assert.IsNotNull(customer);

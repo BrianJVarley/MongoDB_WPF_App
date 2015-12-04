@@ -17,7 +17,7 @@ namespace Tests
     public class MainViewModelTests
     {
         private IDataService<CustomerModel> customerDataService;
-        private IDataService<CountryModel> countryDataService;
+        private IDataService<Country> countryDataService;
 
         private CustomerDetailsViewModel GetViewModel()
         {
@@ -32,11 +32,12 @@ namespace Tests
         }
 
         [TestMethod]
-        public void LoadAllCustomers()
+        public async Task LoadAllCustomers()
         {
             //Arrange
             ObservableCollection<CustomerModel> customers = null;
-            var expectedCustomers = customerDataService.GetAll();
+            var result = await customerDataService.GetAllAsync();
+            var expectedCustomers = result;
 
             //act
             var viewModel = GetViewModel();

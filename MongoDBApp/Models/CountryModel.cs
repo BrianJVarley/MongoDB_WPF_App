@@ -13,16 +13,24 @@ namespace MongoDBApp.Models
     public class CountryModel
     {
 
+        
+      
         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+
+        [BsonElement("name")]
+        public string CountryObjectName { get; set; }
+
 
         [BsonElement("countries")]
-        public List<Country> countries { get; set; }
+        public List<Country> Countries { get; set; }
         
        
 
     }
 
+    [BsonIgnoreExtraElements]
     [ImplementPropertyChanged]
     public class Country
     {

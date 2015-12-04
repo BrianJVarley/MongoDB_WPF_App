@@ -10,13 +10,13 @@ namespace MongoDBApp.Services
 {
     public interface IDataService<T> where T : new()
     {
-         
-        List<T> GetAll();
-        T GetById(ObjectId id);
-        T GetByEmail(string email);
-        Task Update(T t);
-        Task Add(T t);
-        Task Delete(T t);
+
+        Task<List<T>> GetAllAsync();
+        Task<T> GetByIdAsync(ObjectId id);
+        Task<T> GetByEmailAsync(string email);
+        Task UpdateAsync(T t);
+        Task AddAsync(T t);
+        Task DeleteAsync(T t);
    
     }
 }

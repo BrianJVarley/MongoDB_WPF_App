@@ -8,46 +8,46 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Services
 {
-    class CountryDataService : IDataService<CountryModel>
+    class CountryDataService : IDataService<Country>
     {
 
-        IRepository<CountryModel> repository;
+        IRepository<Country> repository;
 
-        public CountryDataService(IRepository<CountryModel> repository)
+        public CountryDataService(IRepository<Country> repository)
         {
             this.repository = repository;  
         }
 
-
-
-        public List<CountryModel> GetAll()
+        public async Task<List<Country>> GetAllAsync()
         {
-            return repository.GetAll();
+            return await repository.GetAllAsync();
         }
 
-        public CountryModel GetById(MongoDB.Bson.ObjectId id)
+        public async Task<Country> GetByIdAsync(MongoDB.Bson.ObjectId id)
         {
             throw new NotImplementedException();
         }
 
-        public CountryModel GetByEmail(string email)
+        public async Task<Country> GetByEmailAsync(string email)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(CountryModel t)
+        public async Task UpdateAsync(Country t)
         {
             throw new NotImplementedException();
         }
 
-        public Task Add(CountryModel t)
+        public async Task AddAsync(Country t)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(CountryModel t)
+        public async Task DeleteAsync(Country t)
         {
             throw new NotImplementedException();
         }
+
+          
     }
 }

@@ -47,47 +47,44 @@ namespace Tests.Mocks
         }
 
 
-        public CustomerModel GetByEmail(string email)
+
+
+        public async Task<CustomerModel> GetByEmailAsync(string email)
         {
-            if (customers == null)
+             if (customers == null)
                 LoadMockCustomers();
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
-        public CustomerModel GetById(ObjectId id)
+        public async Task<CustomerModel> GetByIdAsync(ObjectId id)
         {
             throw new NotImplementedException();
         }
 
-        public List<CustomerModel> GetAll()
+        public async Task<List<CustomerModel>> GetAllAsync()
         {
             return customers;
         }
 
-        public Task Update(CustomerModel customer)
+        public async Task UpdateAsync(CustomerModel t)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(CustomerModel customer)
+        public async Task AddAsync(CustomerModel t)
         {
             throw new NotImplementedException();
         }
 
-        public Task Add(CustomerModel customer)
+        public async Task DeleteAsync(CustomerModel t)
         {
             throw new NotImplementedException();
         }
 
-
-        public void LoadDb()
+        public async Task LoadDbAsync()
         {
             throw new NotImplementedException();
         }
 
-        public IMongoCollection<CustomerModel> StartConnection()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

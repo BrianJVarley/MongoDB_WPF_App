@@ -31,12 +31,12 @@ namespace MongoDBApp.ViewModels
 
 
         private IDataService<CustomerModel> _customerDataService;
-        private IDataService<CountryModel> _countryDataService;
+        private IDataService<Country> _countryDataService;
 
 
 
 
-        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService, IDataService<CountryModel> countryDataService) 
+        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService, IDataService<Country> countryDataService) 
         {
             this._customerDataService = customerDataService;
             this._countryDataService = countryDataService;
@@ -53,8 +53,7 @@ namespace MongoDBApp.ViewModels
             UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
-            AddCommand = new RelayCommand(AddCustomer);
-            //RefreshCommand = new RelayCommand(QueryDataFromPersistence());   //debugging...
+            AddCommand = new RelayCommand(AddCustomerLocal);
         }
 
 
@@ -67,9 +66,13 @@ namespace MongoDBApp.ViewModels
         
         public ObservableCollection<CustomerModel> Customers { get; set; }
 
-        public ObservableCollection<CountryModel> Countries { get; set; }   
+        public ObservableCollection<Country> Countries { get; set; }
     
         public Boolean ButtonEnabled { get; set; }
+
+
+
+
         
         public string Name
         {
@@ -98,23 +101,27 @@ namespace MongoDBApp.ViewModels
 
         public void OnSelectedCustomerChanged()
         { 
-            Messenger.Default.Send<CustomerModel>(SelectedCustomer); 
+            Messenger.Default.Send<CustomerModel>(SelectedCustomer);
         }
 
         #region persistence methods
 
-        private void QueryDataFromPersistence()
+
+        private async Task QueryDataFromPersistence()
         {
-            Customers =  _customerDataService.GetAll().ToObservableCollection();
-            Countries = _countryDataService.GetAll().ToObservableCollection();
+            var customerResult = await _customerDataService.GetAllAsync();
+            Customers = customerResult.ToObservableCollection();
+
+            var countryResult = await _countryDataService.GetAllAsync();
+            Countries = countryResult.ToObservableCollection();
+          
         }
 
        
-
         private async Task UpdateCustomerAsync(object customer) { 
             
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.Update(SelectedCustomer));
+            await Task.Run(() => _customerDataService.UpdateAsync(SelectedCustomer));
             ButtonEnabled = false;
             QueryDataFromPersistence();
         }
@@ -123,7 +130,7 @@ namespace MongoDBApp.ViewModels
         private async Task DeleteCustomerAsync(object customer)
         {
             ButtonEnabled = true;
-            await Task.Run(() => _customerDataService.Delete(SelectedCustomer));
+            await Task.Run(() => _customerDataService.DeleteAsync(SelectedCustomer));
             ButtonEnabled = false;
             QueryDataFromPersistence();
         }
@@ -133,10 +140,10 @@ namespace MongoDBApp.ViewModels
         {
 
      
-           if(!Customers.Any(str => String.Compare(str.Email, SelectedCustomer.Email, true) == -1))
+           if(Customers.Any(str => String.Compare(str.Email, SelectedCustomer.Email, true) == -1))
            {
-               ButtonEnabled = true;
-                await Task.Run(() => _customerDataService.Add(SelectedCustomer));
+                ButtonEnabled = true;
+                await Task.Run(() => _customerDataService.AddAsync(SelectedCustomer));
                 ButtonEnabled = false;
                 QueryDataFromPersistence();
                 
@@ -146,7 +153,7 @@ namespace MongoDBApp.ViewModels
         }
 
 
-        private void AddCustomer(object customer)
+        private void AddCustomerLocal(object customer)
         {
 
                 ButtonEnabled = true;

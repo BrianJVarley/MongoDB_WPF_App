@@ -11,13 +11,13 @@ using Xceed.Wpf.Toolkit;
 
 namespace MongoDBApp.DAL
 {
-    class CountryRepository : IRepository<CountryModel>
+    class CountryRepository : IRepository<Country>
     {
 
          //Database connection string
         private static string connectionString = Properties.Settings.Default.ordersConnectionString;
         private static readonly CountryRepository instance = new CountryRepository();
-        private static List<CountryModel> countries = new List<CountryModel>();
+        private static List<Country> countryList = new List<Country>();
 
 
         static CountryRepository()
@@ -38,62 +38,64 @@ namespace MongoDBApp.DAL
         }
 
 
-        public CountryModel GetByEmail(string email)
+
+        public async Task<Country> GetByEmailAsync(string email)
         {
             throw new NotImplementedException();
         }
 
-        public CountryModel GetById(MongoDB.Bson.ObjectId id)
+        public async Task<Country> GetByIdAsync(ObjectId id)
         {
             throw new NotImplementedException();
         }
 
-        public List<CountryModel> GetAll()
+        public async Task<List<Country>> GetAllAsync()
         {
-            if (countries.Count == 0)
-                LoadDb();
-            return countries;
+            if (countryList.Count == 0)
+                await LoadDbAsync();
+            return countryList;
         }
 
-        public Task Update(CountryModel t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Add(CountryModel t)
+        public async Task UpdateAsync(Country t)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(CountryModel t)
+        public async Task AddAsync(Country t)
         {
             throw new NotImplementedException();
         }
 
-        public void LoadDb()
+        public async Task DeleteAsync(Country t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task LoadDbAsync()
         {
             var collection = StartConnection();
 
             try
             {
-                countries = collection.Find(new BsonDocument()).ToListAsync().GetAwaiter().GetResult();
+                var result = await collection.Find(x => x.CountryObjectName == "CountryListObject").Project(x => x.Countries).FirstOrDefaultAsync();
+                countryList = result;
             }
             catch (MongoException ex)
             {
                 //Log exception here:
-               System.Windows.MessageBox.Show("A connection error occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("A connection error occurred: " + ex.Message, "Connection Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-
         public IMongoCollection<CountryModel> StartConnection()
         {
-            
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("orders");
             //Get a handle on the countries collection:
             var collection = database.GetCollection<CountryModel>("countries");
             return collection;
         }
+
+       
     }
 }

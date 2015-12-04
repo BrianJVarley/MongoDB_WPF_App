@@ -17,13 +17,13 @@ namespace Tests.Mocks
 
         public void DeleteCustomer(CustomerModel customer)
         {
-            repository.DeleteCustomer(customer);
+            repository.Delete(customer);
         }
    
       
         public List<CustomerModel> GetAll()
         {
-            return repository.GetCustomers();
+            return repository.GetAll();
         }
 
         public CustomerModel GetById(ObjectId id)
@@ -33,7 +33,7 @@ namespace Tests.Mocks
 
         public CustomerModel GetByEmail(string email)
         {
-            CustomerModel customer = repository.GetCustomerByEmail(email);
+            CustomerModel customer = repository.GetByEmail(email);
             return customer;
         }
 

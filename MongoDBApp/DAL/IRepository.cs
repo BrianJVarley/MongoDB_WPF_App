@@ -11,15 +11,14 @@ namespace MongoDBApp.DAL
 {
     public interface IRepository<T> where T : new()
     {
-        
-        T GetByEmail(string email);
-        T GetById(ObjectId id);
-        List<T> GetAll();
-        Task Update(T t);
-        Task Add(T t);
-        Task Delete(T t);
-        void LoadDb();
-        IMongoCollection<T> StartConnection();
+
+        Task<T> GetByEmailAsync(string email);
+        Task<T> GetByIdAsync(ObjectId id);
+        Task <List<T>> GetAllAsync();
+        Task UpdateAsync(T t);
+        Task AddAsync(T t);
+        Task DeleteAsync(T t);
+        Task LoadDbAsync();
 
     }
 }

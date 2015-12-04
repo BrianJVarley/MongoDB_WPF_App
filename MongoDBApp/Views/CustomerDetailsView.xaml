@@ -137,6 +137,7 @@
                          Grid.Column="3"
                          Width="120"
                          Height="23"
+                         Margin="0,3,0,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top">
                     <Binding Path="SelectedCustomer.Email" UpdateSourceTrigger="PropertyChanged">
@@ -154,16 +155,16 @@
                        Content="Country:" />
 
                 <ComboBox Grid.Row="6"
-                          Grid.RowSpan="2"
                           Grid.Column="4"
                           Width="180"
                           Height="30"
+                          Margin="84,9,84,0"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Top"
-                          DisplayMemberPath="Country"
+                          DisplayMemberPath="Name"
                           ItemsSource="{Binding Countries}"
                           ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          SelectedItem="{Binding Countries.Name}" />
+                          Text="{Binding SelectedCustomer.Country}" />
 
 
 
@@ -176,9 +177,18 @@
                         Command="{Binding AddCommand}"
                         Content="Add" />
 
-                <Button x:Name="updateBtn"
+                <Button x:Name="saveBtn"
                         Grid.Row="7"
                         Grid.Column="3"
+                        Width="75"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Command="{Binding SaveCommand}"
+                        Content="Save" />
+
+                <Button x:Name="updateBtn"
+                        Grid.Row="7"
+                        Grid.Column="4"
                         Width="75"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
@@ -195,15 +205,6 @@
                     </Button.ToolTip>
                 </Button>
 
-                <Button x:Name="saveBtn"
-                        Grid.Row="7"
-                        Grid.Column="4"
-                        Width="75"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Command="{Binding SaveCommand}"
-                        Content="Save" />
-
                 <Button x:Name="statsBtn"
                         Grid.Row="7"
                         Grid.Column="4"
@@ -218,7 +219,7 @@
                         Grid.Row="7"
                         Grid.Column="4"
                         Width="75"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         Command="{Binding DeleteCommand}"
                         Content="Delete" />

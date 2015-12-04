@@ -43,28 +43,31 @@ namespace MongoDBApp.DAL
 
 
 
-        public CustomerModel GetByEmail(string email)
+        public async Task<CustomerModel> GetByEmailAsync(string email)
         {
             if (customers == null)
-                LoadDb();
+                await LoadDbAsync();
             return customers.Where(c => c.Email == email).FirstOrDefault();
         }
 
-        public CustomerModel GetById(ObjectId id)
+        public async Task<CustomerModel> GetByIdAsync(ObjectId id)
         {
             if (customers == null)
-                LoadDb();
+                await LoadDbAsync();
             return customers.Where(c => c.Id == id).FirstOrDefault();
         }
 
-        public List<CustomerModel> GetAll()
+        public async Task<List<CustomerModel>> GetAllAsync()
         {
             if (customers.Count == 0)
-                LoadDb();
+                await LoadDbAsync();
             return customers;
         }
 
-        public async Task Update(CustomerModel t)
+
+
+
+        public async Task UpdateAsync(CustomerModel t)
         {
             var collection = StartConnection();
             var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == t.Id);
@@ -76,14 +79,14 @@ namespace MongoDBApp.DAL
             customers[index] = t;
         }
 
-        public async Task Add(CustomerModel t)
+        public async Task AddAsync(CustomerModel t)
         {
             var collection = StartConnection();
             await collection.InsertOneAsync(t);
             customers.Add(t);
         }
 
-        public async Task Delete(CustomerModel t)
+        public async Task DeleteAsync(CustomerModel t)
         {
             var collection = StartConnection();
             var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == t.Id);
@@ -91,13 +94,14 @@ namespace MongoDBApp.DAL
             customers.Remove(t);
         }
 
-        public void LoadDb()
+        public async Task LoadDbAsync()
         {
-            var collection = StartConnection();
+            var customerCollection = StartConnection();
 
             try
             {
-                customers = collection.Find(new BsonDocument()).ToListAsync().GetAwaiter().GetResult();
+                customers = await customerCollection.Find(new BsonDocument()).ToListAsync();
+             
             }
             catch (MongoException ex)
             {
@@ -110,7 +114,7 @@ namespace MongoDBApp.DAL
 
         public IMongoCollection<CustomerModel> StartConnection()
         {
-              
+
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("orders");
             //Get a handle on the customers collection:

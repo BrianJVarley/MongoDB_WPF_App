@@ -19,36 +19,40 @@ namespace MongoDBApp.Services
             this.repository = repository;  
         }
 
-        
-        public List<CustomerModel> GetAll()
-        {
-            return repository.GetAll();
-        }
-
-        public CustomerModel GetById(ObjectId id)
-        {
-            return repository.GetById(id);
-        }
-
-        public CustomerModel GetByEmail(string email)
-        {
-            return repository.GetByEmail(email);
-        }
 
 
-        async Task IDataService<CustomerModel>.Update(CustomerModel t)
+
+        public async Task<List<CustomerModel>> GetAllAsync()
         {
-            await repository.Update(t);
+            return await repository.GetAllAsync();
         }
 
-        async Task IDataService<CustomerModel>.Add(CustomerModel t)
+        public async Task<CustomerModel> GetByIdAsync(ObjectId id)
         {
-            await repository.Add(t);
+            return await repository.GetByIdAsync(id);
         }
 
-        async Task IDataService<CustomerModel>.Delete(CustomerModel t)
+        public async Task<CustomerModel> GetByEmailAsync(string email)
         {
-            await repository.Delete(t);
+            return await repository.GetByEmailAsync(email);
         }
+
+        public async Task UpdateAsync(CustomerModel t)
+        {
+            await repository.UpdateAsync(t);
+        }
+
+        public async Task AddAsync(CustomerModel t)
+        {
+            await repository.AddAsync(t);
+        }
+
+        public async Task DeleteAsync(CustomerModel t)
+        {
+            await repository.DeleteAsync(t);
+        }
+
+
+      
     }
 }
