@@ -31,14 +31,14 @@
         <chartingToolkit:Chart Name="pieChart"
                                Title="Customer Geographics"
                                Grid.Row="0"
+                               Grid.RowSpan="9"
                                Grid.Column="1"
-                               Width="230"
-                               Height="262"
+                               Grid.ColumnSpan="5"
+                               Height="400"
                                VerticalAlignment="Top">
-            <chartingToolkit:PieSeries DependentValuePath="Value"
-                                       IndependentValuePath="Key"
-                                       IsSelectionEnabled="True"
-                                       ItemsSource="{Binding}" />
+            <chartingToolkit:PieSeries DependentValuePath="Share"
+                                       IndependentValuePath="Name"
+                                       ItemsSource="{Binding PieCollection}" />
         </chartingToolkit:Chart>
 
 

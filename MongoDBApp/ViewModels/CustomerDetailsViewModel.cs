@@ -54,6 +54,8 @@ namespace MongoDBApp.ViewModels
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             AddCommand = new RelayCommand(AddCustomerLocal);
+
+            
         }
 
 
@@ -102,6 +104,7 @@ namespace MongoDBApp.ViewModels
         public void OnSelectedCustomerChanged()
         { 
             Messenger.Default.Send<CustomerModel>(SelectedCustomer);
+            Messenger.Default.Send<ObservableCollection<CustomerModel>>(Customers);
         }
 
         #region persistence methods

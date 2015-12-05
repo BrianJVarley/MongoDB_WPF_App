@@ -205,15 +205,6 @@
                     </Button.ToolTip>
                 </Button>
 
-                <Button x:Name="statsBtn"
-                        Grid.Row="7"
-                        Grid.Column="4"
-                        Width="75"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Command="{Binding StatsCommand}"
-                        Content="View Stats" />
-
 
                 <Button x:Name="deleteBtn"
                         Grid.Row="7"
