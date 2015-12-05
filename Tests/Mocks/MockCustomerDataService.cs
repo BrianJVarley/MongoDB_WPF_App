@@ -15,41 +15,41 @@ namespace Tests.Mocks
 
         private MockRepository repository = new MockRepository();
 
-        public void DeleteCustomer(CustomerModel customer)
+
+
+        public async Task<List<CustomerModel>> GetAllAsync()
         {
-            repository.Delete(customer);
-        }
-   
-      
-        public List<CustomerModel> GetAll()
-        {
-            return repository.GetAll();
+            return await repository.GetAllAsync();
         }
 
-        public CustomerModel GetById(ObjectId id)
+        public Task<CustomerModel> GetByIdAsync(ObjectId id)
         {
             throw new NotImplementedException();
         }
 
-        public CustomerModel GetByEmail(string email)
+        public async Task<CustomerModel> GetByEmailAsync(string email)
         {
-            CustomerModel customer = repository.GetByEmail(email);
-            return customer;
+            return await repository.GetByEmailAsync(email);
         }
 
-        public Task Update(CustomerModel t)
+        public async Task UpdateAsync(CustomerModel t)
         {
             throw new NotImplementedException();
         }
 
-        public Task Add(CustomerModel t)
+        public async Task AddAsync(CustomerModel t)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(CustomerModel t)
+        public async Task DeleteAsync(CustomerModel t)
         {
-            throw new NotImplementedException();
+           await repository.DeleteAsync(t); ;
         }
+
+     
+       
+
+     
     }
 }
