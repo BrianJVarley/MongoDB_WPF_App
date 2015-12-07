@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Extensions
 {
-    static class CollectionExtensions
+    public static class CollectionExtensions
     {
         public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerableResult)
         {
             return new ObservableCollection<T>(enumerableResult);
+        }
+
+        public static string ToString<T>(this IList<T> list)
+        {
+            return string.Join(", ", list);
         }
 
     }

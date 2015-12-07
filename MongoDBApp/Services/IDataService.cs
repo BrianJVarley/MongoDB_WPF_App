@@ -14,6 +14,7 @@ namespace MongoDBApp.Services
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(ObjectId id);
         Task<T> GetByEmailAsync(string email);
+        Task<List<T>> GetAllByEmailAsync(string email);
         Task UpdateAsync(T t);
         Task AddAsync(T t);
         Task DeleteAsync(T t);

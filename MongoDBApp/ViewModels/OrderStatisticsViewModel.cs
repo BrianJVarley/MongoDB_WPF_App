@@ -28,20 +28,19 @@ namespace MongoDBApp.ViewModels
             Customers = customers;
             IsEnabled = true;
 
-            PieCollection = new ObservableCollection<PiePoint>();
-            PieCollection.Add(new PiePoint { Name = "Mango", Share = 10 });
-            PieCollection.Add(new PiePoint { Name = "Banana", Share = 36 });
+           
+
+            IEnumerable<PiePointModel> piePoints = Customers.GroupBy(i => i.Country).Select(s => new PiePointModel()
+            { 
+                Name = s.Key, 
+                Amount = s.Count() 
+            });
+            CountryRatioCollection = new ObservableCollection<PiePointModel>(piePoints);
         }
 
 
-        public class PiePoint
-        {
-            public string Name { get; set; }
-            public Int16 Share { get; set; }
-        }
-
-
-        public ObservableCollection<PiePoint> PieCollection { get; set; }
+   
+        public ObservableCollection<PiePointModel> CountryRatioCollection { get; set; }
 
         public ObservableCollection<CustomerModel> Customers { get; set; }
 

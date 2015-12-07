@@ -29,7 +29,7 @@ namespace MongoDBApp.Models
        
 
 
-        [BsonElement("status")]
+        [BsonElement("ship_status")]
         public Boolean Status { get; set; }
         
 

@@ -86,5 +86,14 @@ namespace Tests.Mocks
             throw new NotImplementedException();
         }
 
+
+
+
+
+
+        public Task<List<CustomerModel>> GetAllByEmailAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

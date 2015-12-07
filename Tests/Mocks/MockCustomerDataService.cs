@@ -47,9 +47,10 @@ namespace Tests.Mocks
            await repository.DeleteAsync(t); ;
         }
 
-     
-       
 
-     
+        public Task<List<CustomerModel>> GetAllByEmailAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

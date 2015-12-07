@@ -53,6 +53,11 @@ namespace MongoDBApp.Services
         }
 
 
-      
+
+
+        public Task<List<CustomerModel>> GetAllByEmailAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

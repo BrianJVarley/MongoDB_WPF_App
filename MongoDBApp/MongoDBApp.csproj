@@ -128,6 +128,7 @@
     <Compile Include="Converters\BoolToNonVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="DAL\CountryRepository.cs" />
+    <Compile Include="DAL\OrderRepository.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\TaskExtension.cs" />
     <Compile Include="Models\CountryModel.cs" />
@@ -135,9 +136,11 @@
     <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\PiePointModel.cs" />
     <Compile Include="Services\CountryDataService.cs" />
     <Compile Include="Services\CustomerDataService.cs" />
     <Compile Include="Services\IDataService.cs" />
+    <Compile Include="Services\OrderDataService.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Validator\RegexValidationRule.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
@@ -211,6 +214,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\export.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\refresh.png">

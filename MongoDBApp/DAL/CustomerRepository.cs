@@ -20,7 +20,7 @@ namespace MongoDBApp.DAL
         //Database connection string
         private static string connectionString = Properties.Settings.Default.ordersConnectionString;
         private static readonly CustomerRepository instance = new CustomerRepository();
-        private static List<CustomerModel> customers = new List<CustomerModel>();
+        private static List<CustomerModel> customerList = new List<CustomerModel>();
 
 
         static CustomerRepository()
@@ -45,23 +45,25 @@ namespace MongoDBApp.DAL
 
         public async Task<CustomerModel> GetByEmailAsync(string email)
         {
-            if (customers == null)
+            if (customerList == null)
                 await LoadDbAsync();
-            return customers.Where(c => c.Email == email).FirstOrDefault();
+            return customerList.Where(c => c.Email == email).FirstOrDefault();
         }
 
+
+        
         public async Task<CustomerModel> GetByIdAsync(ObjectId id)
         {
-            if (customers == null)
+            if (customerList == null)
                 await LoadDbAsync();
-            return customers.Where(c => c.Id == id).FirstOrDefault();
+            return customerList.Where(c => c.Id == id).FirstOrDefault();
         }
 
         public async Task<List<CustomerModel>> GetAllAsync()
         {
-            if (customers.Count == 0)
+            if (customerList.Count == 0)
                 await LoadDbAsync();
-            return customers;
+            return customerList;
         }
 
 
@@ -75,15 +77,15 @@ namespace MongoDBApp.DAL
             collection.Find(filter).ToString();
             var result = await collection.ReplaceOneAsync(filter, t, new UpdateOptions { IsUpsert = true });
 
-            var index = customers.FindIndex(a => a.Id == t.Id);
-            customers[index] = t;
+            var index = customerList.FindIndex(a => a.Id == t.Id);
+            customerList[index] = t;
         }
 
         public async Task AddAsync(CustomerModel t)
         {
             var collection = StartConnection();
             await collection.InsertOneAsync(t);
-            customers.Add(t);
+            customerList.Add(t);
         }
 
         public async Task DeleteAsync(CustomerModel t)
@@ -91,7 +93,7 @@ namespace MongoDBApp.DAL
             var collection = StartConnection();
             var filter = Builders<CustomerModel>.Filter.Where(x => x.Id == t.Id);
             var result = await collection.DeleteOneAsync(filter);
-            customers.Remove(t);
+            customerList.Remove(t);
         }
 
         public async Task LoadDbAsync()
@@ -100,7 +102,7 @@ namespace MongoDBApp.DAL
 
             try
             {
-                customers = await customerCollection.Find(new BsonDocument()).ToListAsync();
+                customerList = await customerCollection.Find(new BsonDocument()).ToListAsync();
              
             }
             catch (MongoException ex)
@@ -120,6 +122,15 @@ namespace MongoDBApp.DAL
             //Get a handle on the customers collection:
             var collection = database.GetCollection<CustomerModel>("customers");
             return collection;
+        }
+
+
+
+
+
+        public Task<List<CustomerModel>> GetAllByEmailAsync(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 

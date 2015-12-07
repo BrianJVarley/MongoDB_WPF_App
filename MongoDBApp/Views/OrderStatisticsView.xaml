@@ -7,40 +7,54 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height=".50*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height=".2*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="17*" />
-            <ColumnDefinition Width="142*" />
-            <ColumnDefinition Width="29*" />
-            <ColumnDefinition Width="171*" />
-            <ColumnDefinition Width="342*" />
-            <ColumnDefinition Width="85*" />
-        </Grid.ColumnDefinitions>
-
-        <chartingToolkit:Chart Name="pieChart"
-                               Title="Customer Geographics"
-                               Grid.Row="0"
-                               Grid.RowSpan="9"
-                               Grid.Column="1"
-                               Grid.ColumnSpan="5"
-                               Height="400"
-                               VerticalAlignment="Top">
-            <chartingToolkit:PieSeries DependentValuePath="Share"
-                                       IndependentValuePath="Name"
-                                       ItemsSource="{Binding PieCollection}" />
-        </chartingToolkit:Chart>
+    <Viewbox>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
 
-    </Grid>
+            <DockPanel>
+                <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
+                    <ToolBar>
+                        <Button Command="{Binding ExportCommand}" ToolTip="Exports country data.">
+                            <Image Width="10"
+                                   Height="10"
+                                   Source="/MongoDBApp;component/Images/export.png" />
+                        </Button>
+                    </ToolBar>
+                </ToolBarTray>
+            </DockPanel>
+
+            <chartingToolkit:Chart Name="pieChart"
+                                   Title="Customer Geographics"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="9"
+                                   Grid.Column="1"
+                                   Grid.ColumnSpan="5"
+                                   Width="400"
+                                   Height="400"
+                                   VerticalAlignment="Top">
+                <chartingToolkit:PieSeries DependentValuePath="Amount"
+                                           IndependentValuePath="Name"
+                                           ItemsSource="{Binding CountryRatioCollection}" />
+            </chartingToolkit:Chart>
+        </Grid>
+    </Viewbox>
 </UserControl>

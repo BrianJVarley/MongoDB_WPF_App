@@ -40,7 +40,7 @@ namespace MongoDBApp.ViewModels
         {
             this._customerDataService = customerDataService;
             this._countryDataService = countryDataService;
-            QueryDataFromPersistence();
+            GetAllCustomersAsync();
 
             LoadCommands();
 
@@ -110,14 +110,14 @@ namespace MongoDBApp.ViewModels
         #region persistence methods
 
 
-        private async Task QueryDataFromPersistence()
+       
+        private async Task GetAllCustomersAsync()
         {
             var customerResult = await _customerDataService.GetAllAsync();
             Customers = customerResult.ToObservableCollection();
 
             var countryResult = await _countryDataService.GetAllAsync();
             Countries = countryResult.ToObservableCollection();
-          
         }
 
        
@@ -126,7 +126,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.UpdateAsync(SelectedCustomer));
             ButtonEnabled = false;
-            QueryDataFromPersistence();
+            GetAllCustomersAsync();
         }
 
 
@@ -135,7 +135,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.DeleteAsync(SelectedCustomer));
             ButtonEnabled = false;
-            QueryDataFromPersistence();
+            GetAllCustomersAsync();
         }
 
        
@@ -148,8 +148,7 @@ namespace MongoDBApp.ViewModels
                 ButtonEnabled = true;
                 await Task.Run(() => _customerDataService.AddAsync(SelectedCustomer));
                 ButtonEnabled = false;
-                QueryDataFromPersistence();
-                
+                GetAllCustomersAsync();                
             }
           
                 return;            

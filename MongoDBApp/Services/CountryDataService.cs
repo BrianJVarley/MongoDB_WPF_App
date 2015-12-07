@@ -48,6 +48,10 @@ namespace MongoDBApp.Services
             throw new NotImplementedException();
         }
 
-          
+
+        public Task<List<Country>> GetAllByEmailAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

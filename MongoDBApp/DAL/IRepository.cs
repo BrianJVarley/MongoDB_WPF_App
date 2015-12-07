@@ -13,6 +13,7 @@ namespace MongoDBApp.DAL
     {
 
         Task<T> GetByEmailAsync(string email);
+        Task<List<T>> GetAllByEmailAsync(string email);
         Task<T> GetByIdAsync(ObjectId id);
         Task <List<T>> GetAllAsync();
         Task UpdateAsync(T t);

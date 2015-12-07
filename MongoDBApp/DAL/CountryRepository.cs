@@ -14,7 +14,7 @@ namespace MongoDBApp.DAL
     class CountryRepository : IRepository<Country>
     {
 
-         //Database connection string
+        //Database connection string
         private static string connectionString = Properties.Settings.Default.ordersConnectionString;
         private static readonly CountryRepository instance = new CountryRepository();
         private static List<Country> countryList = new List<Country>();
@@ -43,6 +43,9 @@ namespace MongoDBApp.DAL
         {
             throw new NotImplementedException();
         }
+
+
+      
 
         public async Task<Country> GetByIdAsync(ObjectId id)
         {
@@ -96,6 +99,15 @@ namespace MongoDBApp.DAL
             return collection;
         }
 
-       
+
+
+
+
+
+
+        public Task<List<Country>> GetAllByEmailAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
