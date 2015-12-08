@@ -53,10 +53,7 @@ namespace MongoDBApp.DAL
         {
             if (orderList == null || orderList.Count() == 0)
                 await LoadDbAsync();
-            orderList.Where(c => c.Email.Equals(email)).ToList();
-            //string dump = string.Join(",", orderList.ToArray());
-            return orderList;
-
+            return orderList.Where(c => c.Email.Equals(email)).ToList();           
         }
 
         public async Task<OrderModel> GetByIdAsync(MongoDB.Bson.ObjectId id)
