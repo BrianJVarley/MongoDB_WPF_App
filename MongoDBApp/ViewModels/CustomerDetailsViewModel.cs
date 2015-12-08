@@ -52,7 +52,7 @@ namespace MongoDBApp.ViewModels
         {
             UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
-            SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveCustomer);
             AddCommand = new RelayCommand(AddCustomerLocal);
 
             
@@ -92,12 +92,26 @@ namespace MongoDBApp.ViewModels
         {
             
             if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.Country != null &&
-                SelectedCustomer.LastName != null && SelectedCustomer.Email != null && SelectedCustomer.Address != null)            
+                SelectedCustomer.LastName != null && SelectedCustomer.Email != null
+                && SelectedCustomer.Address != null && SelectedCustomer.Id.ToString() != "000000000000000000000000")            
             {
                 return true;
             }
 
             return false;            
+        }
+
+
+        private bool CanSaveCustomer(object obj)
+        {
+
+            if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.Country != null &&
+                SelectedCustomer.LastName != null && SelectedCustomer.Email != null && SelectedCustomer.Address != null && SelectedCustomer.Id.ToString() == "000000000000000000000000")
+            {
+                return true;
+            }
+
+            return false;
         }
 
 
