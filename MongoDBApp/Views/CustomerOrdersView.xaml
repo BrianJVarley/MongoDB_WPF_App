@@ -1,16 +1,22 @@
 ﻿<UserControl x:Class="MongoDBApp.Views.CustomerOrdersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:boolean_converter="clr-namespace:MongoDBApp.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <boolean_converter:BooleanConverter x:Key="BooleanConverter" />
+    </UserControl.Resources>
 
+    <Viewbox>
+        <xctk:BusyIndicator IsBusy="{Binding ButtonEnabled}">
 
-
-    <Grid>
+            <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -25,7 +31,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="2*" />
@@ -58,9 +64,86 @@
                     <DataGridTextColumn Binding="{Binding Status}" Header="Shipping Status" />
                 </DataGrid.Columns>
             </DataGrid>
+            <Label Grid.Row="4"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Content="Date:" />
 
 
+            <TextBlock Grid.Row="4"
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding SelectedOrder.Date}"
+                       TextWrapping="Wrap" />
+            <Label Grid.Row="4"
+                   Grid.Column="3"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Content="Products:" />
+                    <ComboBox Grid.Row="4"
+                      Grid.Column="4"
+                      Grid.ColumnSpan="4"
+                      Width="120"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="ProductId"
+                              ItemsSource="{Binding SelectedOrder.Products}"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                    <Label Grid.Row="5"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Content="Email:" />
+
+
+            <TextBlock Grid.Row="5"
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding SelectedOrder.Email}"
+                       TextWrapping="Wrap" />
+            <RadioButton Grid.Row="5"
+                         Grid.Column="3"
+                         Grid.ColumnSpan="2"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Content="Shipped"
+                         IsChecked="{Binding SelectedOrder.Status,
+                                             Converter={StaticResource BooleanConverter},
+                                             ConverterParameter='true',
+                                             Mode=TwoWay}" />
+
+            <RadioButton Grid.Row="5"
+                         Grid.Column="4"
+                         Grid.ColumnSpan="2"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Content="Processing"
+                         IsChecked="{Binding SelectedOrder.Status,
+                                             Converter={StaticResource BooleanConverter},
+                                             ConverterParameter='false',
+                                             Mode=TwoWay}" />
+
+
+            <Button Grid.Row="7"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="3"
+                    Width="75"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Edit" />
+            <Button Grid.Row="7"
+                    Grid.Column="3"
+                    Grid.ColumnSpan="3"
+                    Width="75"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Command="{Binding SaveCommand}"
+                    Content="Save" />
         </Grid>
     </Grid>
-
+        </xctk:BusyIndicator>
+    </Viewbox>
 </UserControl>

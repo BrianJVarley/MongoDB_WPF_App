@@ -68,7 +68,14 @@ namespace MongoDBApp.DAL
 
         public async Task UpdateAsync(OrderModel t)
         {
-            throw new NotImplementedException();
+            var collection = StartConnection();
+            var filter = Builders<OrderModel>.Filter.Where(x => x.Id == t.Id);
+
+            collection.Find(filter).ToString();
+            var result = await collection.ReplaceOneAsync(filter, t, new UpdateOptions { IsUpsert = true });
+
+            var index = orderList.FindIndex(a => a.Id == t.Id);
+            orderList[index] = t;
         }
 
         public async Task AddAsync(OrderModel t)

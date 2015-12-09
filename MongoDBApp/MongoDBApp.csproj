@@ -125,6 +125,7 @@
     <Compile Include="Common\CustomCommand.cs" />
     <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\BoolToNonVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="DAL\CountryRepository.cs" />

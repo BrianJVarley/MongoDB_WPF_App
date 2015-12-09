@@ -33,6 +33,7 @@ namespace MongoDBApp.ViewModels
         private IDataService<CustomerModel> _customerDataService;
         private IDataService<Country> _countryDataService;
 
+        private string NullObjectId = "000000000000000000000000";
 
 
 
@@ -93,7 +94,7 @@ namespace MongoDBApp.ViewModels
             
             if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.Country != null &&
                 SelectedCustomer.LastName != null && SelectedCustomer.Email != null
-                && SelectedCustomer.Address != null && SelectedCustomer.Id.ToString() != "000000000000000000000000")            
+                && SelectedCustomer.Address != null && SelectedCustomer.Id.ToString() != NullObjectId)            
             {
                 return true;
             }
@@ -106,7 +107,8 @@ namespace MongoDBApp.ViewModels
         {
 
             if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.Country != null &&
-                SelectedCustomer.LastName != null && SelectedCustomer.Email != null && SelectedCustomer.Address != null && SelectedCustomer.Id.ToString() == "000000000000000000000000")
+                SelectedCustomer.LastName != null && SelectedCustomer.Email != null 
+                && SelectedCustomer.Address != null && SelectedCustomer.Id.ToString() == NullObjectId)
             {
                 return true;
             }

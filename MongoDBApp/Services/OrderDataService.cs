@@ -38,7 +38,7 @@ namespace MongoDBApp.Services
      
         public async Task UpdateAsync(OrderModel t)
         {
-            throw new NotImplementedException();
+            await repository.UpdateAsync(t);
         }
 
         public async Task AddAsync(OrderModel t)
