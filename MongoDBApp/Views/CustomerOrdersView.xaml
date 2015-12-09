@@ -17,133 +17,133 @@
         <xctk:BusyIndicator IsBusy="{Binding ButtonEnabled}">
 
             <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <DockPanel>
-                <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
-                    <ToolBar>
-                        <Button Command="{Binding RefreshCommand}" ToolTip="Refreshes the customer records.">
-                            <Image Width="10"
-                                   Height="10"
-                                   Source="/MongoDBApp;component/Images/refresh.png" />
-                        </Button>
-                    </ToolBar>
-                </ToolBarTray>
-            </DockPanel>
+                    <DockPanel>
+                        <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
+                            <ToolBar>
+                                <Button Command="{Binding RefreshCommand}" ToolTip="Refreshes the customer records.">
+                                    <Image Width="10"
+                                           Height="10"
+                                           Source="/MongoDBApp;component/Images/refresh.png" />
+                                </Button>
+                            </ToolBar>
+                        </ToolBarTray>
+                    </DockPanel>
 
-            <DataGrid x:Name="customersgrid"
-                      Grid.Row="0"
-                      Grid.RowSpan="3"
-                      Grid.Column="1"
-                      Grid.ColumnSpan="4"
-                      AutoGenerateColumns="False"
-                      ItemsSource="{Binding CustomerOrders}"
-                      SelectedItem="{Binding SelectedOrder}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
-                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
-                    <DataGridTextColumn Binding="{Binding Status}" Header="Shipping Status" />
-                </DataGrid.Columns>
-            </DataGrid>
-            <Label Grid.Row="4"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Content="Date:" />
+                    <DataGrid x:Name="customersgrid"
+                              Grid.Row="0"
+                              Grid.RowSpan="3"
+                              Grid.Column="1"
+                              Grid.ColumnSpan="4"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding CustomerOrders}"
+                              SelectedItem="{Binding SelectedOrder}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
+                            <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                            <DataGridTextColumn Binding="{Binding Status}" Header="Shipping Status" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label Grid.Row="4"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Date:" />
 
 
-            <TextBlock Grid.Row="4"
-                       Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Text="{Binding SelectedOrder.Date}"
-                       TextWrapping="Wrap" />
-            <Label Grid.Row="4"
-                   Grid.Column="3"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Content="Products:" />
+                    <TextBlock Grid.Row="4"
+                               Grid.Column="2"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Text="{Binding SelectedOrder.Date}"
+                               TextWrapping="Wrap" />
+                    <Label Grid.Row="4"
+                           Grid.Column="3"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Products:" />
                     <ComboBox Grid.Row="4"
-                      Grid.Column="4"
-                      Grid.ColumnSpan="4"
-                      Width="120"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top"
-                      DisplayMemberPath="ProductId"
+                              Grid.Column="4"
+                              Grid.ColumnSpan="4"
+                              Width="120"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              DisplayMemberPath="ProductId"
                               ItemsSource="{Binding SelectedOrder.Products}"
-                              ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                              ScrollViewer.VerticalScrollBarVisibility="Visible" />
                     <Label Grid.Row="5"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Content="Email:" />
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="Email:" />
 
 
-            <TextBlock Grid.Row="5"
-                       Grid.Column="2"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Text="{Binding SelectedOrder.Email}"
-                       TextWrapping="Wrap" />
-            <RadioButton Grid.Row="5"
-                         Grid.Column="3"
-                         Grid.ColumnSpan="2"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         Content="Shipped"
-                         IsChecked="{Binding SelectedOrder.Status,
-                                             Converter={StaticResource BooleanConverter},
-                                             ConverterParameter='true',
-                                             Mode=TwoWay}" />
+                    <TextBlock Grid.Row="5"
+                               Grid.Column="2"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Text="{Binding SelectedOrder.Email}"
+                               TextWrapping="Wrap" />
+                    <RadioButton Grid.Row="5"
+                                 Grid.Column="3"
+                                 Grid.ColumnSpan="2"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Content="Shipped"
+                                 IsChecked="{Binding SelectedOrder.Status,
+                                                     Converter={StaticResource BooleanConverter},
+                                                     ConverterParameter='true',
+                                                     Mode=TwoWay}" />
 
-            <RadioButton Grid.Row="5"
-                         Grid.Column="4"
-                         Grid.ColumnSpan="2"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         Content="Processing"
-                         IsChecked="{Binding SelectedOrder.Status,
-                                             Converter={StaticResource BooleanConverter},
-                                             ConverterParameter='false',
-                                             Mode=TwoWay}" />
+                    <RadioButton Grid.Row="5"
+                                 Grid.Column="4"
+                                 Grid.ColumnSpan="2"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Content="Processing"
+                                 IsChecked="{Binding SelectedOrder.Status,
+                                                     Converter={StaticResource BooleanConverter},
+                                                     ConverterParameter='false',
+                                                     Mode=TwoWay}" />
 
 
-            <Button Grid.Row="7"
-                    Grid.Column="3"
-                    Grid.ColumnSpan="3"
-                    Width="75"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Edit" />
-            <Button Grid.Row="7"
-                    Grid.Column="3"
-                    Grid.ColumnSpan="3"
-                    Width="75"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Command="{Binding SaveCommand}"
-                    Content="Save" />
-        </Grid>
-    </Grid>
+                    <Button Grid.Row="7"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="3"
+                            Width="75"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Edit" />
+                    <Button Grid.Row="7"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="3"
+                            Width="75"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Command="{Binding SaveCommand}"
+                            Content="Save" />
+                </Grid>
+            </Grid>
         </xctk:BusyIndicator>
     </Viewbox>
 </UserControl>
