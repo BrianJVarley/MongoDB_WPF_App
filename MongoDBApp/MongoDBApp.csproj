@@ -147,6 +147,7 @@
     <Compile Include="DAL\OrderRepository.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\TaskExtension.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
