@@ -24,13 +24,16 @@ namespace MongoDBApp.Views
     {
 
         private static IDialogService dialogService = new DialogService();
+        private static IAuthenticationService authoService = new AuthenticationService();
         private LoginViewModel loginViewModel { get; set; }
 
         public LoginView()
         {
             InitializeComponent();
-            loginViewModel = new LoginViewModel(dialogService);
+            loginViewModel = new LoginViewModel(dialogService, authoService);
             this.DataContext = loginViewModel;
         }
+
+      
     }
 }

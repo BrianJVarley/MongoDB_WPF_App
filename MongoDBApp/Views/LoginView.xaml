@@ -1,10 +1,13 @@
 ﻿<Window x:Class="MongoDBApp.Views.LoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:b="clr-namespace:MongoDBApp.Behaviors"
         xmlns:btv="clr-namespace:MongoDBApp.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:pass_helper="clr-namespace:MongoDBApp.Helpers"
+        Title="BV Coffee shop"
+        ResizeMode="NoResize"
         d:DesignHeight="300"
         d:DesignWidth="300"
         mc:Ignorable="d">
@@ -40,19 +43,18 @@
                   Header="Login">
             <Grid>
                 <Button Name="LoginWithWidget"
-                        Width="102"
                         Height="22"
-                        Margin="68,126,71,70"
+                        Margin="68,131,54,75"
                         Command="{Binding LoginCommand}"
                         Content="Login" />
 
                 <TextBox Name="UserTextBox"
-                         Width="94"
+                         Width="109"
                          Height="23"
-                         Margin="119,24,0,171"
+                         Margin="119,29,0,176"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Center"
-                         Text="{Binding User}" />
+                         Text="{Binding UserName}" />
                 <Label Name="label1"
                        Height="28"
                        Margin="34,24,0,166"
@@ -70,9 +72,12 @@
                              Height="23"
                              Margin="119,70,0,0"
                              HorizontalAlignment="Left"
-                             VerticalAlignment="Top"
-                             pass_helper:PasswordHelper.Attach="True"
-                             pass_helper:PasswordHelper.Password="{Binding Path=Password}" />
+                             VerticalAlignment="Top">
+                    <i:Interaction.Behaviors>
+                        <b:PasswordBoxBindingBehavior Password="{Binding Password}" />
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
+
             </Grid>
         </GroupBox>
     </Grid>

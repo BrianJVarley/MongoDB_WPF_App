@@ -44,7 +44,10 @@ namespace MongoDBApp.ViewModels
             this._customerDataService = customerDataService;
             this._countryDataService = countryDataService;
             this._dialogService = dialogService;
+
             GetAllCustomersAsync();
+
+            _dialogService.ShowDialog();
 
             LoadCommands();
             Messenger.Default.Register<UpdateLoginMessage>(this, OnLoggedInMessageReceived);

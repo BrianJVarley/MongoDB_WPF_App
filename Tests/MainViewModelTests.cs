@@ -18,10 +18,11 @@ namespace Tests
     {
         private IDataService<CustomerModel> customerDataService;
         private IDataService<Country> countryDataService;
+        private IDialogService dialogService;
 
         private CustomerDetailsViewModel GetViewModel()
         {
-            return new CustomerDetailsViewModel(this.customerDataService, this.countryDataService);
+            return new CustomerDetailsViewModel(this.customerDataService, this.countryDataService, this.dialogService);
         }
        
 

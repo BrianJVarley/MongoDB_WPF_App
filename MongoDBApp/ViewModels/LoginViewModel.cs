@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows;
 
 namespace MongoDBApp.ViewModels
 {
@@ -24,64 +26,44 @@ namespace MongoDBApp.ViewModels
 
         public string Name { get; set; }
         public bool IsEnabled { get; set; }
-        public bool IsLoggedIn { get; set; }
 
 
         public ICommand LoginCommand { get; set; }
-        private IDialogService _dialogService; 
+        private IDialogService _dialogService;
+        private IAuthenticationService _authService;
 
 
-        private Auth0Client auth0 = new Auth0Client(ConfigurationManager.AppSettings["auth0:Domain"],
-                                                    ConfigurationManager.AppSettings["auth0:ClientId"]);
 
-        public LoginViewModel(IDialogService dialogService)
+        public LoginViewModel(IDialogService dialogService, IAuthenticationService authService)
         {
             this._dialogService = dialogService;
+            this._authService = authService;
             LoadCommands();
         }
 
 
-        public string User { get; set; }
-        public string Password { get; set; }
-        public string ConnectionName = ConfigurationManager.AppSettings["auth0: ConnectionName"];
+        public string UserName { get; set; }
+        public SecureString Password { get; set; }
 
 
         private void LoadCommands()
         {
-            LoginCommand = new RelayCommand(LoginCustomer);
+            LoginCommand = new RelayCommand(OnLogin);
         }
 
-        
-
-
-        #region OAuth screen invoke
-
-
-        private void LoginCustomer(object obj)
+            
+        private void OnLogin(object obj)
         {
-
-            auth0.LoginAsync(connection: ConnectionName, userName: User, password: Password).ContinueWith(t =>
+            if (_authService.Login(UserName, Password))
             {
-                if (t.IsFaulted){
-
-                    IsLoggedIn = false;
-                    System.Windows.MessageBox.Show("Login failed!", "Not Logged In", MessageBoxButton.OK, MessageBoxImage.Warning);
-      
-                }
-                   
-                else
-                    IsLoggedIn = true;
-                Messenger.Default.Send<UpdateLoginMessage>(new UpdateLoginMessage());
-
-            },
-           TaskScheduler.FromCurrentSynchronizationContext());
-
+                System.Windows.MessageBox.Show("You are logged in");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Unknown username or password.");
+            }
         }
 
-
-
-
-        #endregion
 
     }
 }

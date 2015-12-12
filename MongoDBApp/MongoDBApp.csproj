@@ -41,6 +41,10 @@
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Mvvm">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
     </Reference>
@@ -137,6 +141,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\PasswordBoxBindingBehaviors.cs" />
     <Compile Include="Common\CustomCommand.cs" />
     <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Common\RelayCommand.cs" />
@@ -147,7 +152,6 @@
     <Compile Include="DAL\OrderRepository.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\TaskExtension.cs" />
-    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Messages\UpdateLoginMessage.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
@@ -155,9 +159,11 @@
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PiePointModel.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CountryDataService.cs" />
     <Compile Include="Services\CustomerDataService.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\OrderDataService.cs" />
