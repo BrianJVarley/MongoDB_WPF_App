@@ -20,8 +20,35 @@ namespace MongoDBApp.Services
                                                     ConfigurationManager.AppSettings["auth0:ClientId"]);
 
 
-        public bool Login(string username, SecureString password)
+
+
+
+
+
+
+        private async Task<bool> LoginServiceAsync(string username, string password)
         {
+            string ConnectionName = "Username-Password-Authentication";
+
+            try
+            {
+                var result = await auth0.LoginAsync(
+                    connection: ConnectionName, userName: username, password: password);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+
+
+
+        public async Task<bool> LoginAsync(string username, SecureString password)
+        {
+            
             IntPtr passwordBSTR = default(IntPtr);
             string insecurePassword = "";
             try
@@ -33,33 +60,9 @@ namespace MongoDBApp.Services
             {
                 insecurePassword = "";
             }
-            return LoginService(username, insecurePassword);
+            var loginResult = await LoginServiceAsync(username, insecurePassword);
+            return loginResult;
+              
         }
-
-        
-        private bool LoginService(string username, string password)
-        {
-
-            string ConnectionName = "Username-Password-Authentication";
-
-            auth0.LoginAsync(connection: ConnectionName, userName: username, password: password).ContinueWith(t =>
-            {
-                if (t.IsFaulted)
-                {
-                    return false;
-                }
-                else
-                {
-                    Messenger.Default.Send<UpdateLoginMessage>(new UpdateLoginMessage());
-                    return true;                  
-                }
-
-            },
-           
-           TaskScheduler.FromCurrentSynchronizationContext());
-        }
-
-
-
     }
 }

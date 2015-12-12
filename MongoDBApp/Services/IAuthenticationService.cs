@@ -10,7 +10,7 @@ namespace MongoDBApp.Services
    
     public interface IAuthenticationService
     {
-        bool Login(string username, SecureString password);
+        Task<bool> LoginAsync(string username, SecureString password);
     }
     
 }

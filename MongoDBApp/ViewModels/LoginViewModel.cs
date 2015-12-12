@@ -52,11 +52,15 @@ namespace MongoDBApp.ViewModels
         }
 
             
-        private void OnLogin(object obj)
+        private async void OnLogin(object obj)
         {
-            if (_authService.Login(UserName, Password))
+
+            var result = await _authService.LoginAsync(UserName, Password);
+
+            if (result)
             {
                 System.Windows.MessageBox.Show("You are logged in");
+                Messenger.Default.Send<UpdateLoginMessage>(new UpdateLoginMessage());
             }
             else
             {
