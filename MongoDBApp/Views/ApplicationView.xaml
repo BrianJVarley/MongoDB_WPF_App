@@ -17,9 +17,6 @@
         <DataTemplate DataType="{x:Type vm:OrderStatisticsViewModel}">
             <views:OrderStatisticsView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:LoginViewModel}">
-            <views:LoginView />
-        </DataTemplate>
     </Window.Resources>
 
     <Window.DataContext>

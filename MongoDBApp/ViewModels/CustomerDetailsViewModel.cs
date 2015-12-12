@@ -15,6 +15,7 @@ using MongoDB.Bson;
 using System.Windows.Input;
 using MongoDBApp.Utility;
 using PropertyChanged;
+using MongoDBApp.Messages;
 
 namespace MongoDBApp.ViewModels
 {
@@ -32,18 +33,21 @@ namespace MongoDBApp.ViewModels
 
         private IDataService<CustomerModel> _customerDataService;
         private IDataService<Country> _countryDataService;
+        private IDialogService _dialogService; 
 
         private string NullObjectId = "000000000000000000000000";
 
 
 
-        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService, IDataService<Country> countryDataService) 
+        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService, IDataService<Country> countryDataService, IDialogService dialogService) 
         {
             this._customerDataService = customerDataService;
             this._countryDataService = countryDataService;
+            this._dialogService = dialogService;
             GetAllCustomersAsync();
 
             LoadCommands();
+            Messenger.Default.Register<UpdateLoginMessage>(this, OnLoggedInMessageReceived);
 
             IsEnabled = true;
         }
@@ -57,6 +61,11 @@ namespace MongoDBApp.ViewModels
             AddCommand = new RelayCommand(AddCustomerLocal);
 
             
+        }
+
+        private void OnLoggedInMessageReceived(UpdateLoginMessage obj)
+        {
+            _dialogService.CloseDialog();
         }
 
 

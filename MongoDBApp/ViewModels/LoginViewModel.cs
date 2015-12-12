@@ -1,5 +1,8 @@
 ﻿using Auth0.Windows;
 using MongoDBApp.Common;
+using MongoDBApp.Messages;
+using MongoDBApp.Services;
+using MongoDBApp.Utility;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
@@ -21,15 +24,19 @@ namespace MongoDBApp.ViewModels
 
         public string Name { get; set; }
         public bool IsEnabled { get; set; }
+        public bool IsLoggedIn { get; set; }
+
 
         public ICommand LoginCommand { get; set; }
+        private IDialogService _dialogService; 
+
 
         private Auth0Client auth0 = new Auth0Client(ConfigurationManager.AppSettings["auth0:Domain"],
                                                     ConfigurationManager.AppSettings["auth0:ClientId"]);
 
-        public LoginViewModel()
+        public LoginViewModel(IDialogService dialogService)
         {
-
+            this._dialogService = dialogService;
             LoadCommands();
         }
 
@@ -57,13 +64,15 @@ namespace MongoDBApp.ViewModels
             {
                 if (t.IsFaulted){
 
-                    IsEnabled = false;
-                    System.Windows.MessageBox.Show("Login failed!: ", "Not Logged In", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    IsLoggedIn = false;
+                    System.Windows.MessageBox.Show("Login failed!", "Not Logged In", MessageBoxButton.OK, MessageBoxImage.Warning);
       
                 }
                    
                 else
-                    IsEnabled = true;
+                    IsLoggedIn = true;
+                Messenger.Default.Send<UpdateLoginMessage>(new UpdateLoginMessage());
+
             },
            TaskScheduler.FromCurrentSynchronizationContext());
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDBApp.Services;
+using MongoDBApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,17 @@ namespace MongoDBApp.Views
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class LoginView : Window
     {
+
+        private static IDialogService dialogService = new DialogService();
+        private LoginViewModel loginViewModel { get; set; }
+
         public LoginView()
         {
             InitializeComponent();
+            loginViewModel = new LoginViewModel(dialogService);
+            this.DataContext = loginViewModel;
         }
     }
 }

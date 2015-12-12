@@ -148,6 +148,7 @@
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\TaskExtension.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Messages\UpdateLoginMessage.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="DAL\CustomerRepository.cs" />
@@ -156,7 +157,9 @@
     <Compile Include="Models\PiePointModel.cs" />
     <Compile Include="Services\CountryDataService.cs" />
     <Compile Include="Services\CustomerDataService.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IDataService.cs" />
+    <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\OrderDataService.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Validator\RegexValidationRule.cs" />

@@ -1,20 +1,14 @@
-﻿<UserControl x:Class="MongoDBApp.Views.LoginView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:btv="clr-namespace:MongoDBApp.Converters"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pass_helper="clr-namespace:MongoDBApp.Helpers"
-             Visibility="{Binding LoggedIn,
-                                  Converter={StaticResource BoolToNonVisibilityConverter}}"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
-             mc:Ignorable="d">
+﻿<Window x:Class="MongoDBApp.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:btv="clr-namespace:MongoDBApp.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pass_helper="clr-namespace:MongoDBApp.Helpers"
+        d:DesignHeight="300"
+        d:DesignWidth="300"
+        mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <btv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <btv:BoolToNonVisibilityConverter x:Key="BoolToNonVisibilityConverter" />
-    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -79,11 +73,8 @@
                              VerticalAlignment="Top"
                              pass_helper:PasswordHelper.Attach="True"
                              pass_helper:PasswordHelper.Password="{Binding Path=Password}" />
-
             </Grid>
         </GroupBox>
-
-
     </Grid>
-</UserControl>
+</Window>
 
