@@ -46,7 +46,6 @@ namespace MongoDBApp.ViewModels
             this._dialogService = dialogService;
 
             GetAllCustomersAsync();
-
             _dialogService.ShowDialog();
 
             LoadCommands();
@@ -187,7 +186,7 @@ namespace MongoDBApp.ViewModels
         {
 
                 ButtonEnabled = true;
-                //create new customer and add, set as selected customer
+                //create new customer and add to data grid, set as selected customer
                 CustomerModel newCustomer = new CustomerModel();
                 Customers.Add(newCustomer);
                 SelectedCustomer = newCustomer;

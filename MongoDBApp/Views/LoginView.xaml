@@ -8,9 +8,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="BV Coffee shop"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         d:DesignHeight="300"
-        d:DesignWidth="300"
-        mc:Ignorable="d">
+        d:DesignWidth="450"
+        mc:Ignorable="d"
+        Width="300"
+        Height="300">
 
 
     <Grid>
@@ -27,59 +30,63 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2.5*" />
+            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+       
+           
+        
+        <Label Name="label1"
+               Grid.Row="2"
+               Grid.Column="2"
+               Grid.ColumnSpan="2"
+               Height="28"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Content="Username:" />
+        <TextBox Name="UserTextBox"
+                 Grid.Row="2"
+                 Grid.Column="3"
+                 Grid.ColumnSpan="2"
+                 Width="109"
+                 Height="23"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 Text="{Binding UserName}" />
+        <Label Name="label2"
+               Grid.Row="3"
+               Grid.Column="2"
+               Height="28"
+               Grid.ColumnSpan="2"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Content="Password:" />
+        <PasswordBox Name="PasswordTextBox"
+                     Grid.Row="3"
+                     Grid.Column="3"
+                     Grid.ColumnSpan="2"
+                     Width="112"
+                     Height="23"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Center">
+            <i:Interaction.Behaviors>
+                <b:PasswordBoxBindingBehavior Password="{Binding Password}" />
+            </i:Interaction.Behaviors>
+        </PasswordBox>
 
+        <Button Name="LoginBtn"
+                Grid.Row="4"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                Width="80"
+                Height="22"
+                HorizontalAlignment="Left"
+                Command="{Binding LoginCommand}"
+                Content="Login" />
 
-        <GroupBox Name="groupBox3"
-                  Grid.RowSpan="7"
-                  Grid.ColumnSpan="5"
-                  Width="250"
-                  Height="250"
-                  Header="Login">
-            <Grid>
-                <Button Name="LoginWithWidget"
-                        Height="22"
-                        Margin="68,131,54,75"
-                        Command="{Binding LoginCommand}"
-                        Content="Login" />
-
-                <TextBox Name="UserTextBox"
-                         Width="109"
-                         Height="23"
-                         Margin="119,29,0,176"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Center"
-                         Text="{Binding UserName}" />
-                <Label Name="label1"
-                       Height="28"
-                       Margin="34,24,0,166"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Content="Username" />
-                <Label Name="label2"
-                       Height="28"
-                       Margin="34,64,0,126"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Content="Password" />
-                <PasswordBox Name="PasswordTextBox"
-                             Width="112"
-                             Height="23"
-                             Margin="119,70,0,0"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top">
-                    <i:Interaction.Behaviors>
-                        <b:PasswordBoxBindingBehavior Password="{Binding Password}" />
-                    </i:Interaction.Behaviors>
-                </PasswordBox>
-
-            </Grid>
-        </GroupBox>
     </Grid>
 </Window>
 
