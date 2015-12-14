@@ -21,19 +21,10 @@ namespace MongoDBApp.Views
     /// Interaction logic for LoginView.xaml
     /// </summary>
     public partial class LoginView : Window
-    {
-
-        private static IDialogService dialogService = new DialogService();
-        private static IAuthenticationService authoService = new AuthenticationService();
-        private LoginViewModel loginViewModel { get; set; }
-
+    {     
         public LoginView()
         {
-            InitializeComponent();
-            loginViewModel = new LoginViewModel(dialogService, authoService);
-            this.DataContext = loginViewModel;
-        }
-
-      
+            InitializeComponent();         
+        }   
     }
 }

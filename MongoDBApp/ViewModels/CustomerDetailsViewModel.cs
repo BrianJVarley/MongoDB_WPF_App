@@ -35,7 +35,7 @@ namespace MongoDBApp.ViewModels
         private IDataService<Country> _countryDataService;
         private IDialogService _dialogService; 
 
-        private string NullObjectId = "000000000000000000000000";
+        private const string NullObjectId = "000000000000000000000000";
 
 
 
@@ -46,17 +46,18 @@ namespace MongoDBApp.ViewModels
             this._dialogService = dialogService;
 
             GetAllCustomersAsync();
-            _dialogService.ShowDialog();
-
-            LoadCommands();
-            Messenger.Default.Register<UpdateLoginMessage>(this, OnLoggedInMessageReceived);
 
             IsEnabled = true;
+            LoadCommands();
+
+           
+        
         }
 
 
         private void LoadCommands()
         {
+            
             UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveCustomer);
@@ -64,11 +65,7 @@ namespace MongoDBApp.ViewModels
 
             
         }
-
-        private void OnLoggedInMessageReceived(UpdateLoginMessage obj)
-        {
-            _dialogService.CloseDialog();
-        }
+       
 
 
       #region Properties
@@ -83,6 +80,8 @@ namespace MongoDBApp.ViewModels
         public ObservableCollection<Country> Countries { get; set; }
     
         public Boolean ButtonEnabled { get; set; }
+
+        public string AuthenticatedUserName { get; set; }
 
 
 

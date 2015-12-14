@@ -42,7 +42,13 @@ namespace MongoDBApp.ViewModels
 
         private bool CanSaveOrder(object obj)
         {
-            return true;              
+            if (SelectedOrder != null && SelectedOrder.Email != null && SelectedOrder.Date != null &&
+                SelectedOrder.Id != null)
+            {
+                return true;
+            }
+
+            return false;             
         }
 
 

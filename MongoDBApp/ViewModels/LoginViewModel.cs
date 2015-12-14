@@ -16,7 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows;
+
 
 namespace MongoDBApp.ViewModels
 {
@@ -26,6 +26,7 @@ namespace MongoDBApp.ViewModels
 
         public string Name { get; set; }
         public bool IsEnabled { get; set; }
+        public bool IsActive { get; set; }
 
 
         public ICommand LoginCommand { get; set; }
@@ -39,6 +40,7 @@ namespace MongoDBApp.ViewModels
             this._dialogService = dialogService;
             this._authService = authService;
             LoadCommands();
+
         }
 
 
@@ -54,13 +56,17 @@ namespace MongoDBApp.ViewModels
             
         private async void OnLogin(object obj)
         {
+            IsActive = true;
 
             var result = await _authService.LoginAsync(UserName, Password);
 
+
             if (result)
             {
+                Messenger.Default.Send<string>(UserName);
                 System.Windows.MessageBox.Show("You are logged in");
-                Messenger.Default.Send<UpdateLoginMessage>(new UpdateLoginMessage());
+                IsActive = false;
+               
             }
             else
             {
