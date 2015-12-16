@@ -24,19 +24,35 @@
         <vm:ApplicationViewModel />
     </Window.DataContext>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".07*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
 
-    <TabControl ItemsSource="{Binding PageViewModels}"
-                SelectedItem="{Binding CurrentPageViewModel}"
-                TabStripPlacement="Top">
-        <TabControl.ItemTemplate>
-            <DataTemplate>
-                <TextBlock Text="{Binding Name}" />
-            </DataTemplate>
-        </TabControl.ItemTemplate>
-        <TabControl.ItemContainerStyle>
-            <Style TargetType="{x:Type TabItem}">
-                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-            </Style>
-        </TabControl.ItemContainerStyle>
-    </TabControl>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Name="LogoutBtn"
+                    Width="50"
+                    Height="25"
+                    HorizontalAlignment="Right"
+                    Command="{Binding LogOutCommand}"
+                    Content="Logout" />
+        </StackPanel>
+
+        <TabControl Grid.Row="1"
+                    ItemsSource="{Binding PageViewModels}"
+                    SelectedItem="{Binding CurrentPageViewModel}"
+                    TabStripPlacement="Top">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+        </TabControl>
+    </Grid>
 </Window>

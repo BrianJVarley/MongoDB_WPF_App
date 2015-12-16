@@ -32,17 +32,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <DockPanel>
-                        <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
-                            <ToolBar>
-                                <Button Command="{Binding RefreshCommand}" ToolTip="Refreshes the customer records.">
-                                    <Image Width="10"
-                                           Height="10"
-                                           Source="/MongoDBApp;component/Images/refresh.png" />
-                                </Button>
-                            </ToolBar>
-                        </ToolBarTray>
-                    </DockPanel>
+
 
                     <DataGrid x:Name="customersgrid"
                               Grid.Row="0"

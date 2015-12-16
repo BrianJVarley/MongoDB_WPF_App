@@ -12,6 +12,7 @@ namespace MongoDBApp.Services
     {
 
         Window loginView = null;
+        Window productView = null;
 
         public DialogService()
         {
@@ -28,6 +29,21 @@ namespace MongoDBApp.Services
         {
             loginView = new LoginView();
             loginView.ShowDialog();
+        }
+
+
+        public void CloseDetailDialog()
+        {
+         
+            if (productView != null)
+                productView.Close();
+        
+        }
+
+        public void ShowDetailDialog()
+        {
+             productView = new ProductView();
+            productView.ShowDialog();
         }
     }
 }

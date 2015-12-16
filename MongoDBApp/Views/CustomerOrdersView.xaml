@@ -38,17 +38,6 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <DockPanel>
-                        <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
-                            <ToolBar>
-                                <Button Command="{Binding RefreshCommand}" ToolTip="Refreshes the customer records.">
-                                    <Image Width="10"
-                                           Height="10"
-                                           Source="/MongoDBApp;component/Images/refresh.png" />
-                                </Button>
-                            </ToolBar>
-                        </ToolBarTray>
-                    </DockPanel>
 
                     <DataGrid x:Name="customersgrid"
                               Grid.Row="0"
@@ -90,7 +79,8 @@
                               VerticalAlignment="Top"
                               DisplayMemberPath="ProductId"
                               ItemsSource="{Binding SelectedOrder.Products}"
-                              ScrollViewer.VerticalScrollBarVisibility="Visible" />
+                              ScrollViewer.VerticalScrollBarVisibility="Visible"
+                              SelectedItem="{Binding SelectedProduct}" />
                     <Label Grid.Row="5"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
@@ -133,6 +123,7 @@
                             Width="75"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
+                            Command="{Binding EditCommand}"
                             Content="Edit"
                             IsEnabled="{Binding IsEnabled}" />
                     <Button Grid.Row="7"

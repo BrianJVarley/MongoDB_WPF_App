@@ -10,5 +10,7 @@ namespace MongoDBApp.Services
     {
         void CloseDialog();
         void ShowDialog();
+        void CloseDetailDialog();
+        void ShowDetailDialog();
     }
 }

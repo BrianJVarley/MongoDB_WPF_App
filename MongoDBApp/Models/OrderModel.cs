@@ -51,9 +51,11 @@ namespace MongoDBApp.Models
         [BsonElement("price")]
         public float Price { get; set; }
 
-
         [BsonElement("description")]
         public string Description { get; set; }
+
+        [BsonElement("quantity")]
+        public int Quantity { get; set; }
 
     }
 

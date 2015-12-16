@@ -71,7 +71,9 @@ namespace MongoDBApp.ViewModels
             else
             {
                 System.Windows.MessageBox.Show("Unknown username or password.");
+                IsActive = false;
             }
+            return;
         }
 
 

@@ -27,6 +27,7 @@ namespace MongoDBApp
         public App()
         {
             Messenger.Default.Register<string>(this, OnLoggedInMessageReceived);
+            Messenger.Default.Register<bool>(this, OnLoggedOutMessageReceived);
 
         }
 
@@ -39,6 +40,16 @@ namespace MongoDBApp
             app.Show();
             login.Hide();
             
+        }
+
+        private void OnLoggedOutMessageReceived(bool isLoggedIn)
+        {
+            login = new LoginView();
+            var loginVM = new LoginViewModel(dialogService, authoService);
+            login.DataContext = loginVM;
+            login.Show();
+            app.Close();
+
         }
 
 

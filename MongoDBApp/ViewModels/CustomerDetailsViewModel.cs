@@ -21,7 +21,7 @@ namespace MongoDBApp.ViewModels
 {
 
     [ImplementPropertyChanged]
-    public class CustomerDetailsViewModel : IPageViewModel
+    public class CustomerDetailsViewModel : IPageViewModel, IAsyncInitialization
     {
 
         public ICommand UpdateCommand { get; set; }
@@ -45,26 +45,17 @@ namespace MongoDBApp.ViewModels
             this._countryDataService = countryDataService;
             this._dialogService = dialogService;
 
-            GetAllCustomersAsync();
+            Initialization = GetAllCustomersAsync();
 
             IsEnabled = true;
             LoadCommands();
 
-           
+            
         
         }
 
 
-        private void LoadCommands()
-        {
-            
-            UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
-            DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
-            SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveCustomer);
-            AddCommand = new RelayCommand(AddCustomerLocal);
-
-            
-        }
+        
        
 
 
@@ -83,10 +74,10 @@ namespace MongoDBApp.ViewModels
 
         public string AuthenticatedUserName { get; set; }
 
+        public Task Initialization { get; private set; }
+       
 
-
-
-        
+     
         public string Name
         {
             get
@@ -98,6 +89,26 @@ namespace MongoDBApp.ViewModels
 
       #endregion
 
+
+        #region methods
+
+
+
+       
+
+        private void LoadCommands()
+        {
+
+            UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
+            SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveCustomer);
+            AddCommand = new RelayCommand(AddCustomerLocal);
+
+
+        }
+
+
+        
 
         private bool CanModifyCustomer(object obj)
         {
@@ -133,7 +144,7 @@ namespace MongoDBApp.ViewModels
             Messenger.Default.Send<ObservableCollection<CustomerModel>>(Customers);
         }
 
-        #region persistence methods
+       
 
 
        
@@ -152,7 +163,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.UpdateAsync(SelectedCustomer));
             ButtonEnabled = false;
-            GetAllCustomersAsync();
+            await GetAllCustomersAsync();
         }
 
 
@@ -161,7 +172,7 @@ namespace MongoDBApp.ViewModels
             ButtonEnabled = true;
             await Task.Run(() => _customerDataService.DeleteAsync(SelectedCustomer));
             ButtonEnabled = false;
-            GetAllCustomersAsync();
+            await GetAllCustomersAsync();
         }
 
        
@@ -174,7 +185,7 @@ namespace MongoDBApp.ViewModels
                 ButtonEnabled = true;
                 await Task.Run(() => _customerDataService.AddAsync(SelectedCustomer));
                 ButtonEnabled = false;
-                GetAllCustomersAsync();                
+                await GetAllCustomersAsync();                
             }
           
                 return;            
@@ -194,6 +205,8 @@ namespace MongoDBApp.ViewModels
         }
 
         #endregion
-  
+
+
+       
     }
 }

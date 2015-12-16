@@ -1,5 +1,4 @@
-﻿using MongoDBApp.Services;
-using MongoDBApp.ViewModels;
+﻿using MongoDBApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +17,17 @@ using System.Windows.Shapes;
 namespace MongoDBApp.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class LoginView : Window
+    public partial class ProductView : Window
     {
+        private ProductViewModel ViewModel { get; set; }
 
-        
-
-        public LoginView()
+        public ProductView()
         {
             InitializeComponent();
-            
-        }   
+            ViewModel = new ProductViewModel();
+            this.DataContext = ViewModel;
+        }
     }
 }
