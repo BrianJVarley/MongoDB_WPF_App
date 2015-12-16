@@ -169,6 +169,7 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\OrderDataService.cs" />
+    <Compile Include="Utility\AwaitableMessages.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Validator\RegexValidationRule.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />

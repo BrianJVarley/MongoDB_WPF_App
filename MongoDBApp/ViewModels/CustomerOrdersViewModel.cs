@@ -17,25 +17,29 @@ using MongoDBApp.Messages;
 namespace MongoDBApp.ViewModels
 {
     [ImplementPropertyChanged]
-    public class CustomerOrdersViewModel : IPageViewModel, IAsyncInitialization
+    public class CustomerOrdersViewModel : IPageViewModel
     {
 
 
         private IDataService<OrderModel> _orderDataService;
         public ICommand SaveCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand WindowLoadedCommand { get; set; }
         private IDialogService _dialogService; 
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IDialogService dialogservice)
         {
-
+ 
             this._orderDataService = orderDataService;
             this._dialogService = dialogservice;
+                    
+            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
 
-            Messenger.Default.Register<CustomerModel>(this, OnSelectedCustomerReceived);
-            Messenger.Default.Register<UpdateProductMessage>(this, OnUpdateProductMessageReceived);
+            this.Initialization = InitializeAsync();
+
             LoadCommands();
-         
+
+           
         }
 
 
@@ -45,16 +49,16 @@ namespace MongoDBApp.ViewModels
 
         public string SelectedCustomerEmail { get; set; }
 
-        public ObservableCollection<OrderModel> CustomerOrders { get; set; }
+        public IEnumerable<OrderModel> CustomerOrders { get; set; }
 
         public OrderModel SelectedOrder { get; set; }
 
         public ProductModel SelectedProduct { get; set; }
 
-        public Task Initialization { get; private set; }
-        
- 
+        public Task Initialization { get; set; }
 
+        public bool IsEnabled { get; set; }
+        
         public string Name
         {
             get
@@ -63,16 +67,17 @@ namespace MongoDBApp.ViewModels
             }
         }
 
-        public bool IsEnabled { get; set; }
-
+       
         #endregion
 
 
 
         #region methods
 
-        private void OnUpdateProductMessageReceived(UpdateProductMessage obj)
+       
+        private void OnUpdateProductMessageReceived(ProductModel product)
         {
+            SelectedProduct = product;
             _dialogService.CloseDetailDialog();
         }
 
@@ -80,6 +85,7 @@ namespace MongoDBApp.ViewModels
         {
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveOrder);
             EditCommand = new CustomCommand(EditOrder, CanModifyOrder);
+            WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
         }
 
 
@@ -107,6 +113,7 @@ namespace MongoDBApp.ViewModels
             return false;
         }
 
+
         private void EditOrder(object obj)
         {
             Messenger.Default.Send<ProductModel>(SelectedProduct);
@@ -114,16 +121,29 @@ namespace MongoDBApp.ViewModels
         }
 
 
-
-
-        public void OnSelectedCustomerReceived(CustomerModel customer)
+        private bool CanLoadWindow(object obj)
         {
+            return true;
+        }
+
+        private async Task WindowLoadedAsync(object obj)
+        {
+            
+        }
+
+
+
+
+        private async Task InitializeAsync()
+        {
+            var customer = await AwaitableMessages.NextMessageAsync<CustomerModel>(); 
             SelectedCustomerEmail = customer.Email;
-            LoadCustomerOrdersAsync(SelectedCustomerEmail);
+            await LoadCustomerOrdersAsync(SelectedCustomerEmail);
             IsEnabled = true;
         }
 
 
+       
 
         public async Task LoadCustomerOrdersAsync(string email)
         {

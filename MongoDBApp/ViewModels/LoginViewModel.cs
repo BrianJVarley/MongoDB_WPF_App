@@ -64,13 +64,12 @@ namespace MongoDBApp.ViewModels
             if (result)
             {
                 Messenger.Default.Send<string>(UserName);
-                System.Windows.MessageBox.Show("You are logged in");
                 IsActive = false;
                
             }
             else
             {
-                System.Windows.MessageBox.Show("Unknown username or password.");
+                System.Windows.MessageBox.Show("Invalid username or password.");
                 IsActive = false;
             }
             return;

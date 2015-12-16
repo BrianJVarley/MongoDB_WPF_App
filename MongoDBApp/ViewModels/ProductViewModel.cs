@@ -27,6 +27,13 @@ namespace MongoDBApp.ViewModels
             SaveCommand = new CustomCommand(SaveProduct, CanSaveProduct);
             DeleteCommand = new CustomCommand(DeleteProduct, CanDeleteProduct);
 
+            //SelectedProduct = new ProductModel();
+
+            //SelectedProduct.Description = "a generic apple pie";
+            //SelectedProduct.Quantity = 2;
+            //SelectedProduct.Price = 2.99f;
+            //SelectedProduct.ProductId = "1012";   
+
             Messenger.Default.Register<ProductModel>(this, OnSelectedProductReceived);
 
         }
@@ -38,8 +45,7 @@ namespace MongoDBApp.ViewModels
         
         public bool IsEnabled { get; set; }
         public ProductModel SelectedProduct { get; set; }
-    
-
+ 
 
         #endregion
 
@@ -47,9 +53,11 @@ namespace MongoDBApp.ViewModels
 
         #region methods
 
+        
         public void OnSelectedProductReceived(ProductModel product)
         {
             SelectedProduct = product;
+            
         }
 
         private bool CanDeleteProduct(object product)
@@ -59,17 +67,24 @@ namespace MongoDBApp.ViewModels
 
         private void DeleteProduct(object product)
         {
-            Messenger.Default.Send<UpdateProductMessage>(new UpdateProductMessage());
+            SelectedProduct.ProductId = " ";
+            Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
 
         private bool CanSaveProduct(object product)
         {
-            return true;
+            if (SelectedProduct != null && SelectedProduct.Description != null && SelectedProduct.Price != null &&
+                SelectedProduct.ProductId != null && SelectedProduct.Quantity != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void SaveProduct(object product)
         {
-            Messenger.Default.Send<UpdateProductMessage>(new UpdateProductMessage());
+            Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
 
 

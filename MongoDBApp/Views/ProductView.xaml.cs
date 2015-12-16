@@ -28,6 +28,7 @@ namespace MongoDBApp.Views
             InitializeComponent();
             ViewModel = new ProductViewModel();
             this.DataContext = ViewModel;
+
         }
     }
 }

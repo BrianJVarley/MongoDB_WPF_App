@@ -30,17 +30,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <DockPanel>
-                <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal">
-                    <ToolBar>
-                        <Button Command="{Binding ExportCommand}" ToolTip="Exports country data.">
-                            <Image Width="10"
-                                   Height="10"
-                                   Source="/MongoDBApp;component/Images/export.png" />
-                        </Button>
-                    </ToolBar>
-                </ToolBarTray>
-            </DockPanel>
+
 
             <chartingToolkit:Chart Name="pieChart"
                                    Title="Customer Geographics"

@@ -22,36 +22,38 @@ namespace MongoDBApp
         private static IAuthenticationService authoService = new AuthenticationService();
         private LoginView login;
         private ApplicationView app;
+
+       
    
 
         public App()
         {
             Messenger.Default.Register<string>(this, OnLoggedInMessageReceived);
-            Messenger.Default.Register<bool>(this, OnLoggedOutMessageReceived);
-
         }
 
+
+        
 
         private void OnLoggedInMessageReceived(string username)
-        {           
-            app = new ApplicationView();
-            var appVM = new ApplicationViewModel();
-            app.DataContext = appVM;
-            app.Show();
-            login.Hide();
-            
-        }
-
-        private void OnLoggedOutMessageReceived(bool isLoggedIn)
         {
-            login = new LoginView();
-            var loginVM = new LoginViewModel(dialogService, authoService);
-            login.DataContext = loginVM;
-            login.Show();
-            app.Close();
-
+            if (username == "un_authorized_user")
+            {
+                login = new LoginView();
+                var loginVM = new LoginViewModel(dialogService, authoService);
+                login.DataContext = loginVM;
+                login.Show();
+                app.Close();
+            }
+            else
+            {
+                app = new ApplicationView();
+                var appVM = new ApplicationViewModel();
+                app.DataContext = appVM;
+                app.Show();
+                login.Close();   
+            }
+                  
         }
-
 
         protected override void OnStartup(StartupEventArgs e)
         {

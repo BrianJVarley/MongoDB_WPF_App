@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:MongoDBApp.Views"
         xmlns:vm="clr-namespace:MongoDBApp.ViewModels"
-        Title="{Binding AuthenticatedUserName}"
+        Title="BV Coffee"
         Width="800"
         Height="500"
         WindowStartupLocation="CenterScreen">
@@ -37,6 +37,10 @@
                     HorizontalAlignment="Right"
                     Command="{Binding LogOutCommand}"
                     Content="Logout" />
+            <Label Width="70" />
+            <Label Width="40" />
+            <Label Width="180" Content="{Binding AuthenticatedUserName, Mode=TwoWay}" />
+
         </StackPanel>
 
         <TabControl Grid.Row="1"
@@ -49,9 +53,7 @@
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ItemContainerStyle>
-                <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-                </Style>
+                <Style TargetType="{x:Type TabItem}" />
             </TabControl.ItemContainerStyle>
         </TabControl>
     </Grid>
