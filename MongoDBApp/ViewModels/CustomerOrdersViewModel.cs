@@ -51,8 +51,6 @@ namespace MongoDBApp.ViewModels
 
         public string SelectedCustomerEmail { get; set; }
 
-
-
         public ObservableCollection<OrderModel> CustomerOrders { get; set; }
 
         public OrderModel SelectedOrder { get; set; }
@@ -120,8 +118,8 @@ namespace MongoDBApp.ViewModels
 
         private void EditOrder(object obj)
         {
-            Messenger.Default.Send<ProductModel>(SelectedProduct);
-            _dialogService.ShowDetailDialog();         
+            _dialogService.ShowDetailDialog();    
+            Messenger.Default.Send<ProductModel>(SelectedProduct);            
         }
 
 

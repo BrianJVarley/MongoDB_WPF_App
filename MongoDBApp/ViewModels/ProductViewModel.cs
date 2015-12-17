@@ -13,7 +13,7 @@ using System.Windows.Input;
 namespace MongoDBApp.ViewModels
 {
     [ImplementPropertyChanged]
-    class ProductViewModel 
+    public class ProductViewModel 
     {
 
         public ICommand SaveCommand { get; set; }
@@ -23,6 +23,9 @@ namespace MongoDBApp.ViewModels
         public ProductViewModel()
         {
 
+
+            Messenger.Default.Register<ProductModel>(this, OnSelectedProductReceived);
+           
            
             SaveCommand = new CustomCommand(SaveProduct, CanSaveProduct);
             DeleteCommand = new CustomCommand(DeleteProduct, CanDeleteProduct);
@@ -34,7 +37,6 @@ namespace MongoDBApp.ViewModels
             //SelectedProduct.Price = 2.99f;
             //SelectedProduct.ProductId = "1012";   
 
-            Messenger.Default.Register<ProductModel>(this, OnSelectedProductReceived);
 
         }
 
@@ -73,8 +75,7 @@ namespace MongoDBApp.ViewModels
 
         private bool CanSaveProduct(object product)
         {
-            if (SelectedProduct != null && SelectedProduct.Description != null && SelectedProduct.Price != null &&
-                SelectedProduct.ProductId != null && SelectedProduct.Quantity != null)
+            if (SelectedProduct != null && SelectedProduct.Description != null && SelectedProduct.ProductId != null)
             {
                 return true;
             }
