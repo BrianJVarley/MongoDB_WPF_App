@@ -53,7 +53,9 @@
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ItemContainerStyle>
-                <Style TargetType="{x:Type TabItem}" />
+                <Style TargetType="{x:Type TabItem}" >
+                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+                </Style>
             </TabControl.ItemContainerStyle>
         </TabControl>
     </Grid>

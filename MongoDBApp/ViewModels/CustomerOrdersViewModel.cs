@@ -29,27 +29,31 @@ namespace MongoDBApp.ViewModels
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IDialogService dialogservice)
         {
- 
+
+                      
             this._orderDataService = orderDataService;
             this._dialogService = dialogservice;
-                    
-            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
 
-            this.Initialization = InitializeAsync();
+            Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
+                    
+            //this.Initialization = InitializeAsync();
 
             LoadCommands();
 
            
         }
 
-
+       
+        
         
 
         #region properties
 
         public string SelectedCustomerEmail { get; set; }
 
-        public IEnumerable<OrderModel> CustomerOrders { get; set; }
+
+
+        public ObservableCollection<OrderModel> CustomerOrders { get; set; }
 
         public OrderModel SelectedOrder { get; set; }
 
@@ -85,7 +89,7 @@ namespace MongoDBApp.ViewModels
         {
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveOrder);
             EditCommand = new CustomCommand(EditOrder, CanModifyOrder);
-            WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
+            WindowLoadedCommand = new CustomCommand(WindowLoaded, CanLoadWindow);
         }
 
 
@@ -126,21 +130,29 @@ namespace MongoDBApp.ViewModels
             return true;
         }
 
-        private async Task WindowLoadedAsync(object obj)
+        private void WindowLoaded(object obj)
         {
-            
+            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
         }
 
 
-
-
-        private async Task InitializeAsync()
+        private void OnUpdateOrderMessageReceived(CustomerModel customer)
         {
-            var customer = await AwaitableMessages.NextMessageAsync<CustomerModel>(); 
             SelectedCustomerEmail = customer.Email;
-            await LoadCustomerOrdersAsync(SelectedCustomerEmail);
+            LoadCustomerOrdersAsync(SelectedCustomerEmail);
             IsEnabled = true;
+          
         }
+
+
+
+        //private async Task InitializeAsync()
+        //{
+        //    var customer = await AwaitableMessages.NextMessageAsync<CustomerModel>(); 
+        //    SelectedCustomerEmail = customer.Email;
+        //    await LoadCustomerOrdersAsync(SelectedCustomerEmail);
+        //    IsEnabled = true;
+        //}
 
 
        
@@ -151,6 +163,7 @@ namespace MongoDBApp.ViewModels
             CustomerOrders = ordersResult.ToObservableCollection();
         }
 
+        
 
         private async Task SaveCustomerAsync(object customer)
         {
@@ -168,7 +181,8 @@ namespace MongoDBApp.ViewModels
 
         #endregion
 
+       
 
-        
+
     }
 }
