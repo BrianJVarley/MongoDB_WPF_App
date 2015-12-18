@@ -35,9 +35,8 @@ namespace MongoDBApp.ViewModels
             this._dialogService = dialogservice;
 
             Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
+            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
                     
-            //this.Initialization = InitializeAsync();
-
             LoadCommands();
 
            
@@ -79,8 +78,8 @@ namespace MongoDBApp.ViewModels
        
         private void OnUpdateProductMessageReceived(ProductModel product)
         {
-            SelectedProduct = product;
             _dialogService.CloseDetailDialog();
+            SelectedProduct = product;           
         }
 
         private void LoadCommands()
@@ -118,8 +117,8 @@ namespace MongoDBApp.ViewModels
 
         private void EditOrder(object obj)
         {
-            _dialogService.ShowDetailDialog();    
-            Messenger.Default.Send<ProductModel>(SelectedProduct);            
+            Messenger.Default.Send<ProductModel>(SelectedProduct);
+            _dialogService.ShowDetailDialog();                         
         }
 
 
@@ -130,7 +129,7 @@ namespace MongoDBApp.ViewModels
 
         private void WindowLoaded(object obj)
         {
-            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
+            
         }
 
 

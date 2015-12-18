@@ -13,10 +13,11 @@ namespace MongoDBApp.Services
 
         Window loginView = null;
         Window productView = null;
+        ProductView _productView;
 
         public DialogService()
         {
-
+            _productView = new ProductView();
         }
 
         public void CloseDialog()
@@ -42,8 +43,7 @@ namespace MongoDBApp.Services
 
         public void ShowDetailDialog()
         {
-             productView = new ProductView();
-            productView.ShowDialog();
+            _productView.ShowDialog();
         }
     }
 }

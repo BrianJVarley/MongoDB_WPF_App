@@ -30,14 +30,7 @@ namespace MongoDBApp.ViewModels
             SaveCommand = new CustomCommand(SaveProduct, CanSaveProduct);
             DeleteCommand = new CustomCommand(DeleteProduct, CanDeleteProduct);
 
-            //SelectedProduct = new ProductModel();
-
-            //SelectedProduct.Description = "a generic apple pie";
-            //SelectedProduct.Quantity = 2;
-            //SelectedProduct.Price = 2.99f;
-            //SelectedProduct.ProductId = "1012";   
-
-
+          
         }
 
 
