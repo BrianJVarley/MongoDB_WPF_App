@@ -33,17 +33,15 @@ namespace MongoDBApp.ViewModels
 
         private IDataService<CustomerModel> _customerDataService;
         private IDataService<Country> _countryDataService;
-        private IDialogService _dialogService; 
 
         private const string NullObjectId = "000000000000000000000000";
 
 
 
-        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService, IDataService<Country> countryDataService, IDialogService dialogService) 
+        public CustomerDetailsViewModel(IDataService<CustomerModel> customerDataService, IDataService<Country> countryDataService) 
         {
             this._customerDataService = customerDataService;
             this._countryDataService = countryDataService;
-            this._dialogService = dialogService;
 
             Initialization = GetAllCustomersAsync();
 

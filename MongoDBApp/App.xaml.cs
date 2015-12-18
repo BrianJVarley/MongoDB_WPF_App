@@ -18,7 +18,6 @@ namespace MongoDBApp
     public partial class App : Application
     {
 
-        private static IDialogService dialogService = new DialogService();
         private static IAuthenticationService authoService = new AuthenticationService();
         private LoginView login;
         private ApplicationView app;
@@ -39,7 +38,7 @@ namespace MongoDBApp
             if (username == "un_authorized_user")
             {
                 login = new LoginView();
-                var loginVM = new LoginViewModel(dialogService, authoService);
+                var loginVM = new LoginViewModel(authoService);
                 login.DataContext = loginVM;
                 login.Show();
                 app.Close();
@@ -60,7 +59,7 @@ namespace MongoDBApp
             base.OnStartup(e);
 
             login = new LoginView();
-            var loginVM = new LoginViewModel(dialogService,authoService);
+            var loginVM = new LoginViewModel(authoService);
             login.DataContext = loginVM;
             login.Show();
                              

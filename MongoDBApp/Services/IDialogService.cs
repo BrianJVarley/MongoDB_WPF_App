@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDBApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,7 @@ namespace MongoDBApp.Services
     public interface IDialogService
     {
         void CloseDialog();
-        void ShowDialog();
-        void CloseDetailDialog();
-        void ShowDetailDialog();
+        void ShowDialog(ProductViewModel prodVM);
+        
     }
 }

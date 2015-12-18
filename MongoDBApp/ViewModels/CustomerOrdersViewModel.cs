@@ -25,7 +25,7 @@ namespace MongoDBApp.ViewModels
         public ICommand SaveCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
-        private IDialogService _dialogService; 
+        private IDialogService _dialogService;
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IDialogService dialogservice)
         {
@@ -34,10 +34,9 @@ namespace MongoDBApp.ViewModels
             this._orderDataService = orderDataService;
             this._dialogService = dialogservice;
 
-            Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
-            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
-                    
+            Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);                  
             LoadCommands();
+
 
            
         }
@@ -78,7 +77,6 @@ namespace MongoDBApp.ViewModels
        
         private void OnUpdateProductMessageReceived(ProductModel product)
         {
-            _dialogService.CloseDetailDialog();
             SelectedProduct = product;           
         }
 
@@ -115,10 +113,13 @@ namespace MongoDBApp.ViewModels
         }
 
 
+    
+
         private void EditOrder(object obj)
         {
-            Messenger.Default.Send<ProductModel>(SelectedProduct);
-            _dialogService.ShowDetailDialog();                         
+            ProductViewModel pvm = new ProductViewModel(_dialogService);
+            pvm.Present(pvm);
+            Messenger.Default.Send<ProductModel>(SelectedProduct);                              
         }
 
 
@@ -160,7 +161,8 @@ namespace MongoDBApp.ViewModels
             CustomerOrders = ordersResult.ToObservableCollection();
         }
 
-        
+
+       
 
         private async Task SaveCustomerAsync(object customer)
         {

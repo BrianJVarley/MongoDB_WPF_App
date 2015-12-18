@@ -30,14 +30,12 @@ namespace MongoDBApp.ViewModels
 
 
         public ICommand LoginCommand { get; set; }
-        private IDialogService _dialogService;
         private IAuthenticationService _authService;
 
 
 
-        public LoginViewModel(IDialogService dialogService, IAuthenticationService authService)
+        public LoginViewModel(IAuthenticationService authService)
         {
-            this._dialogService = dialogService;
             this._authService = authService;
             LoadCommands();
 

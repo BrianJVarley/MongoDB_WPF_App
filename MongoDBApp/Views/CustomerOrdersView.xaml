@@ -131,8 +131,7 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Command="{Binding EditCommand}"
-                            Content="Edit"
-                            IsEnabled="{Binding IsEnabled}" />
+                            Content="Edit" />
                     <Button Grid.Row="7"
                             Grid.Column="3"
                             Grid.ColumnSpan="3"
@@ -140,8 +139,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Command="{Binding SaveCommand}"
-                            Content="Save"
-                            IsEnabled="{Binding IsEnabled}" />
+                            Content="Save" />
 
                 </Grid>
             </Grid>

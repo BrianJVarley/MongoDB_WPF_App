@@ -1,4 +1,5 @@
-﻿using MongoDBApp.ViewModels;
+﻿using MongoDBApp.Services;
+using MongoDBApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +20,28 @@ namespace MongoDBApp.Views
     /// <summary>
     /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class ProductView : Window
+    public partial class ProductView : Window, IDialogService
     {
-        private ProductViewModel ViewModel { get; set; }
-
+       
         public ProductView()
         {
             InitializeComponent();
-            ViewModel = new ProductViewModel();
-            this.DataContext = ViewModel;
-
+            this.DataContext = new ProductViewModel(this);
+           
         }
+
+        public void CloseDialog()
+        {
+            if (this != null)
+                this.Visibility = Visibility.Collapsed;
+        }
+
+        public void ShowDialog(ProductViewModel prodVM)
+        {
+            this.DataContext = prodVM;
+            this.Show();
+        }
+
+        
     }
 }

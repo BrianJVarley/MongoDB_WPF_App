@@ -163,7 +163,6 @@
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CountryDataService.cs" />
     <Compile Include="Services\CustomerDataService.cs" />
-    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\IAsyncInitialization.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IDataService.cs" />

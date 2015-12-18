@@ -1,6 +1,7 @@
 ﻿using MongoDBApp.Common;
 using MongoDBApp.Messages;
 using MongoDBApp.Models;
+using MongoDBApp.Services;
 using MongoDBApp.Utility;
 using PropertyChanged;
 using System;
@@ -18,11 +19,14 @@ namespace MongoDBApp.ViewModels
 
         public ICommand SaveCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        private IDialogService _dialogService;
 
 
-        public ProductViewModel()
+        public ProductViewModel(IDialogService dialogService)
         {
 
+
+            this._dialogService = dialogService;
 
             Messenger.Default.Register<ProductModel>(this, OnSelectedProductReceived);
            
@@ -63,6 +67,11 @@ namespace MongoDBApp.ViewModels
         private void DeleteProduct(object product)
         {
             SelectedProduct.ProductId = " ";
+            SelectedProduct.Price = 0.00f;
+            SelectedProduct.Quantity = 0;
+            SelectedProduct.Description = "";
+
+            _dialogService.CloseDialog();
             Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
 
@@ -78,8 +87,16 @@ namespace MongoDBApp.ViewModels
 
         private void SaveProduct(object product)
         {
+            _dialogService.CloseDialog();
             Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
+
+        public void Present(ProductViewModel prodVM) 
+        {
+            _dialogService.ShowDialog(prodVM);
+        }
+
+       
 
 
         #endregion

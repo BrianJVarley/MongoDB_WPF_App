@@ -23,12 +23,17 @@ namespace MongoDBApp.Views
     public partial class LoginView : Window
     {
 
-        
+        private LoginViewModel ViewModel { get; set; }
+        private IAuthenticationService _authService;
 
         public LoginView()
         {
             InitializeComponent();
+            ViewModel = new LoginViewModel(_authService);
+            this.DataContext = ViewModel;
             
-        }   
+        }
+
+    
     }
 }
