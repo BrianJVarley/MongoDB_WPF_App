@@ -14,7 +14,7 @@ using System.Windows.Input;
 namespace MongoDBApp.ViewModels
 {
     [ImplementPropertyChanged]
-    public class ProductViewModel 
+    public class EditProductViewModel 
     {
 
         public ICommand SaveCommand { get; set; }
@@ -22,7 +22,7 @@ namespace MongoDBApp.ViewModels
         private IDialogService _dialogService;
 
 
-        public ProductViewModel(IDialogService dialogService)
+        public EditProductViewModel(IDialogService dialogService)
         {
 
 
@@ -44,6 +44,7 @@ namespace MongoDBApp.ViewModels
         
         public bool IsEnabled { get; set; }
         public ProductModel SelectedProduct { get; set; }
+        public ProductModel SelectedProductTemp { get; set; }
  
 
         #endregion
@@ -55,7 +56,7 @@ namespace MongoDBApp.ViewModels
         
         public void OnSelectedProductReceived(ProductModel product)
         {
-            SelectedProduct = product;
+            SelectedProductTemp = product;
             
         }
 
@@ -66,6 +67,8 @@ namespace MongoDBApp.ViewModels
 
         private void DeleteProduct(object product)
         {
+            SelectedProduct = SelectedProductTemp;
+
             SelectedProduct.ProductId = " ";
             SelectedProduct.Price = 0.00f;
             SelectedProduct.Quantity = 0;
@@ -77,7 +80,7 @@ namespace MongoDBApp.ViewModels
 
         private bool CanSaveProduct(object product)
         {
-            if (SelectedProduct != null && SelectedProduct.Description != null && SelectedProduct.ProductId != null)
+            if (SelectedProductTemp != null && SelectedProductTemp.Description != null && SelectedProductTemp.ProductId != null)
             {
                 return true;
             }
@@ -87,11 +90,11 @@ namespace MongoDBApp.ViewModels
 
         private void SaveProduct(object product)
         {
+            SelectedProduct = SelectedProductTemp;
             _dialogService.CloseDialog();
-            Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
 
-        public void Present(ProductViewModel prodVM) 
+        public void Present(EditProductViewModel prodVM) 
         {
             _dialogService.ShowDialog(prodVM);
         }

@@ -91,18 +91,12 @@ namespace MongoDBApp.ViewModels
         #region methods
 
 
-
-       
-
         private void LoadCommands()
         {
-
             UpdateCommand = new CustomCommand((c) => UpdateCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             DeleteCommand = new CustomCommand((c) => DeleteCustomerAsync(c).FireAndLogErrors(), CanModifyCustomer);
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveCustomer);
             AddCommand = new RelayCommand(AddCustomerLocal);
-
-
         }
 
 
@@ -110,7 +104,7 @@ namespace MongoDBApp.ViewModels
 
         private bool CanModifyCustomer(object obj)
         {
-            
+           
             if (SelectedCustomer != null && SelectedCustomer.FirstName != null && SelectedCustomer.Country != null &&
                 SelectedCustomer.LastName != null && SelectedCustomer.Email != null
                 && SelectedCustomer.Address != null && SelectedCustomer.Id.ToString() != NullObjectId)            
@@ -142,9 +136,7 @@ namespace MongoDBApp.ViewModels
             Messenger.Default.Send<ObservableCollection<CustomerModel>>(Customers);
         }
 
-       
-
-
+      
        
         private async Task GetAllCustomersAsync()
         {
@@ -175,9 +167,7 @@ namespace MongoDBApp.ViewModels
 
        
         private async Task SaveCustomerAsync(object customer)
-        {
-
-     
+        {    
            if(Customers.Any(str => String.Compare(str.Email, SelectedCustomer.Email, true) == -1))
            {
                 ButtonEnabled = true;
@@ -192,14 +182,12 @@ namespace MongoDBApp.ViewModels
 
         private void AddCustomerLocal(object customer)
         {
-
                 ButtonEnabled = true;
                 //create new customer and add to data grid, set as selected customer
                 CustomerModel newCustomer = new CustomerModel();
                 Customers.Add(newCustomer);
                 SelectedCustomer = newCustomer;
-                ButtonEnabled = false;
-            
+                ButtonEnabled = false;            
         }
 
         #endregion

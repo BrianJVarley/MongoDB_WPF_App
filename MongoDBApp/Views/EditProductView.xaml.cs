@@ -26,7 +26,7 @@ namespace MongoDBApp.Views
         public ProductView()
         {
             InitializeComponent();
-            this.DataContext = new ProductViewModel(this);
+            this.DataContext = new EditProductViewModel(this);
            
         }
 
@@ -36,10 +36,15 @@ namespace MongoDBApp.Views
                 this.Visibility = Visibility.Collapsed;
         }
 
-        public void ShowDialog(ProductViewModel prodVM)
+        public void ShowDialog(EditProductViewModel prodVM)
         {
             this.DataContext = prodVM;
             this.Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
         }
 
         

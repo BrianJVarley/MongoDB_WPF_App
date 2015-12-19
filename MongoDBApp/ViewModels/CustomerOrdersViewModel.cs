@@ -28,17 +28,12 @@ namespace MongoDBApp.ViewModels
         private IDialogService _dialogService;
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IDialogService dialogservice)
-        {
-
-                      
+        {                  
             this._orderDataService = orderDataService;
             this._dialogService = dialogservice;
 
-            Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);                  
-            LoadCommands();
-
-
-           
+            Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
+            LoadCommands();     
         }
 
        
@@ -74,17 +69,13 @@ namespace MongoDBApp.ViewModels
 
         #region methods
 
-       
-        private void OnUpdateProductMessageReceived(ProductModel product)
-        {
-            SelectedProduct = product;           
-        }
+              
 
         private void LoadCommands()
         {
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveOrder);
             EditCommand = new CustomCommand(EditOrder, CanModifyOrder);
-            WindowLoadedCommand = new CustomCommand(WindowLoaded, CanLoadWindow);
+            WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
         }
 
 
@@ -113,13 +104,18 @@ namespace MongoDBApp.ViewModels
         }
 
 
-    
-
         private void EditOrder(object obj)
         {
-            ProductViewModel pvm = new ProductViewModel(_dialogService);
+            EditProductViewModel pvm = new EditProductViewModel(_dialogService);
             pvm.Present(pvm);
             Messenger.Default.Send<ProductModel>(SelectedProduct);                              
+        }
+
+
+        private async Task WindowLoadedAsync(object obj)
+        {
+            await LoadCustomerOrdersAsync(SelectedCustomerEmail);
+            IsEnabled = true;
         }
 
 
@@ -127,43 +123,21 @@ namespace MongoDBApp.ViewModels
         {
             return true;
         }
-
-        private void WindowLoaded(object obj)
-        {
-            
-        }
-
-
+     
         private void OnUpdateOrderMessageReceived(CustomerModel customer)
         {
             SelectedCustomerEmail = customer.Email;
-            LoadCustomerOrdersAsync(SelectedCustomerEmail);
-            IsEnabled = true;
-          
+            IsEnabled = true;                
         }
 
-
-
-        //private async Task InitializeAsync()
-        //{
-        //    var customer = await AwaitableMessages.NextMessageAsync<CustomerModel>(); 
-        //    SelectedCustomerEmail = customer.Email;
-        //    await LoadCustomerOrdersAsync(SelectedCustomerEmail);
-        //    IsEnabled = true;
-        //}
-
-
-       
-
+     
         public async Task LoadCustomerOrdersAsync(string email)
         {
             var ordersResult = await _orderDataService.GetAllByEmailAsync(email);
             CustomerOrders = ordersResult.ToObservableCollection();
         }
 
-
-       
-
+     
         private async Task SaveCustomerAsync(object customer)
         {
 
@@ -178,10 +152,7 @@ namespace MongoDBApp.ViewModels
         }
 
 
-        #endregion
-
-       
-
+        #endregion    
 
     }
 }

@@ -173,11 +173,11 @@
     <Compile Include="Validator\RegexValidationRule.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrdersViewModel.cs" />
+    <Compile Include="ViewModels\EditProductViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\CustomerDetailsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\OrderStatisticsViewModel.cs" />
-    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
@@ -187,14 +187,14 @@
     <Compile Include="Views\CustomerDetailsView.xaml.cs">
       <DependentUpon>CustomerDetailsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditProductView.xaml.cs">
+      <DependentUpon>EditProductView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderStatisticsView.xaml.cs">
       <DependentUpon>OrderStatisticsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProductView.xaml.cs">
-      <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -238,15 +238,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EditProductView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderStatisticsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

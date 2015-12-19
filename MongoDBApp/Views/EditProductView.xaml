@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Closed="Window_Closed"
         d:DesignHeight="300"
         d:DesignWidth="300"
         mc:Ignorable="d">
@@ -29,7 +30,7 @@
                    FontWeight="Bold" />
             <TextBox Grid.Row="2"
                      Grid.Column="1"
-                     Text="{Binding SelectedProduct.ProductId,
+                     Text="{Binding SelectedProductTemp.ProductId,
                                     Mode=TwoWay}" />
             <Label Grid.Row="3"
                    VerticalAlignment="Center"
@@ -39,21 +40,21 @@
                      Grid.Column="1"
                      Height="75"
                      AcceptsReturn="True"
-                     Text="{Binding SelectedProduct.Description,
+                     Text="{Binding SelectedProductTemp.Description,
                                     Mode=TwoWay}" />
             <Label Grid.Row="4"
                    Content="Price"
                    FontWeight="Bold" />
             <TextBox Grid.Row="4"
                      Grid.Column="1"
-                     Text="{Binding SelectedProduct.Price,
+                     Text="{Binding SelectedProductTemp.Price,
                                     Mode=TwoWay}" />
             <Label Grid.Row="5"
                    Content="Order amount"
                    FontWeight="Bold" />
             <TextBox Grid.Row="5"
                      Grid.Column="1"
-                     Text="{Binding SelectedProduct.Quantity,
+                     Text="{Binding SelectedProductTemp.Quantity,
                                     Mode=TwoWay}" />
 
 
