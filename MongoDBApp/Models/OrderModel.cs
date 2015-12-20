@@ -54,6 +54,9 @@ namespace MongoDBApp.Models
         [BsonElement("description")]
         public string Description { get; set; }
 
+        [BsonElement("available")]
+        public int Available { get; set; }
+
         [BsonElement("quantity")]
         public int Quantity { get; set; }
 

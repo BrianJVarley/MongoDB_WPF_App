@@ -68,13 +68,10 @@ namespace MongoDBApp.ViewModels
         private void DeleteProduct(object product)
         {
             SelectedProduct = SelectedProductTemp;
-
-            SelectedProduct.ProductId = " ";
-            SelectedProduct.Price = 0.00f;
-            SelectedProduct.Quantity = 0;
-            SelectedProduct.Description = "";
-
+            SelectedProduct = null;
+            
             _dialogService.CloseDialog();
+
             Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
 
