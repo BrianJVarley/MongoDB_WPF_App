@@ -140,6 +140,14 @@
                             VerticalAlignment="Top"
                             Command="{Binding SaveCommand}"
                             Content="Save" />
+                    <Button Grid.Row="7"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="3"
+                            Width="75"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Command="{Binding AddCommand}"
+                            Content="Add" />
 
                 </Grid>
             </Grid>

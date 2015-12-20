@@ -12,22 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MongoDBApp.Views
 {
     /// <summary>
-    /// Interaction logic for ProductView.xaml
+    /// Interaction logic for ProductsView.xaml
     /// </summary>
-    public partial class ProductView : Window, IDialogService
+    public partial class ProductsView : Window, IDialogService
     {
-       
-        public ProductView()
+        public ProductsView()
         {
             InitializeComponent();
-            this.DataContext = new EditProductViewModel(this);
-           
+            this.DataContext = new ProductsViewModel(this);
         }
 
         public void CloseDialog()
@@ -36,9 +33,14 @@ namespace MongoDBApp.Views
                 this.Visibility = Visibility.Collapsed;
         }
 
-        public void ShowDialog(EditProductViewModel editProdVM)
+        public void ShowDialog(ViewModels.EditProductViewModel editProdVM)
         {
-            this.DataContext = editProdVM;
+            throw new NotImplementedException();
+        }
+
+        public void ShowDialog(ViewModels.ProductsViewModel prodVM)
+        {
+            this.DataContext = prodVM;
             this.Show();
         }
 
@@ -46,12 +48,5 @@ namespace MongoDBApp.Views
         {
             this.Visibility = Visibility.Collapsed;
         }
-
-
-        public void ShowDialog(ProductsViewModel prodVM)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

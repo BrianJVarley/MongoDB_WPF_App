@@ -24,6 +24,7 @@ namespace MongoDBApp.ViewModels
         private IDataService<OrderModel> _orderDataService;
         public ICommand SaveCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand AddCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
         private IDialogService _dialogService;
 
@@ -75,7 +76,9 @@ namespace MongoDBApp.ViewModels
         {
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveOrder);
             EditCommand = new CustomCommand(EditOrder, CanModifyOrder);
+            AddCommand = new CustomCommand(AddProduct, CanAddproduct);
             WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
+
         }
 
 
@@ -106,9 +109,24 @@ namespace MongoDBApp.ViewModels
 
         private void EditOrder(object obj)
         {
-            EditProductViewModel pvm = new EditProductViewModel(_dialogService);
-            pvm.Present(pvm);
+            EditProductViewModel epvm = new EditProductViewModel(_dialogService);
+            epvm.Present(epvm);
             Messenger.Default.Send<ProductModel>(SelectedProduct);                              
+        }
+
+
+
+        private bool CanAddproduct(object obj)
+        {
+            return true;
+           
+        }
+
+
+        private void AddProduct(object obj)
+        {
+            ProductsViewModel pvm = new ProductsViewModel(_dialogService);
+            pvm.Present(pvm);            
         }
 
 

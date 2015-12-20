@@ -10,7 +10,8 @@ namespace MongoDBApp.Services
     public interface IDialogService
     {
         void CloseDialog();
-        void ShowDialog(EditProductViewModel prodVM);
+        void ShowDialog(EditProductViewModel editProdVM);
+        void ShowDialog(ProductsViewModel prodVM);
         
     }
 }
