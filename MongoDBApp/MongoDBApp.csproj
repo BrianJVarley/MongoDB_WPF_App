@@ -168,7 +168,8 @@
     <Compile Include="Services\IAsyncInitialization.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IDataService.cs" />
-    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\IEditProductDialogService.cs" />
+    <Compile Include="Services\IProductsDialogService.cs" />
     <Compile Include="Services\OrderDataService.cs" />
     <Compile Include="Services\ProductDataService.cs" />
     <Compile Include="Utility\AwaitableMessages.cs" />

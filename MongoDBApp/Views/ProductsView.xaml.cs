@@ -20,7 +20,7 @@ namespace MongoDBApp.Views
     /// <summary>
     /// Interaction logic for ProductsView.xaml
     /// </summary>
-    public partial class ProductsView : Window, IDialogService
+    public partial class ProductsView : Window, IProductsDialogService
     {
 
         private static IDataService<ProductModel> productDataService;
@@ -38,11 +38,7 @@ namespace MongoDBApp.Views
                 this.Visibility = Visibility.Collapsed;
         }
 
-        public void ShowDialog(EditProductViewModel editProdVM)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public void ShowDialog(ProductsViewModel prodVM)
         {
             this.DataContext = prodVM;

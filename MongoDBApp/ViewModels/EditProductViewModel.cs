@@ -19,10 +19,10 @@ namespace MongoDBApp.ViewModels
 
         public ICommand SaveCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        private IDialogService _dialogService;
+        private IEditProductDialogService _dialogService;
 
 
-        public EditProductViewModel(IDialogService dialogService)
+        public EditProductViewModel(IEditProductDialogService dialogService)
         {
 
 

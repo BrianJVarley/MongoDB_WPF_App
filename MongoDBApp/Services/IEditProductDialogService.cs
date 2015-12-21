@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace MongoDBApp.Services
 {
-    public interface IDialogService
+    public interface IEditProductDialogService
     {
         void CloseDialog();
-        void ShowDialog(EditProductViewModel editProdVM);
-        void ShowDialog(ProductsViewModel prodVM);
-        
+        void ShowDialog(EditProductViewModel editProdVM);        
     }
 }

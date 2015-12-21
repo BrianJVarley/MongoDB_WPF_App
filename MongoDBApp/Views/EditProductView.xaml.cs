@@ -20,7 +20,7 @@ namespace MongoDBApp.Views
     /// <summary>
     /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class EditProductView : Window, IDialogService
+    public partial class EditProductView : Window, IEditProductDialogService
     {
        
         public EditProductView()
@@ -48,10 +48,6 @@ namespace MongoDBApp.Views
         }
 
 
-        public void ShowDialog(ProductsViewModel prodVM)
-        {
-            throw new NotImplementedException();
-        }
-
+       
     }
 }

@@ -19,12 +19,12 @@ namespace MongoDBApp.ViewModels
     public class ProductsViewModel
     {
 
-        private IDialogService _dialogService;
+        private IProductsDialogService _dialogService;
         public ICommand SaveCommand { get; set; }
         private IDataService<ProductModel> _productDataService;
 
 
-        public ProductsViewModel(IDialogService dialogService, IDataService<ProductModel> productDataService)
+        public ProductsViewModel(IProductsDialogService dialogService, IDataService<ProductModel> productDataService)
 	    {
             this._productDataService = productDataService;
             this._dialogService = dialogService;

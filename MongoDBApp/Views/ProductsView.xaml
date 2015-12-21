@@ -5,7 +5,9 @@
         Title="ProductsView"
         Width="300"
         Height="300"
-        Closed="Window_Closed">
+        Closed="Window_Closed"
+        WindowStartupLocation="CenterScreen"
+        >
 
     <Window.Resources>
         <converters:AmountInStockConverter x:Key="AmountInStockConverter" />

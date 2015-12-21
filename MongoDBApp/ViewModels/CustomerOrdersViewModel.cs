@@ -26,14 +26,16 @@ namespace MongoDBApp.ViewModels
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
-        private IDialogService _dialogService;
+        private IEditProductDialogService _editProductsDialogService;
+        private IProductsDialogService _productsDialogService;
         private IDataService<ProductModel> _productDataService;
 
-        public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IDialogService dialogservice, IDataService<ProductModel> productDataService)
+        public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IEditProductDialogService editProductDialogservice, IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService)
         {                  
             this._orderDataService = orderDataService;
             this._productDataService = productDataService;
-            this._dialogService = dialogservice;
+            this._editProductsDialogService = editProductDialogservice;
+            this._productsDialogService = productsDialogservice;
 
             Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
             LoadCommands();     
@@ -111,7 +113,7 @@ namespace MongoDBApp.ViewModels
 
         private void EditOrder(object obj)
         {
-            EditProductViewModel epvm = new EditProductViewModel(_dialogService);
+            EditProductViewModel epvm = new EditProductViewModel(_editProductsDialogService);
             epvm.Present(epvm);
             Messenger.Default.Send<ProductModel>(SelectedProduct);                              
         }
@@ -127,7 +129,7 @@ namespace MongoDBApp.ViewModels
 
         private void AddProduct(object obj)
         {
-            ProductsViewModel pvm = new ProductsViewModel(_dialogService, _productDataService);
+            ProductsViewModel pvm = new ProductsViewModel(_productsDialogService, _productDataService);
             pvm.Present(pvm);            
         }
 
