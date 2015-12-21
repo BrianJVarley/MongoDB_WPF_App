@@ -20,10 +20,10 @@ namespace MongoDBApp.Views
     /// <summary>
     /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class ProductView : Window, IDialogService
+    public partial class EditProductView : Window, IDialogService
     {
        
-        public ProductView()
+        public EditProductView()
         {
             InitializeComponent();
             this.DataContext = new EditProductViewModel(this);

@@ -14,7 +14,7 @@ namespace Tests
 {
 
     [TestClass]
-    public class MainViewModelTests
+    public class CustomerDetailsViewModelTests
     {
         private IDataService<CustomerModel> customerDataService;
         private IDataService<Country> countryDataService;

@@ -151,6 +151,7 @@
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="DAL\CountryRepository.cs" />
     <Compile Include="DAL\OrderRepository.cs" />
+    <Compile Include="DAL\ProductRepository.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\TaskExtension.cs" />
     <Compile Include="Messages\UpdateLoginMessage.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\OrderDataService.cs" />
+    <Compile Include="Services\ProductDataService.cs" />
     <Compile Include="Utility\AwaitableMessages.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Validator\RegexValidationRule.cs" />

@@ -65,7 +65,11 @@
     <Compile Include="CustomerDataServiceTest.cs" />
     <Compile Include="MainViewModelTests.cs" />
     <Compile Include="Mocks\MockCustomerDataService.cs" />
-    <Compile Include="Mocks\MockRepository.cs" />
+    <Compile Include="Mocks\MockCustomerRepository.cs" />
+    <Compile Include="Mocks\MockProductDataService.cs" />
+    <Compile Include="Mocks\MockProductRespository.cs" />
+    <Compile Include="ProductDataServiceTest.cs" />
+    <Compile Include="ProductsViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

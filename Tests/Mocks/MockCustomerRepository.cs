@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Tests.Mocks
 {
-    class MockRepository : IRepository<CustomerModel>
+    class MockCustomerRepository : IRepository<CustomerModel>
     {
         private List<CustomerModel> customers;
 
-        public MockRepository()
+        public MockCustomerRepository()
         {
             customers = LoadMockCustomers();
         }
@@ -85,10 +85,6 @@ namespace Tests.Mocks
         {
             throw new NotImplementedException();
         }
-
-
-
-
 
 
         public Task<List<CustomerModel>> GetAllByEmailAsync(string email)

@@ -16,7 +16,7 @@ namespace Tests
         [TestInitialize]
         public void Init()
         {
-            repository = new MockRepository();
+            repository = new MockCustomerRepository();
         }
 
 

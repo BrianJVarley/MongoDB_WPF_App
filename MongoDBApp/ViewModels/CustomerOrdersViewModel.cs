@@ -27,10 +27,12 @@ namespace MongoDBApp.ViewModels
         public ICommand AddCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
         private IDialogService _dialogService;
+        private IDataService<ProductModel> _productDataService;
 
-        public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IDialogService dialogservice)
+        public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IDialogService dialogservice, IDataService<ProductModel> productDataService)
         {                  
             this._orderDataService = orderDataService;
+            this._productDataService = productDataService;
             this._dialogService = dialogservice;
 
             Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
@@ -125,7 +127,7 @@ namespace MongoDBApp.ViewModels
 
         private void AddProduct(object obj)
         {
-            ProductsViewModel pvm = new ProductsViewModel(_dialogService);
+            ProductsViewModel pvm = new ProductsViewModel(_dialogService, _productDataService);
             pvm.Present(pvm);            
         }
 

@@ -13,7 +13,7 @@ namespace Tests.Mocks
     class MockCustomerDataService : IDataService<CustomerModel>
     {
 
-        private MockRepository repository = new MockRepository();
+        private MockCustomerRepository repository = new MockCustomerRepository();
 
 
 
@@ -44,7 +44,7 @@ namespace Tests.Mocks
 
         public async Task DeleteAsync(CustomerModel t)
         {
-           await repository.DeleteAsync(t); ;
+           await repository.DeleteAsync(t); 
         }
 
 

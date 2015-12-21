@@ -1,4 +1,5 @@
-﻿using MongoDBApp.Services;
+﻿using MongoDBApp.Models;
+using MongoDBApp.Services;
 using MongoDBApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,14 @@ namespace MongoDBApp.Views
     /// </summary>
     public partial class ProductsView : Window, IDialogService
     {
+
+        private static IDataService<ProductModel> productDataService;
+
+
         public ProductsView()
         {
             InitializeComponent();
-            this.DataContext = new ProductsViewModel(this);
+            this.DataContext = new ProductsViewModel(this, productDataService);
         }
 
         public void CloseDialog()
@@ -33,12 +38,12 @@ namespace MongoDBApp.Views
                 this.Visibility = Visibility.Collapsed;
         }
 
-        public void ShowDialog(ViewModels.EditProductViewModel editProdVM)
+        public void ShowDialog(EditProductViewModel editProdVM)
         {
             throw new NotImplementedException();
         }
 
-        public void ShowDialog(ViewModels.ProductsViewModel prodVM)
+        public void ShowDialog(ProductsViewModel prodVM)
         {
             this.DataContext = prodVM;
             this.Show();

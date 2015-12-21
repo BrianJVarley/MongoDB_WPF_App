@@ -111,7 +111,7 @@ namespace MongoDBApp.DAL
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("orders");
             //Get a handle on the customer_orders collection:
-            var collection = database.GetCollection<OrderModel>("customerOrders");
+            var collection = database.GetCollection<OrderModel>("orders");
             return collection;
         }
 
