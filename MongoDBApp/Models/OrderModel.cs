@@ -41,10 +41,11 @@ namespace MongoDBApp.Models
 
 
     [ImplementPropertyChanged]
+    [BsonIgnoreExtraElements]
     public class ProductModel
     {
 
-
+       
         [BsonElement("productId")]
         public string ProductId { get; set; }
 

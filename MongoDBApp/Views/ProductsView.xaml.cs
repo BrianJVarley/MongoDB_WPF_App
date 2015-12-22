@@ -24,12 +24,16 @@ namespace MongoDBApp.Views
     {
 
         private static IDataService<ProductModel> productDataService;
+        private ProductsViewModel ViewModel { get; set; }
+
 
 
         public ProductsView()
         {
             InitializeComponent();
-            this.DataContext = new ProductsViewModel(this, productDataService);
+            ViewModel = new ProductsViewModel(this, productDataService);
+            this.DataContext = ViewModel;
+            //this.DataContext = new ProductsViewModel(this, productDataService);
         }
 
         public void CloseDialog()

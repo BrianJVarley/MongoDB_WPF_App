@@ -21,6 +21,7 @@ namespace MongoDBApp.ViewModels
 
         private IProductsDialogService _dialogService;
         public ICommand SaveCommand { get; set; }
+        public ICommand WindowLoadedCommand { get; set; }
         private IDataService<ProductModel> _productDataService;
 
 
@@ -28,7 +29,7 @@ namespace MongoDBApp.ViewModels
 	    {
             this._productDataService = productDataService;
             this._dialogService = dialogService;
-            Initialization = GetAllProductsAsync();
+            
             LoadCommands();
                              
         }
@@ -63,6 +64,7 @@ namespace MongoDBApp.ViewModels
         private void LoadCommands()
         {
             SaveCommand = new CustomCommand(SaveProduct, CanSaveProduct);
+            WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
         }
 
         private bool CanSaveProduct(object product)
@@ -84,6 +86,18 @@ namespace MongoDBApp.ViewModels
         public void Present(ProductsViewModel prodVM)
         {
             _dialogService.ShowDialog(prodVM);
+        }
+
+        private async Task WindowLoadedAsync(object obj)
+        {
+            await GetAllProductsAsync();
+            IsEnabled = true;
+        }
+
+
+        private bool CanLoadWindow(object obj)
+        {
+            return true;
         }
 
 
