@@ -25,6 +25,7 @@ namespace MongoDBApp.ViewModels
         public ICommand SaveCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand NewCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
         private IEditProductDialogService _editProductsDialogService;
         private IProductsDialogService _productsDialogService;
@@ -38,7 +39,10 @@ namespace MongoDBApp.ViewModels
             this._productsDialogService = productsDialogservice;
 
             Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
-            LoadCommands();     
+            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
+            LoadCommands();
+
+
         }
 
        
@@ -58,6 +62,8 @@ namespace MongoDBApp.ViewModels
         public Task Initialization { get; set; }
 
         public bool IsEnabled { get; set; }
+
+        public bool ButtonEnabled { get; set; }
         
         public string Name
         {
@@ -82,6 +88,8 @@ namespace MongoDBApp.ViewModels
             EditCommand = new CustomCommand(EditOrder, CanModifyOrder);
             AddCommand = new CustomCommand(AddProduct, CanAddproduct);
             WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
+            NewCommand = new RelayCommand(AddNewOrderLocal);
+
 
         }
 
@@ -149,7 +157,12 @@ namespace MongoDBApp.ViewModels
         private void OnUpdateOrderMessageReceived(CustomerModel customer)
         {
             SelectedCustomerEmail = customer.Email;
-            IsEnabled = true;                
+            IsEnabled = true;    
+        }
+
+        private void OnUpdateProductMessageReceived(ProductModel product)
+        {
+            SelectedOrder.Products.Add(product);
         }
 
      
@@ -165,12 +178,29 @@ namespace MongoDBApp.ViewModels
 
             if (SelectedOrder != null)
             {
-                IsEnabled = true;
+                ButtonEnabled = true;
                 await Task.Run(() => _orderDataService.UpdateAsync(SelectedOrder));
-                IsEnabled = false;
+                ButtonEnabled = false;
             }
 
             return;
+        }
+
+
+        private bool CanAddOrder(object obj)
+        {
+            return true;
+
+        }
+
+        private void AddNewOrderLocal(object order)
+        {
+            //create new customer and add to data grid, set as selected order
+            OrderModel newOrder = new OrderModel();
+            CustomerOrders.Add(newOrder);
+            newOrder.Email = SelectedCustomerEmail;
+            newOrder.Date = DateTime.Now;
+            SelectedOrder = newOrder;
         }
 
 

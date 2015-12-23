@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MongoDBApp.Extensions;
+using MongoDBApp.Utility;
 
 namespace MongoDBApp.ViewModels
 {
@@ -20,7 +21,7 @@ namespace MongoDBApp.ViewModels
     {
 
         private IProductsDialogService _dialogService;
-        public ICommand SaveCommand { get; set; }
+        public ICommand AddCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
         private IDataService<ProductModel> _productDataService;
 
@@ -53,6 +54,14 @@ namespace MongoDBApp.ViewModels
 
         #region methods
 
+
+        //public void OnSelectedProductChanged()
+        //{
+        //    Messenger.Default.Send<ProductModel>(SelectedProduct);
+        //}
+
+
+
         private async Task GetAllProductsAsync()
         {
             var productsResult = await _productDataService.GetAllAsync();
@@ -63,11 +72,11 @@ namespace MongoDBApp.ViewModels
 
         private void LoadCommands()
         {
-            SaveCommand = new CustomCommand(SaveProduct, CanSaveProduct);
+            AddCommand = new CustomCommand(AddProduct, CanAddProduct);
             WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
         }
 
-        private bool CanSaveProduct(object product)
+        private bool CanAddProduct(object product)
         {
             if (SelectedProduct != null && SelectedProduct.Description != null && SelectedProduct.Quantity != null)
             {
@@ -77,9 +86,10 @@ namespace MongoDBApp.ViewModels
             return false;
         }
 
-        private void SaveProduct(object product)
+        private void AddProduct(object product)
         {
             _dialogService.CloseDialog();
+            Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
 
 

@@ -113,14 +113,14 @@
             <Label Grid.Row="5"
                    Content="Order amount:"
                    FontWeight="Bold" />
-            <Label Grid.Row="5"
-                   Grid.Column="1"
-                   Content="{Binding SelectedProduct.Quantity,
-                                     Mode=OneWay}" />
+            <TextBox Grid.Row="5"
+                     Grid.Column="1"
+                     Text="{Binding SelectedProduct.Quantity,
+                                    Mode=OneWay}" />
 
 
             <StackPanel Grid.Row="7">
-                <Button Command="{Binding SaveCommand}" Content="Save" />
+                <Button Command="{Binding AddCommand}" Content="Add" />
             </StackPanel>
         </Grid>
     </Grid>
