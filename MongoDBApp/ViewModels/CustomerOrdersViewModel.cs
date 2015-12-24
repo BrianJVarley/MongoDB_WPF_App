@@ -30,6 +30,7 @@ namespace MongoDBApp.ViewModels
         private IEditProductDialogService _editProductsDialogService;
         private IProductsDialogService _productsDialogService;
         private IDataService<ProductModel> _productDataService;
+        private const string NullObjectId = "000000000000000000000000";
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IEditProductDialogService editProductDialogservice, IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService)
         {                  
@@ -39,7 +40,6 @@ namespace MongoDBApp.ViewModels
             this._productsDialogService = productsDialogservice;
 
             Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
-            Messenger.Default.Register<ProductModel>(this, OnUpdateProductMessageReceived);
             LoadCommands();
 
 
@@ -179,6 +179,12 @@ namespace MongoDBApp.ViewModels
             if (SelectedOrder != null)
             {
                 ButtonEnabled = true;
+                if(SelectedOrder.Id.ToString() == NullObjectId)
+                {
+                    await Task.Run(() => _orderDataService.AddAsync(SelectedOrder));
+                    ButtonEnabled = false;
+                }
+                else
                 await Task.Run(() => _orderDataService.UpdateAsync(SelectedOrder));
                 ButtonEnabled = false;
             }

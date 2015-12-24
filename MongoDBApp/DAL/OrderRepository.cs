@@ -80,7 +80,9 @@ namespace MongoDBApp.DAL
 
         public async Task AddAsync(OrderModel t)
         {
-            throw new NotImplementedException();
+            var collection = StartConnection();
+            await collection.InsertOneAsync(t);
+            orderList.Add(t);
         }
 
         public async Task DeleteAsync(OrderModel t)

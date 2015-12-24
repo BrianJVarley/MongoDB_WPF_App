@@ -89,7 +89,6 @@ namespace MongoDBApp.ViewModels
         private void AddProduct(object product)
         {
             _dialogService.CloseDialog();
-            Messenger.Default.Send<ProductModel>(SelectedProduct);
         }
 
 
