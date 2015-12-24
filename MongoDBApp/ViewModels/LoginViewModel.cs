@@ -39,10 +39,12 @@ namespace MongoDBApp.ViewModels
             this._authService = authService;
             LoadCommands();
 
+            UserName = UserSettings.Default.UserName;
+
         }
 
 
-        public string UserName { get; set; }
+        public string UserName  { get; set; }
         public SecureString Password { get; set; }
 
 
@@ -61,9 +63,13 @@ namespace MongoDBApp.ViewModels
 
             if (result)
             {
+                // Update the value.
+                UserSettings.Default.UserName = UserName;
+                // Save the config file.
+                UserSettings.Default.Save();
+
                 Messenger.Default.Send<string>(UserName);
-                IsActive = false;
-               
+                IsActive = false;               
             }
             else
             {

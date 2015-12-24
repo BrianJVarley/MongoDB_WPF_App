@@ -57,7 +57,7 @@
                               SelectedItem="{Binding SelectedOrder}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
-                            <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                            <DataGridTextColumn Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" Header="Date" />
                             <DataGridTextColumn Binding="{Binding Status}" Header="Shipping Status" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -68,12 +68,12 @@
                            Content="Date:" />
 
 
-                    <TextBlock Grid.Row="4"
-                               Grid.Column="2"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               Text="{Binding SelectedOrder.Date}"
-                               TextWrapping="Wrap" />
+                    <Label Grid.Row="4"
+                           Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Content="{Binding SelectedOrder.Date}"
+                           ContentStringFormat="dd MMM yyyy" />
                     <Label Grid.Row="4"
                            Grid.Column="3"
                            HorizontalAlignment="Left"

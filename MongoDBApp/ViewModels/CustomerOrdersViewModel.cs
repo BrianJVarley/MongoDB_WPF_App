@@ -31,6 +31,7 @@ namespace MongoDBApp.ViewModels
         private IProductsDialogService _productsDialogService;
         private IDataService<ProductModel> _productDataService;
         private const string NullObjectId = "000000000000000000000000";
+        
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IEditProductDialogService editProductDialogservice, IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService)
         {                  

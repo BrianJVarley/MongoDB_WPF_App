@@ -24,6 +24,7 @@ namespace MongoDBApp.ViewModels
         public ICommand AddCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
         private IDataService<ProductModel> _productDataService;
+        
 
 
         public ProductsViewModel(IProductsDialogService dialogService, IDataService<ProductModel> productDataService)

@@ -172,6 +172,11 @@
     <Compile Include="Services\IProductsDialogService.cs" />
     <Compile Include="Services\OrderDataService.cs" />
     <Compile Include="Services\ProductDataService.cs" />
+    <Compile Include="UserSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>UserSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Utility\AwaitableMessages.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="Validator\RegexValidationRule.cs" />
@@ -229,6 +234,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="UserSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
