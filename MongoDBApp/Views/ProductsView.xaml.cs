@@ -24,22 +24,21 @@ namespace MongoDBApp.Views
     {
 
         private static IDataService<ProductModel> productDataService;
-        private ProductsViewModel ViewModel { get; set; }
+        private ProductsViewModel prodViewModel { get; set; }
 
 
 
         public ProductsView()
         {
             InitializeComponent();
-            ViewModel = new ProductsViewModel(this, productDataService);
-            this.DataContext = ViewModel;
-            //this.DataContext = new ProductsViewModel(this, productDataService);
+            prodViewModel = new ProductsViewModel(this, productDataService);
+            this.DataContext = prodViewModel;          
         }
 
         public void CloseDialog()
         {
             if (this != null)
-                this.Visibility = Visibility.Collapsed;
+                this.Visibility = Visibility.Hidden;
         }
 
        
@@ -51,7 +50,7 @@ namespace MongoDBApp.Views
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            this.Visibility = Visibility.Hidden;
         }
     }
 }

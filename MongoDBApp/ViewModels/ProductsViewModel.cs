@@ -44,9 +44,6 @@ namespace MongoDBApp.ViewModels
         public bool IsEnabled { get; set; }
         public ProductModel SelectedProduct { get; set; }
         public ObservableCollection<ProductModel> Products { get; set; }
-        public Task Initialization { get; private set; }
-
-
 
         #endregion
 
@@ -54,13 +51,6 @@ namespace MongoDBApp.ViewModels
 
 
         #region methods
-
-
-        //public void OnSelectedProductChanged()
-        //{
-        //    Messenger.Default.Send<ProductModel>(SelectedProduct);
-        //}
-
 
 
         private async Task GetAllProductsAsync()

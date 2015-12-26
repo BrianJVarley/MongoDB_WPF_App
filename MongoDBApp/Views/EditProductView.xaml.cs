@@ -33,7 +33,7 @@ namespace MongoDBApp.Views
         public void CloseDialog()
         {
             if (this != null)
-                this.Visibility = Visibility.Collapsed;
+                this.Visibility = Visibility.Hidden;
         }
 
         public void ShowDialog(EditProductViewModel editProdVM)
@@ -44,7 +44,7 @@ namespace MongoDBApp.Views
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            this.Visibility = Visibility.Hidden;
         }
 
 

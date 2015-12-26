@@ -27,22 +27,26 @@ namespace MongoDBApp.ViewModels
         public ICommand AddCommand { get; set; }
         public ICommand NewCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
+        public ICommand WindowActivatedCommand { get; set; }
         private IEditProductDialogService _editProductsDialogService;
         private IProductsDialogService _productsDialogService;
         private IDataService<ProductModel> _productDataService;
+        private ProductsViewModel _productsViewModel;
         private const string NullObjectId = "000000000000000000000000";
-        
 
-        public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IEditProductDialogService editProductDialogservice, IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService)
+
+        public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IEditProductDialogService editProductDialogservice, 
+            IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService, ProductsViewModel productsViewModel)
         {                  
             this._orderDataService = orderDataService;
             this._productDataService = productDataService;
             this._editProductsDialogService = editProductDialogservice;
             this._productsDialogService = productsDialogservice;
+            this._productsViewModel = productsViewModel;
 
             Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
             LoadCommands();
-
+          
 
         }
 
@@ -89,6 +93,7 @@ namespace MongoDBApp.ViewModels
             EditCommand = new CustomCommand(EditOrder, CanModifyOrder);
             AddCommand = new CustomCommand(AddProduct, CanAddproduct);
             WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
+            WindowActivatedCommand = new RelayCommand(AddProductToOrder);
             NewCommand = new RelayCommand(AddNewOrderLocal);
 
 
@@ -161,9 +166,14 @@ namespace MongoDBApp.ViewModels
             IsEnabled = true;    
         }
 
-        private void OnUpdateProductMessageReceived(ProductModel product)
+        public void AddProductToOrder(object order)
         {
-            SelectedOrder.Products.Add(product);
+            if (_productsViewModel.SelectedProduct != null)
+            {
+                SelectedOrder.Products.Add(_productsViewModel.SelectedProduct);
+            }
+            else
+                return;           
         }
 
      
@@ -202,7 +212,7 @@ namespace MongoDBApp.ViewModels
 
         private void AddNewOrderLocal(object order)
         {
-            //create new customer and add to data grid, set as selected order
+            //create new order and add to data grid, set as selected order
             OrderModel newOrder = new OrderModel();
             CustomerOrders.Add(newOrder);
             newOrder.Email = SelectedCustomerEmail;
