@@ -77,10 +77,25 @@ namespace MongoDBApp.ViewModels
             return false;
         }
 
-        private void AddProduct(object product)
+        private async void AddProduct(object product)
         {
+            //Subtract order quantity from available stock
+            SelectedProduct.Available = SelectedProduct.Available - SelectedProduct.Quantity;
+            //update on db
+            await Task.Run(() => _productDataService.UpdateAsync(SelectedProduct));
             _dialogService.CloseDialog();
         }
+
+
+        //public void AddProductToOrder()
+        //{
+        //    if (_productsViewModel.SelectedProduct != null)
+        //    {
+        //        SelectedOrder.Products.Add(_productsViewModel.SelectedProduct);
+        //    }
+        //    else
+        //        return;
+        //}
 
 
         public void Present(ProductsViewModel prodVM)

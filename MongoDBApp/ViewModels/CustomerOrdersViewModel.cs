@@ -31,18 +31,16 @@ namespace MongoDBApp.ViewModels
         private IEditProductDialogService _editProductsDialogService;
         private IProductsDialogService _productsDialogService;
         private IDataService<ProductModel> _productDataService;
-        private ProductsViewModel _productsViewModel;
         private const string NullObjectId = "000000000000000000000000";
 
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IEditProductDialogService editProductDialogservice, 
-            IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService, ProductsViewModel productsViewModel)
+            IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService)
         {                  
             this._orderDataService = orderDataService;
             this._productDataService = productDataService;
             this._editProductsDialogService = editProductDialogservice;
             this._productsDialogService = productsDialogservice;
-            this._productsViewModel = productsViewModel;
 
             Messenger.Default.Register<CustomerModel>(this, OnUpdateOrderMessageReceived);
             LoadCommands();
@@ -91,12 +89,9 @@ namespace MongoDBApp.ViewModels
         {
             SaveCommand = new CustomCommand((c) => SaveCustomerAsync(c).FireAndLogErrors(), CanSaveOrder);
             EditCommand = new CustomCommand(EditOrder, CanModifyOrder);
-            AddCommand = new CustomCommand(AddProduct, CanAddproduct);
+            AddCommand = new CustomCommand(ShowProducts, CanAddProduct);
             WindowLoadedCommand = new CustomCommand((c) => WindowLoadedAsync(c).FireAndLogErrors(), CanLoadWindow);
-            WindowActivatedCommand = new RelayCommand(AddProductToOrder);
             NewCommand = new RelayCommand(AddNewOrderLocal);
-
-
         }
 
 
@@ -134,14 +129,14 @@ namespace MongoDBApp.ViewModels
 
 
 
-        private bool CanAddproduct(object obj)
+        private bool CanAddProduct(object obj)
         {
             return true;
            
         }
 
 
-        private void AddProduct(object obj)
+        private void ShowProducts(object obj)
         {
             ProductsViewModel pvm = new ProductsViewModel(_productsDialogService, _productDataService);
             pvm.Present(pvm);            
@@ -166,17 +161,7 @@ namespace MongoDBApp.ViewModels
             IsEnabled = true;    
         }
 
-        public void AddProductToOrder(object order)
-        {
-            if (_productsViewModel.SelectedProduct != null)
-            {
-                SelectedOrder.Products.Add(_productsViewModel.SelectedProduct);
-            }
-            else
-                return;           
-        }
-
-     
+        
         public async Task LoadCustomerOrdersAsync(string email)
         {
             var ordersResult = await _orderDataService.GetAllByEmailAsync(email);

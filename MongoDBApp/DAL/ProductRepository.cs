@@ -59,9 +59,13 @@ namespace MongoDBApp.DAL
             return productList;
         }
 
-        public Task UpdateAsync(ProductModel t)
+        public async Task UpdateAsync(ProductModel t)
         {
-            throw new NotImplementedException();
+            var collection = StartConnection();
+            var filter = Builders<ProductModel>.Filter.Where(x => x.ProductId == t.ProductId);
+
+            collection.Find(filter).ToString();
+            var result = await collection.ReplaceOneAsync(filter, t, new UpdateOptions { IsUpsert = true });
         }
 
         public Task AddAsync(ProductModel t)
