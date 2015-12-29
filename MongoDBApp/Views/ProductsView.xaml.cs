@@ -24,7 +24,7 @@ namespace MongoDBApp.Views
     public partial class ProductsView : Window, IProductsDialogService
     {
 
-        private static IDataService<ProductModel> productDataService;
+        private IDataService<ProductModel> productDataService;
         private ProductsViewModel prodViewModel { get; set; }
 
 

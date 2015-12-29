@@ -43,7 +43,7 @@ namespace MongoDBApp.Services
 
         public async Task UpdateAsync(ProductModel t)
         {
-            await repository.UpdateAsync(t)
+            await repository.UpdateAsync(t);
         }
 
         public Task AddAsync(ProductModel t)

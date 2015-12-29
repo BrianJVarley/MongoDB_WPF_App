@@ -20,10 +20,11 @@ namespace MongoDBApp.ViewModels
     public class ProductsViewModel
     {
 
+        private IDataService<ProductModel> _productDataService;
         private IProductsDialogService _dialogService;
         public ICommand AddCommand { get; set; }
         public ICommand WindowLoadedCommand { get; set; }
-        private IDataService<ProductModel> _productDataService;
+      
         
 
 
@@ -31,6 +32,9 @@ namespace MongoDBApp.ViewModels
 	    {
             this._productDataService = productDataService;
             this._dialogService = dialogService;
+
+            Messenger.Default.Register<OrderModel>(this, OnSelectedOrderReceived);
+
             
             LoadCommands();
                              
@@ -44,6 +48,8 @@ namespace MongoDBApp.ViewModels
         public bool IsEnabled { get; set; }
         public ProductModel SelectedProduct { get; set; }
         public ObservableCollection<ProductModel> Products { get; set; }
+        public OrderModel SelectedOrder { get; set; }
+
 
         #endregion
 
@@ -51,6 +57,12 @@ namespace MongoDBApp.ViewModels
 
 
         #region methods
+
+        public void OnSelectedOrderReceived(OrderModel order)
+        {
+            SelectedOrder = order;
+
+        }
 
 
         private async Task GetAllProductsAsync()
@@ -78,24 +90,27 @@ namespace MongoDBApp.ViewModels
         }
 
         private async void AddProduct(object product)
-        {
+        {            
             //Subtract order quantity from available stock
             SelectedProduct.Available = SelectedProduct.Available - SelectedProduct.Quantity;
-            //update on db
             await Task.Run(() => _productDataService.UpdateAsync(SelectedProduct));
+            AddProductToOrder();            
             _dialogService.CloseDialog();
         }
 
 
-        //public void AddProductToOrder()
-        //{
-        //    if (_productsViewModel.SelectedProduct != null)
-        //    {
-        //        SelectedOrder.Products.Add(_productsViewModel.SelectedProduct);
-        //    }
-        //    else
-        //        return;
-        //}
+        public void AddProductToOrder()
+        {
+            if (SelectedOrder.Products != null)
+            {
+                SelectedOrder.Products.Add(SelectedProduct);
+            }
+            else
+            {
+                SelectedOrder.Products = new List<ProductModel>();
+                SelectedOrder.Products.Add(SelectedProduct);
+            }
+        }
 
 
         public void Present(ProductsViewModel prodVM)

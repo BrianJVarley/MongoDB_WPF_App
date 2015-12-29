@@ -33,6 +33,8 @@ namespace MongoDBApp.ViewModels
         private IDataService<ProductModel> _productDataService;
         private const string NullObjectId = "000000000000000000000000";
 
+        
+
 
         public CustomerOrdersViewModel(IDataService<OrderModel> orderDataService, IEditProductDialogService editProductDialogservice, 
             IProductsDialogService productsDialogservice, IDataService<ProductModel> productDataService)
@@ -131,15 +133,22 @@ namespace MongoDBApp.ViewModels
 
         private bool CanAddProduct(object obj)
         {
-            return true;
+            if (SelectedOrder != null && SelectedOrder.Email != null && SelectedOrder.Date != null)
+            {
+                return true;
+            }
+
+            return false;
            
         }
 
 
         private void ShowProducts(object obj)
         {
+           
             ProductsViewModel pvm = new ProductsViewModel(_productsDialogService, _productDataService);
-            pvm.Present(pvm);            
+            pvm.Present(pvm);
+            Messenger.Default.Send<OrderModel>(SelectedOrder);    
         }
 
 
