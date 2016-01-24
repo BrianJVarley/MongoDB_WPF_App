@@ -8,6 +8,6 @@ Testing out MongoDB's NoSQL features and integration with the WPF platform.
 
 http://youtu.be/q00HuC3EimE?hd=1
 
-Github Page:  http://brianjvarley.github.io/MongoDB_App/
+Github Page:  http://brianjvarley.github.io/MongoDB_WPF_App/
 
 
